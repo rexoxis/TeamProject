@@ -1,0 +1,18 @@
+.list {float: left}
+.list > h3 {margin: 10px 0 5px 0}
+.list > ul {list-style: none; text-align: left; margin-left: 40px; text-decoration-line: none;}
+.list > ul > li > a {color: #000000}
+
+.faqs > h2 {margin-bottom: 30px}
+.faqs > h4 {width: 1200px; text-align: left; font-weight: bold; font-size: 25px; color: #000030; border-bottom: 0.3mm solid #000030; padding:3px; margin-bottom: 20px}
+.faqs > div > ul {text-align: left; background-color: rgba(0, 0, 150, 0.2); margin:-8px 0 0 15px ;padding: 20px 30px 20px 40px}
+.faqs > div > ul > li {list-style-type: none; margin-bottom: 5px}
+.faqs > div > ul > li > a {color: #000000}
+
+.answer { display: none}
+.answer > h3 {width: 550px; text-align: left; font-weight: bold; font-size: 25px; color: #000030; border-bottom: 0.3mm solid #000030; padding:3px; margin: 30px 0 30px 275px}
+/*.answer > span {width: 950px; text-align: left; background-color: rgba(0, 0, 150, 0.2); margin:-8px 0 0 15px ;padding: 20px 50px 20px 40px}*/
+.answer > p {width: 550px; text-align: left; font-weight: bold; font-size: 20px; color: #000030; background-color: rgba(255,30,0,0.3) ;padding:5px 5px 5px 10px; margin: 30px 0 30px 275px}
+.answer > p > a {color: #ff0000; font-weight: bold; border-bottom: 0.5mm solid #ff0000}
+.answer > p > a:link {color: #ff0000; text-decoration: none}
+.answer > p > a:visited {color: #ff0000; text-decoration: none}

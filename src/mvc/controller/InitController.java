@@ -1,23 +1,22 @@
 package mvc.controller;
 
-import service.PropertySetter;
 
 import javax.servlet.ServletConfig;
-import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 import java.io.FileInputStream;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
 
-public class InitController {
+public class InitController extends HttpServlet {
     private static Map<String, Object> commandMap = new HashMap<>();
 
     public static Map<String, Object> getCommandMap() {
         return commandMap;
     }
 
-    public void init(ServletConfig sc) throws ServletException {
+    public void init(ServletConfig sc) {
         String mvc_config = sc.getInitParameter("mvc_config");
 
         Properties p = new Properties();
@@ -43,6 +42,8 @@ public class InitController {
         while (iterator.hasNext()) {
             String command = (String)iterator.next();
             String handlerName = p.getProperty(command);
+//            System.out.println("InitController command : " + command);
+//            System.out.println("InitController handlerName : " + handlerName);
 
             try {
                 Class<?> handlerClassName = Class.forName(handlerName);

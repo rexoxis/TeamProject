@@ -18,7 +18,7 @@ public class CatBoardHandler implements MVCHandler{
         // 인코딩 처리
         request.setCharacterEncoding("utf-8");
 
-        String viewPage = "1|catList.do";
+        String viewPage = "1|/ttproMVC/catboard/catList.jsp";
 
         String colname = request.getParameter("colname");
         String findtext = request.getParameter("findtext");
@@ -39,14 +39,20 @@ public class CatBoardHandler implements MVCHandler{
         int boardCount = catdao.countBoard();
 
         int perPage = 16;
+        int pageBlock = 10;
+        int cPage = 1;
+
+        if (request.getParameter("cpage") != null){
+            cPage = Integer.parseInt(request.getParameter("cpage"));
+        }
+
         int totalPage = boardCount / perPage;
 
         if(boardCount % perPage > 0) ++totalPage;
 
-        int cPage = Integer.parseInt(request.getParameter("cpage"));
 
-        int startPage = ((cPage - 1)/10) * 10 + 1;
-        int endPage = startPage + 10 - 1;
+        int startPage = ((cPage - 1)/pageBlock) * pageBlock + 1;
+        int endPage = startPage + pageBlock - 1;
 
         if(cPage > totalPage){
             response.sendRedirect("listerror.jsp");
@@ -62,7 +68,6 @@ public class CatBoardHandler implements MVCHandler{
 
         request.setAttribute("catLists", catLists);
 
-        request.setAttribute("boardCount", boardCount);
         request.setAttribute("totalPage", totalPage);
         request.setAttribute("startPage", startPage);
         request.setAttribute("endPage", endPage);
