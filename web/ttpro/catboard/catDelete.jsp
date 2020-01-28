@@ -7,4 +7,5 @@
 
     catfdao.deletecatList(bdno); //위에 int bdno를 또 가져 서 쓴다
     response.sendRedirect("catList.jsp");
+
 %>

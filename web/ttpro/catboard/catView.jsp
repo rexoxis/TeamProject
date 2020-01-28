@@ -31,6 +31,8 @@
     // 댓글 읽어오는 메소드 호출
     ArrayList<RevCatComments> rcclists = catfdao.catcommentView(bdno);
 
+
+
 %>
 
 <html>
