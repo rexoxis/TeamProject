@@ -1,0 +1,41 @@
+body {width: 900px; margin: 0 auto;font-size:11pt; padding:0; text-align: center;}
+h3 {color: #85144b; font-size: 14pt; margin:10 auto; padding: 10px;}
+
+.ttext {text-align: center}
+.ttext #h11 {font-weight: bold; font-size: 70px; line-height: 95px; margin: 50px 0 20px}
+.ttext #h51 {font-weight: bold; margin-bottom: 20px}
+
+.ttext .h12 {font-weight: bold; font-size: 40px; line-height: 95px; margin: 50px 0 10px}
+.ttext .h52 {font-weight: bold; margin-bottom: 20px}
+
+.ttext #searchbox {width: 750px; height: 50px; margin-bottom: 20px; border: 3px solid #000033;}
+
+.btn1 {width: 80px; height: 50px; float: right; font-weight: bold; color: #ffffff; border: 1px solid #000000 ; border-radius: 10px; background-color: #000000;
+    margin-right: 30px;padding: 12px 23px}
+
+#gifimg1 {width:900px; height: 450px; margin-bottom: 100px; border: 1px solid #000000}
+
+#intr1 {width: 400px; height: 400px; background-color: #d3d3d3; position: relative; top: 50px; left: 35px;z-index: 2; }
+#intr1 h3 {font-weight: bold;font-size: 45px;padding: 20px;text-align: left;color: #000000;}
+#intr1 p {font-size: 17px;padding: 20px}
+#intrimg {width: 500px; height: 500px; border: 1px solid #000000; position: relative; top: 0; right: 35px}
+
+.prclist {float: left}
+.prclstti {width: 290px; height: 100px; background-color: #d3d3d3; font-size: 23px;font-weight: bold;padding-top: 30px;}
+.prclstctn {width: 290px; height: 290px; border: 1px solid #000000;}
+
+.banner {position: relative; width: 900px; height: 450px; top: 50px; margin-bottom: 100px;  padding:0; overflow: hidden;}
+.banner ul {position: absolute; margin: 0px; padding:0; list-style: none; }
+.banner ul li {float: left; width: 900px; height: 450px; margin:0; padding:0;}
+.img{position: relative; background-image: url("https://drive.google.com/uc?export=view&id=1Gmm6_D7xp1ktNUlVOEKSz-BAfeU7OVdS"); height: 450px; background-size: cover;
+    margin: 50px 0; }
+.img-cover{ position: absolute; height: 450px; width: 100%; background-color: rgba(0, 0, 0, 0.7); z-index:1; }
+.img .content{ position: absolute; top:50%; left:50%; transform: translate(-50%, -50%); font-size:1.5rem; color: white; z-index: 2; text-align: center; font-weight: bold; }
+
+.qstn {font-weight: bold; margin-bottom: 40px}
+#name {width: 400px; height:50px; margin-bottom: 10px; border: 1px solid #000000}
+#add {width: 400px; height:50px; margin-bottom: 10px; border: 1px solid #000000}
+#email {width: 195px; height:50px; margin-bottom: 10px; border: 1px solid #000000}
+#phon {width: 200px; height:50px; margin-bottom: 10px; border: 1px solid #000000}
+#title {width: 400px; height:50px; margin-bottom: 10px; border: 1px solid #000000}
+#msg {width: 400px; height:150px; margin-bottom: 10px; border: 1px solid #000000}
