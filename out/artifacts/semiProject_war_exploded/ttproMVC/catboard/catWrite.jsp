@@ -22,7 +22,7 @@
 
     <link rel="stylesheet" href="../css/bootstrap-4.3.1-dist/css/bootstrap.css">
 
-    <title>ReviewBoard</title>
+    <title>CatBoard</title>
 </head>
 
 <body>
@@ -34,14 +34,14 @@
             <div class="col-8 text-left" style="font-size: 25px; margin: 0 45px 0 50px ; padding:30px 0 20px 0;">
                 <i class="fa fa-comments fa-2x"> Cat's</i></div>
             <div class="col-3">
-                <button type="button" class="btn btn-success" onclick="location.href='dogList.jsp?cpage=1'" style="margin:40px 0 15px 110px; ">
+                <button type="button" class="btn btn-success" onclick="location.href='catList.do'" style="margin:40px 0 15px 110px; ">
                     <i class="fa fa-plus-circle"> 목록으로</i>
                 </button>
             </div>
         </div>
 
         <div class="row" style="margin: 10px 30px 20px 50px">
-            <form class="card card-body bg-light" name="writefrm" action="procCatWrite.jsp" method="post" enctype="multipart/form-data">
+            <form class="card card-body bg-light" name="writefrm" action="procWrite.do" method="post" enctype="multipart/form-data">
                 <div class="form-group row">
                     <input type="hidden" id="userid" name="userid" class="form-control col-9" value="<%=uid%>">
                 </div>

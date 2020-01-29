@@ -157,13 +157,13 @@
                             if(cPage == i) { %>
                         <li class="page-item"><a class="page-link" style="color: red"><%=i%></a></li>
                         <% } else { %>
-                        <li class="page-item"><a class="page-link" href="catList.jsp?cpage=<%=i%>"><%=i%></a></li>
+                        <li class="page-item"><a class="page-link" href="catList.do?cpage=<%=i%>"><%=i%></a></li>
                         <% } %>
                         <% } %>
 
                         <% if(endPage <= totalPage) { %>
                         <li class="page-item">
-                            <a class="page-link" href="catList.jsp?cpage=<%=(endPage+1)%>" aria-label="Next">
+                            <a class="page-link" href="catList.do?cpage=<%=(endPage+1)%>" aria-label="Next">
                                 <span aria-hidden="true">&raquo;</span>
                                 <span class="sr-only">Next</span>
                             </a>
@@ -204,7 +204,7 @@
 
     $(function () {
         $('#newbtn').on('click', function (e) {
-            location.href = '/ttpro/catboard/catWrite.jsp';
+            location.href = 'catWrite.do';
         });
     });
 

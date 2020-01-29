@@ -1,7 +1,8 @@
-package mvc.handler;
+package mvc.handler.catboard;
 
 
 import dao.CatBoardFactory;
+import mvc.handler.MVCHandler;
 import vo.CatBoard;
 
 import javax.servlet.ServletException;
@@ -11,7 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class CatBoardHandler implements MVCHandler{
+public class CatBoardListHandler implements MVCHandler {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
