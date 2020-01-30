@@ -3,6 +3,8 @@
 <% String baseurl = "/ttpro"; %>
 
 <%
+    String uid = String.valueOf(session.getAttribute("userid"));
+
     boolean islogin = false;
 
     if(session.getAttribute("userid") != null){
@@ -20,7 +22,7 @@
     .menubar { margin:0 auto; width: 100%;}
     .menubar ul{ list-style: none; }
     .menubar ul li { font-size: 15px; float: left; text-align: left; margin-right: 85px; text-decoration: none; }
-    .menubar li ul { background-color: rgba( 150, 150, 150, 0.5 ); display:none;
+    .menubar li ul { background-color: rgba( 180, 255, 255, 0.5 ); display:none;
         height:auto; position:absolute; width:250px; z-index:200;
         list-style: none;}
     .menubar li:hover ul { display:block; }

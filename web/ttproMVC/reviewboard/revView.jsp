@@ -1,6 +1,6 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="vo.ReviewBoard" %>
-<%@ page import="vo.RevComments" %>
+<%@ page import="vo.ReviewComments" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <jsp:useBean id="rbdao" class="dao.ReviewBoardFactory" scope="session"/>
@@ -31,7 +31,7 @@
 
 
     // 댓글 읽어오는 메소드 호출
-    ArrayList<RevComments> rclists = rbdao.commentView(bdno);
+    ArrayList<ReviewComments> rclists = rbdao.commentView(bdno);
 
 %>
 <html>
@@ -181,7 +181,7 @@
                     <%-- 댓글 입력창--%>
                 </form>
                 <%--입력한 댓글이 있으면 댓글을 불러옴--%>
-                <% for (RevComments rc : rclists) { %>
+                <% for (ReviewComments rc : rclists) { %>
                 <% if (rc.getComt_contents() != null || !(rc.getComt_contents().equals(""))) {%>
                 <div class="row">
                     <div class="col-sm-2">

@@ -92,8 +92,8 @@
                 <div style="width: 150px; height: 150px; margin: 20px;">
                     <div class="thumbnail bootsnipp-thumb" style="padding:0;">
                         <div class="imgwrap" style="height: 100px;">
-                            <a href="catView.jsp?bdno=<%=catBoard.getBdno()%>">
-                                <img class="danlazy" src="showimg.jsp?f=<%=catBoard.getFile1()%>" width="100%" height="100%">
+                            <a href="catView.do?bdno=<%=catBoard.getBdno()%>">
+                                <img class="danlazy" src="showimg.do?f=<%=catBoard.getFile1()%>" width="100%" height="100%">
                             </a>
                         </div>
                         <%--제목,날짜,조회수 표시할 부분--%>
@@ -101,7 +101,7 @@
                             <div>
                                 <span class="text-left" style="overflow: hidden ; text-overflow: ellipsis; white-space: nowrap;  width: 150px; height: auto; display: inline-block;  ">
                                     <%--게시글 상세보기로 넘어가는 링크작성--%>
-                                    <a href="catView.jsp?bdno=<%=catBoard.getBdno()%>"><%=catBoard.getTitle()%></a>
+                                    <a href="catView.do?bdno=<%=catBoard.getBdno()%>"><%=catBoard.getTitle()%></a>
                                 </span>
                             </div>
                             <div class="text-leftx" style="font-size: 10pt">

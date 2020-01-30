@@ -157,10 +157,8 @@
                 </div>
                 <%-- 아이콘 뒤에 로그인된 아이디가 들어갔으면 좋겠어요 --%>
                 <div class="col-sm-7">
-                    <div id="coment"><%=qc.getComt_contents()%>
-                    </div>
-                    <div id="coment" style="font-size: 10pt"><%=qc.getComt_regdate()%>
-                    </div>
+                    <div id="coment"><%=qc.getComt_contents()%></div>
+                    <div id="coment" style="font-size: 10pt"><%=qc.getComt_regdate()%></div>
                     <%-- 대댓글은 시간상 언급하는 식으로 들어가는게 나을꺼 같아요 --%>
                 </div>
                 <a href="fcmDelete.jsp?comt_bdno=<%=qc.getComt_bdno()%>&bdno=<%=a.getBdno()%>"

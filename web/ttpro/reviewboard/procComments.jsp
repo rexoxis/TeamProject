@@ -6,7 +6,7 @@
 <% request.setCharacterEncoding("utf-8"); %>
 
 <jsp:useBean id="rbdao" class="dao.ReviewBoardFactory" scope="session"/>
-<jsp:useBean id="rcvo" class="vo.RevComments"/>
+<jsp:useBean id="rcvo" class="vo.ReviewComments"/>
 <jsp:setProperty name="rcvo" property="*"/>
 
 <%

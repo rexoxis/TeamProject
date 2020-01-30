@@ -3,10 +3,9 @@
 <%@ page import="vo.CatBoard" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<jsp:useBean id="catfdao" class="dao.CatBoardFactory" scope="session"/>
 <%
-    ArrayList<CatBoard> cblists = (ArrayList)session.getAttribute("cblists");
-    //view에서 set 저장 session으로
+    ArrayList<CatBoard> catLists = (ArrayList)session.getAttribute("catLists");
+
 %>
 <html>
 <head>
@@ -38,31 +37,31 @@
         </div>
 
         <div class="row" style="margin: 10px 30px 20px 50px">
-            <%for(CatBoard a : cblists) {%>
-            <form class="card card-body bg-light" name="rbfrm" action="procCatModify.jsp?bdno=<%=a.getBdno()%>" method="post" enctype="multipart/form-data">
+            <%for(CatBoard catBoard : catLists) {%>
+            <form class="card card-body bg-light" name="catModifyfrm" action="procModify.do?bdno=<%=catBoard.getBdno()%>" method="post" enctype="multipart/form-data">
                 <div class="form-group row">
-                    <input type="hidden" id="userid" name="userid" class="form-control col-9" value="<%=a.getUserid()%>">
+                    <input type="hidden" id="userid" name="userid" class="form-control col-9" value="<%=catBoard.getUserid()%>">
                 </div>
                 <div class="form-group row">
                     <label class="col-form-label col-2 text-right" for="title">제목</label>
-                    <input type="text" id="title" name="title" class="form-control col-9" value="<%=a.getTitle()%>">
+                    <input type="text" id="title" name="title" class="form-control col-9" value="<%=catBoard.getTitle()%>">
                 </div>
                 <div class="form-group row">
                     <label class="col-form-label col-2 text-right" for="contents">본문내용</label>
                     <textarea rows="20" type="text" id="contents" name="contents"
-                              class="form-control col-9"><%=a.getContents()%></textarea>
+                              class="form-control col-9"><%=catBoard.getContents()%></textarea>
                 </div>
                 <div class="form-group row">
                     <label class="col-form-label col-2 text-right" for="contents">파일첨부1</label>
-                    <input type="file" name="file1" value="<%=a.getFile1()%>">
+                    <input type="file" name="file1" value="<%=catBoard.getFile1()%>">
                     <label class="col-form-label col-2 text-right" for="contents">파일첨부2</label>
-                    <input type="file" name="file2" value="<%=a.getFile2()%>">
+                    <input type="file" name="file2" value="<%=catBoard.getFile2()%>">
                     <label class="col-form-label col-2 text-right" for="contents">파일첨부3</label>
-                    <input type="file" name="file3" value="<%=a.getFile3()%>">
+                    <input type="file" name="file3" value="<%=catBoard.getFile3()%>">
                     <label class="col-form-label col-2 text-right" for="contents">파일첨부4</label>
-                    <input type="file" name="file4" value="<%=a.getFile4()%>">
+                    <input type="file" name="file4" value="<%=catBoard.getFile4()%>">
                     <label class="col-form-label col-2 text-right" for="contents">파일첨부5</label>
-                    <input type="file" name="file5" value="<%=a.getFile5()%>">
+                    <input type="file" name="file5" value="<%=catBoard.getFile5()%>">
                 </div>
                 <% } %>
                 <div class="form-group row">

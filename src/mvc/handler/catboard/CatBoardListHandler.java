@@ -6,8 +6,12 @@ import mvc.handler.MVCHandler;
 import vo.CatBoard;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -56,7 +60,7 @@ public class CatBoardListHandler implements MVCHandler {
         int endPage = startPage + pageBlock - 1;
 
         if(cPage > totalPage){
-            response.sendRedirect("listerror.jsp");
+            viewPage = "1|/ttproMVC/error.jsp";
         }
 
         int startnum = ((cPage-1) * perPage) + 1;
@@ -74,7 +78,6 @@ public class CatBoardListHandler implements MVCHandler {
         request.setAttribute("endPage", endPage);
         request.setAttribute("cPage", cPage);
         request.setAttribute("boardNumber", boardNumber);
-
 
         return viewPage;
     }

@@ -2,15 +2,6 @@
 <%@ page import="vo.ReviewBoard" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<jsp:useBean id="catfdao" class="dao.CatBoardFactory" scope="session"/>
-
-<%
-    request.setCharacterEncoding("utf-8");
-    String uid = String.valueOf(session.getAttribute("userid"));
-    //사용자가 로그인 하면 세션에 로그인 아이디랑 해서 로그하는 순간 세선 설정
-    //proclogin 보면 나와 있음
-%>
-
 <html>
 <head>
     <meta charset="UTF-8">
@@ -41,9 +32,10 @@
         </div>
 
         <div class="row" style="margin: 10px 30px 20px 50px">
-            <form class="card card-body bg-light" name="writefrm" action="procWrite.do" method="post" enctype="multipart/form-data">
+            <form class="card card-body bg-light" name="writefrm" id="writefrm" action="procWrite.do" method="post" enctype="multipart/form-data">
                 <div class="form-group row">
-                    <input type="hidden" id="userid" name="userid" class="form-control col-9" value="<%=uid%>">
+                    <label class="col-form-label col-2 text-right" for="wtitle">작성자</label>
+                    <input type="text" id="userid" name="userid" class="form-control col-1" value="<%=uid%>" readonly>
                 </div>
                 <div class="form-group row">
                     <label class="col-form-label col-2 text-right" for="selectbd">게시판선택</label>
@@ -100,7 +92,7 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="../js/writefrmcheck.js"></script>
+<script src="/ttproMVC/js/writefrmcheck.js"></script>
 
 
 <script>

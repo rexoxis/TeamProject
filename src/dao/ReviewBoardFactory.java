@@ -2,7 +2,7 @@ package dao;
 
 import service.OracleUtil;
 import service.PropertySetter;
-import vo.RevComments;
+import vo.ReviewComments;
 import vo.ReviewBoard;
 
 import java.sql.Connection;
@@ -272,7 +272,7 @@ public class ReviewBoardFactory {
 
 
     // 댓글 쓰기
-    public void commentsWrite(RevComments rc, int revbdno){
+    public void commentsWrite(ReviewComments rc, int revbdno){
         String commentsSQL = "INSERT INTO rev_comments (comt_bdno, rev_bdno, comt_userid, comt_contents) VALUES (comments_seq.nextval, ?, ?, ?)";
 
         try {
@@ -292,10 +292,10 @@ public class ReviewBoardFactory {
     }
 
     // 게시판 댓글 보기
-    public ArrayList<RevComments> commentView(int revbdno){
+    public ArrayList<ReviewComments> commentView(int revbdno){
         String commtViewSQL = "SELECT comt_bdno, comt_userid, comt_contents, comt_likes, comt_regdate from rev_comments WHERE rev_bdno = ? ORDER BY comt_regdate";
 
-        ArrayList<RevComments> rclists = null;
+        ArrayList<ReviewComments> rclists = null;
 
         try {
             conn = oracle.getConn();
@@ -306,7 +306,7 @@ public class ReviewBoardFactory {
             rclists = new ArrayList<>();
 
             while (rs.next()) {
-                RevComments rc = new RevComments();
+                ReviewComments rc = new ReviewComments();
 
 //                PropertySetter.setProperties(rs,rc,false,false);
                 rc.setComt_bdno(rs.getInt(1));

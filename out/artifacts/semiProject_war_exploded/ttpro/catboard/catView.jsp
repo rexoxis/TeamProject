@@ -1,6 +1,6 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="vo.CatBoard" %>
-<%@ page import="vo.RevCatComments" %>
+<%@ page import="vo.CatComments" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <jsp:useBean id="catfdao" class="dao.CatBoardFactory" scope="session"/>
@@ -29,7 +29,7 @@
 
 
     // 댓글 읽어오는 메소드 호출
-    ArrayList<RevCatComments> rcclists = catfdao.catcommentView(bdno);
+    ArrayList<CatComments> rcclists = catfdao.catcommentView(bdno);
 
 
 
@@ -175,7 +175,7 @@
 
 
                 <!--입력한 댓글이 있으면 댓글을 불러옴-->
-                <% for(RevCatComments rcc : rcclists) { %>
+                <% for(CatComments rcc : rcclists) { %>
                 <% if (rcc.getCatc_contents() != null || !(rcc.getCatc_contents().equals(""))) {%>
                 <div class="row">
                     <div class="col-sm-2" >

@@ -3,7 +3,7 @@ package dao;
 import service.OracleUtil;
 import service.PropertySetter;
 import vo.DogBoard;
-import vo.RevDogComments;
+import vo.DogComments;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -227,7 +227,7 @@ public class DogBoardFactory {
     }
 
     // 댓글 쓰기
-    public void commentsDogWrite(RevDogComments rdc, int dogrbdno) {
+    public void commentsDogWrite(DogComments rdc, int dogrbdno) {
         String commentsSQL = "INSERT INTO rev_dogcomments (dogc_bdno, dogr_bdno, dogc_userid, dogc_contents) VALUES (dogc_seq.nextval, ?, ?, ?)";
 
         try {
@@ -248,10 +248,10 @@ public class DogBoardFactory {
 
 
     // 게시판 댓글 보기
-    public ArrayList<RevDogComments> dogcommentView(int dogrbdno) {
+    public ArrayList<DogComments> dogcommentView(int dogrbdno) {
         String dogcommtViewSQL = "SELECT dogc_bdno, dogc_userid, dogc_contents, dogc_likes, dogc_regdate from rev_dogcomments WHERE dogr_bdno = ? ORDER BY dogc_regdate";
 
-        ArrayList<RevDogComments> rdclists = null;
+        ArrayList<DogComments> rdclists = null;
 
         try {
             conn = oracle.getConn();
@@ -262,7 +262,7 @@ public class DogBoardFactory {
             rdclists = new ArrayList<>();
 
             while (rs.next()) {
-                RevDogComments rc = new RevDogComments();
+                DogComments rc = new DogComments();
 
 //                PropertySetter.setProperties(rs,rc,false,false);
                 rc.setDogc_bdno(rs.getInt(1));

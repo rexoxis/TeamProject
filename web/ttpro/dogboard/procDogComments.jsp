@@ -4,7 +4,7 @@
 <% request.setCharacterEncoding("utf-8"); %>
 
 <jsp:useBean id="dogfdoa" class="dao.DogBoardFactory" scope="session"/>
-<jsp:useBean id="rdc" class="vo.RevDogComments"/>
+<jsp:useBean id="rdc" class="vo.DogComments"/>
 <jsp:setProperty name="rdc" property="*"/>   <!-- 변수명을 vo 에서 불러오기 때문에 view페이지 name 값이 vo 변수명과 같아야 함 --!>
 
 <%

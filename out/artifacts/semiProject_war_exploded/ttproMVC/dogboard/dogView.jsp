@@ -1,6 +1,6 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="vo.DogBoard" %>
-<%@ page import="vo.RevDogComments" %>
+<%@ page import="vo.DogComments" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <jsp:useBean id="dogfdao" class="dao.DogBoardFactory" scope="session"/>
@@ -29,7 +29,7 @@
 
 
     // 댓글 읽어오는 메소드 호출
-    ArrayList<RevDogComments> rdclists = dogfdao.dogcommentView(bdno);
+    ArrayList<DogComments> rdclists = dogfdao.dogcommentView(bdno);
 
 %>
 
@@ -174,7 +174,7 @@
 
 
                 <!--입력한 댓글이 있으면 댓글을 불러옴-->
-                <% for(RevDogComments rdc : rdclists) { %>
+                <% for(DogComments rdc : rdclists) { %>
                 <% if (rdc.getDogc_contents() != null || !(rdc.getDogc_contents().equals(""))) {%>
                 <div class="row">
                     <div class="col-sm-2" >

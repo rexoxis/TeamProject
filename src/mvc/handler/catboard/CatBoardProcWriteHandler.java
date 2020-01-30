@@ -24,8 +24,8 @@ public class CatBoardProcWriteHandler implements MVCHandler{
         CatBoardFactory catdao = new CatBoardFactory();
 
         // 파일 업로드 절대경로
-        String realpath = request.getRealPath("ttproMVC/fileupload");
-        System.out.println(realpath);
+        String realpath = request.getServletContext().getRealPath("ttproMVC/fileupload");
+//        System.out.println(realpath);
 
         Map<String, String> frmdata = FileUpDownUtil.procUpload(request, realpath);
 
@@ -34,8 +34,8 @@ public class CatBoardProcWriteHandler implements MVCHandler{
         check = catdao.catWrite(frmdata, selectbd);
 
         if (check >= 1) {
-            viewPage = "2|/ttproMVC/catboard/catList.jsp";
-            out.println("<script> alert('게시글이 등록되었습니다.'); </script>");
+            viewPage = "2|catList.do";
+//            out.println("<script> alert('게시글이 등록되었습니다.'); </script>");
         } else {
             System.out.println("글쓰기 실패");
         }

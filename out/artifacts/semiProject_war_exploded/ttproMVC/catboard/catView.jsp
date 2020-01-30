@@ -1,37 +1,14 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="vo.CatBoard" %>
-<%@ page import="vo.RevCatComments" %>
+<%@ page import="vo.CatComments" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<jsp:useBean id="catfdao" class="dao.CatBoardFactory" scope="session"/>
 <%
-    // 로그인한 사용자의 아이디 가져옴
-    String uid = (String)session.getAttribute("userid");
+    request.setCharacterEncoding("utf-8");
 
-    if(uid==null|| uid.equals("")) {
-        out.println("<script>alert('로그인 후 이용해주세요^^'); location.href='/ttpro/login/login.jsp';</script>");
-    }
+    ArrayList<CatBoard> catLists = (ArrayList)session.getAttribute("catLists");
 
-    // 처음 view.jsp로 이동했을때 bdno를 셋팅하는 방식
-    int bdno = 0;
-
-    if (request.getParameter("bdno") != null) {
-        bdno = Integer.parseInt(request.getParameter("bdno"));
-    }
-
-    // 조회수 증가 메소드 호출
-    catfdao.viewsUp(bdno);
-
-    // 글 상세보기 메소드 호출
-    ArrayList<CatBoard> cblists = catfdao.catView(bdno);
-
-    session.setAttribute("cblists", cblists);
-
-
-    // 댓글 읽어오는 메소드 호출
-    ArrayList<RevCatComments> rcclists = catfdao.catcommentView(bdno);
-
-
+    ArrayList<CatComments> catCommentLists = (ArrayList)request.getAttribute("catCommentLists");
 
 %>
 
@@ -78,6 +55,12 @@
 <div class="container">
     <%@include file="../layout/header.jsp" %>
 
+    <%
+        if(uid == null || uid.equals("")) {
+            out.println("<script> alert('로그인 후 이용해주세요^^'); location.href='/ttproMVC/login/login.jsp';</script>");
+        }
+    %>
+
     <div class="main">
         <div class="row">
             <div class="col-8" style="font-size: 25px; margin: 0 0 0 60px ; padding:30px 0 20px 0;">
@@ -87,7 +70,7 @@
                     <i class="fa fa-plus-circle"> 새글쓰기</i>
                 </button>
                 <button type="button" class="btn btn-warning"
-                        onclick="location.href='catList.jsp'" style="margin:45px 0 15px 0; color: white">
+                        onclick="location.href='catList.do'" style="margin:45px 0 15px 0; color: white">
                     <i class="fa fa-list" aria-hidden="true"> 목록으로</i>
                 </button>
             </div>
@@ -99,57 +82,47 @@
                 <ul>
                     <%--해당 카테고리 a태그는 지워고 색깔 바꿔주세요--%>
                     <li style="color:#919191">&block;&nbsp;&nbsp;Cat's</li>
-                    <li><a href="<%=baseurl%>/dogboard/dogList.jsp?cpage=1">&block;&nbsp;&nbsp;Dog's</a></li>
-                    <li><a href="<%=baseurl%>/reviewboard/revList.jsp?cpage=1">&block;&nbsp;&nbsp;분양후기</a></li>
+                    <li><a href="dogList.do">&block;&nbsp;&nbsp;Dog's</a></li>
+                    <li><a href="reviewList.do">&block;&nbsp;&nbsp;분양후기</a></li>
                 </ul>
             </div> <%-- 왼쪽 카테고리부분 --%>
 
             <div class="col-sm-9" style="height: auto; border: 0.3mm solid #cfcfcf; border-radius: 10px; padding: 20px">
-                <% for (CatBoard a : cblists) {%>
+                <% for (CatBoard catBoard : catLists) {%>
                 <div class="row">
                     <div class="col-sm-12">
-                        <h1 id="title" style="text-align: center"><%=a.getTitle()%></h1>
+                        <h1 id="title" style="text-align: center"><%=catBoard.getTitle()%></h1>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
                         <div id="name" style="text-align: right; margin:20px 20px 20px 0; color: #404040">
-                            <%=a.getUserid()%> &#124; <span style="font-size: 10pt"><%=a.getRegdate()%></span></div>
+                            <%=catBoard.getUserid()%> &#124; <span style="font-size: 10pt"><%=catBoard.getRegdate()%></span></div>
                     </div>
                 </div>
                 <hr color="#cfcfcf">
                 <div class="col-sm-12" style="margin-left: 15%">
                     <div class="row">
-                        <% if (a.getFile1() != null) { %>
-                        <div style="float: left; margin: 0 10px 10px 0 ;"><img class="viewimg"
-                                                                               src="showimg.jsp?f=<%=a.getFile1()%>"
-                                                                               width="180px" height="150px"></div>
+                        <% if (catBoard.getFile1() != null) { %>
+                        <div style="float: left; margin: 0 10px 10px 0 ;"><img class="viewimg" src="showimg.do?f=<%=catBoard.getFile1()%>" width="180px" height="150px"></div>
                         <% } %>
-                        <% if (a.getFile2() != null) { %>
-                        <div style="float: left; margin: 0 10px 10px 0 ;"><img class="viewimg"
-                                                                               src="showimg.jsp?f=<%=a.getFile2()%>"
-                                                                               width="180px" height="150px"></div>
+                        <% if (catBoard.getFile2() != null) { %>
+                        <div style="float: left; margin: 0 10px 10px 0 ;"><img class="viewimg" src="showimg.do?f=<%=catBoard.getFile2()%>" width="180px" height="150px"></div>
                         <% } %>
-                        <% if (a.getFile3() != null) { %>
-                        <div style="float: left; margin: 0 10px 10px 0 ;"><img class="viewimg"
-                                                                               src="showimg.jsp?f=<%=a.getFile3()%>"
-                                                                               width="180px" height="150px"></div>
+                        <% if (catBoard.getFile3() != null) { %>
+                        <div style="float: left; margin: 0 10px 10px 0 ;"><img class="viewimg" src="showimg.do?f=<%=catBoard.getFile3()%>" width="180px" height="150px"></div>
                         <% } %>
                     </div>
                     <div class="row">
-                        <% if (a.getFile4() != null) { %>
-                        <div style="float: left; margin: 0 10px 10px 0 ;"><img class="viewimg"
-                                                                               src="showimg.jsp?f=<%=a.getFile4()%>"
-                                                                               width="180px" height="150px"></div>
+                        <% if (catBoard.getFile4() != null) { %>
+                        <div style="float: left; margin: 0 10px 10px 0 ;"><img class="viewimg" src="showimg.do?f=<%=catBoard.getFile4()%>" width="180px" height="150px"></div>
                         <% } %>
-                        <% if (a.getFile5() != null) { %>
-                        <div style="float: left; margin: 0 10px 10px 0 ;"><img class="viewimg"
-                                                                               src="showimg.jsp?f=<%=a.getFile5()%>"
-                                                                               width="180px" height="150px"></div>
+                        <% if (catBoard.getFile5() != null) { %>
+                        <div style="float: left; margin: 0 10px 10px 0 ;"><img class="viewimg" src="showimg.do?f=<%=catBoard.getFile5()%>" width="180px" height="150px"></div>
                         <% } %>
                     </div>
                     <div class="row">
-                        <div id="contents" style="margin-top: 5px"><%=a.getContents()%></div>
+                        <div id="contents" style="margin-top: 5px"><%=catBoard.getContents()%></div>
                     </div>
                 </div>
             </div> <%-- 메인 내용부분 --%>
@@ -161,32 +134,35 @@
             <div class="col-sm-9" style="margin: 20px 0 30px 0">
                 <%--uid부분은 로그인한 사용자의 아이디를 표시할 부분--%>
 
-                <form action="procCatComments.jsp?bdno=<%=a.getBdno()%>" method="post">
+                <form action="procComment.do?bdno=<%=catBoard.getBdno()%>" method="post">
                     <div class="row" style="margin-top: 30px">
                         <div style="margin-left: 15px ">
                             <i class="fa fa-user-circle-o" aria-hidden="true"></i>
                             <%=uid%> <div class="user"></div>
                         </div>
-                        <input type="hidden" name="catc_userid" value="<%=uid%>">
-                        <input type="text" id="comentWr" name="catc_contents" style="width: 70%; margin: 0 15px 0 35px ">
-                        <button type="submit" class="btn btn-outline-success" id="comentOk"> 등록</button>
+                        <input type="hidden" name="catCommnet_userid" value="<%=uid%>">
+                        <input type="text" id="comment_contents" name="catComment_contents" style="width: 70%; margin: 0 15px 0 35px ">
+                        <button type="submit" class="btn btn-outline-success" id="commentOk"> 등록</button>
                     </div>  <%-- 댓글 입력창--%>
                 </form>
 
 
                 <!--입력한 댓글이 있으면 댓글을 불러옴-->
-                <% for(RevCatComments rcc : rcclists) { %>
-                <% if (rcc.getCatc_contents() != null || !(rcc.getCatc_contents().equals(""))) {%>
+                <% for(CatComments catComments : catCommentLists) { %>
+                <% if (catComments.getCatc_contents() != null || !(catComments.getCatc_contents().equals(""))) {%>
                 <div class="row">
                     <div class="col-sm-2" >
                         <i class="fa fa-user-circle-o" aria-hidden="true"></i>
-                        <%=rcc.getCatc_userid()%> <div class="user"></div>
+                        <%=catComments.getCatc_userid()%> <div class="user"></div>
                     </div> <%-- 아이콘 뒤에 로그인된 아이디가 들어갔으면 좋겠어요 --%>
                     <div class="col-sm-7">
-                        <div id="coment"><%=rcc.getCatc_contents()%></div>
-                        <div id="coment"><%=rcc.getCatc_regdate()%></div>
+                        <div id="coment"><%=catComments.getCatc_contents()%></div>
+                        <div id="coment"><%=catComments.getCatc_regdate()%></div>
                         <%-- 대댓글은 시간상 언급하는 식으로 들어가는게 나을꺼 같아요 --%>
                     </div>
+                    <a href="commentDelete.do?Comment_bdno=<%=catComments.getCatc_bdno()%>&bdno=<%=catComments.getCatBoard_bdno()%>"
+                       class="btn btn-outline-danger" style="height: 35px; margin-left: 65px;">
+                        <i class="fa fa-trash-o" aria-hidden="true"></i></a>
                 </div>
                 <% } %>
                 <% } %>
@@ -195,10 +171,10 @@
 
         <div class="row" style="margin: 0 0 0 53%">
             <div>
-                <button type="button" class="btn btn-info" onclick="location.href='catModify.jsp'"><i class="fa fa-pencil" aria-hidden="true"></i> 수정하기</button>
+                <button type="button" class="btn btn-info" onclick="location.href='catModify.do'"><i class="fa fa-pencil" aria-hidden="true"></i> 수정하기</button>
             </div>&nbsp;
             <div class="text-right">
-                <a href="catDelete.jsp?bdno=<%=a.getBdno()%>" class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i> 삭제하기</a>
+                <a href="procDelete.do?bdno=<%=catBoard.getBdno()%>" class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i> 삭제하기</a>
             </div>
         </div>  <%-- 수정/삭제 버튼 --%>
 
@@ -237,7 +213,7 @@
 
     // 새글쓰기
     $(function() {
-        $('#newbtn').on('click',function(e)  {location.href='catWrite.jsp';});
+        $('#newbtn').on('click',function(e)  {location.href='catWrite.do';});
     });
     // 상단 로그아웃 버튼
     $(function () {

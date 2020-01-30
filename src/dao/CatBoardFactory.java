@@ -3,7 +3,7 @@ package dao;
 import service.OracleUtil;
 import service.PropertySetter;
 import vo.CatBoard;
-import vo.RevCatComments;
+import vo.CatComments;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -228,16 +228,18 @@ public class CatBoardFactory {
     }
 
     ////////// // 댓글 쓰기/////////////////////////
-    public void commentsCatWrite(RevCatComments rcc, int catrbdno) {
-        String commentsSQL = "INSERT INTO rev_catcomments (catc_bdno, catr_bdno, catc_userid, catc_contents) VALUES (catc_seq.nextval, ?, ?, ?)";
+    public int commentsCatWrite(CatComments catComments, int catBoard_bdno) {
+
+        String commentsSQL = "INSERT INTO cat_comments (catc_bdno, catboard_bdno, catc_userid, catc_contents) VALUES (catc_seq.nextval, ?, ?, ?)";
+        int check = 0;
 
         try {
             conn = oracle.getConn();
             pstmt = conn.prepareStatement(commentsSQL);
-            pstmt.setInt(1, catrbdno);
-            pstmt.setString(2, rcc.getCatc_userid());
-            pstmt.setString(3, rcc.getCatc_contents());
-            pstmt.executeUpdate();
+            pstmt.setInt(1, catBoard_bdno);
+            pstmt.setString(2, catComments.getCatc_userid());
+            pstmt.setString(3, catComments.getCatc_contents());
+            check = pstmt.executeUpdate();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -245,14 +247,15 @@ public class CatBoardFactory {
         } finally {
             oracle.closeConn(pstmt, conn);
         }
+        return check;
     }
 
 
     // 게시판 댓글 보기
-    public ArrayList<RevCatComments> catcommentView(int catrbdno) {
-        String catcommtViewSQL = "SELECT catc_bdno, catc_userid, catc_contents, catc_likes, catc_regdate from rev_catcomments WHERE catr_bdno = ? ORDER BY catc_regdate";
+    public ArrayList<CatComments> catcommentView(int catrbdno) {
+        String catcommtViewSQL = "SELECT catc_bdno, catc_userid, catc_contents, catc_likes, catc_regdate from cat_comments WHERE catboard_bdno = ? ORDER BY catc_regdate";
 
-        ArrayList<RevCatComments> rcclists = null;
+        ArrayList<CatComments> rcclists = null;
 
         try {
             conn = oracle.getConn();
@@ -263,7 +266,7 @@ public class CatBoardFactory {
             rcclists = new ArrayList<>();
 
             while (rs.next()) {
-                RevCatComments rc = new RevCatComments();
+                CatComments rc = new CatComments();
 
 //                PropertySetter.setProperties(rs,rc,false,false);
                 rc.setCatc_bdno(rs.getInt(1));
@@ -286,14 +289,17 @@ public class CatBoardFactory {
 
 
     //게시판 삭제
-    public void deletecatList(int bdno) { //delete.jsp에서 받아온 bdno 임
+    public int deletecatList(int bdno) { //delete.jsp에서 받아온 bdno 임
         String deleteSQL = "DELETE FROM CatBoard  WHERE BDNO = ?";
+
+        int check = 0;
 
         try {
             conn = oracle.getConn();
             pstmt = conn.prepareStatement(deleteSQL);
             pstmt.setInt(1, bdno); //커리문 ?에 값을 넣어 줘야함 LIST에서 받아온 BDNO는 위에 delete 메서드에 담겨 있는데 그것을 커리문에 넣겠다 라는 뜻
-            pstmt.executeUpdate();
+
+            check = pstmt.executeUpdate();
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -301,6 +307,27 @@ public class CatBoardFactory {
         } finally {
             oracle.closeConn(pstmt, conn);
         }
+        return check;
+    }
+
+    // 댓글 삭제
+    public int deleteComment(int Comment_bdno) {
+        String deleteSQL = "delete from cat_comments where catc_bdno=?";
+
+        int check = 0;
+
+        try {
+            conn = oracle.getConn();
+            pstmt = conn.prepareStatement(deleteSQL);
+            pstmt.setInt(1, Comment_bdno);
+            check = pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        } finally {
+            oracle.closeConn(rs, pstmt, conn);
+        }
+        return check;
     }
 
 
