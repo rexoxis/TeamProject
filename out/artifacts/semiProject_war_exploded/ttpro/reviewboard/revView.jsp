@@ -1,6 +1,6 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="vo.ReviewBoard" %>
-<%@ page import="vo.RevComments" %>
+<%@ page import="vo.ReviewComments" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <jsp:useBean id="rbdao" class="dao.ReviewBoardFactory" scope="session"/>
@@ -31,7 +31,7 @@
 
 
     // 댓글 읽어오는 메소드 호출
-    ArrayList<RevComments> rclists = rbdao.commentView(bdno);
+    ArrayList<ReviewComments> rclists = rbdao.commentView(bdno);
 
 %>
 <html>
@@ -88,7 +88,7 @@
                 <button type="button" class="btn btn-success" id="newbtn" style="margin:45px 0 15px 31px; ">
                     <i class="fa fa-plus-circle"> 새글쓰기</i>
                 </button>
-                <button type="button" class="btn btn-warning" onclick="location.href='revList.jsp?cpage=1'"
+                <button type="button" class="btn btn-warning" onclick="location.href='reviewList.jsp?cpage=1'"
                         style="margin:45px 0 15px 0; color: white">
                     <i class="fa fa-list" aria-hidden="true"> 목록으로</i>
                 </button>
@@ -181,7 +181,7 @@
                     <%-- 댓글 입력창--%>
                 </form>
                 <%--입력한 댓글이 있으면 댓글을 불러옴--%>
-                <% for (RevComments rc : rclists) { %>
+                <% for (ReviewComments rc : rclists) { %>
                 <% if (rc.getComt_contents() != null || !(rc.getComt_contents().equals(""))) {%>
                 <div class="row">
                     <div class="col-sm-2">
@@ -206,7 +206,7 @@
 
         <div class="row" style="margin: 0 0 0 53%">
             <div>
-                <button type="button" class="btn btn-info" onclick="location.href='revModify.jsp'"><i
+                <button type="button" class="btn btn-info" onclick="location.href='reviewModify.jsp'"><i
                         class="fa fa-pencil" aria-hidden="true"></i> 수정하기
                 </button>
             </div>&nbsp;
@@ -252,7 +252,7 @@
     // 새글쓰기
     $(function () {
         $('#newbtn').on('click', function (e) {
-            location.href = 'revWrite.jsp';
+            location.href = 'reviewWrite.jsp';
         });
         // 상단 로그아웃 버튼
         $(function () {

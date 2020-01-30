@@ -20,12 +20,11 @@ public class ReviewBoardCommentDeleteHandler implements MVCHandler{
 
         ReviewBoardFactory reviewdao = new ReviewBoardFactory();
 
-        check = reviewdao.deleteComment(Comment_bdno);
+        check = reviewdao.commentDelete(Comment_bdno);
 
         if (check >= 1) {
             viewPage = "2|reviewView.do?bdno="+bdno;
         }
-
         return viewPage;
     }
 }

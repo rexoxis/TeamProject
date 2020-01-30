@@ -20,7 +20,7 @@
 
     if (check >= 1) {
         session.setAttribute("frmdata", frmdata);
-        response.sendRedirect("revList.jsp?cpage=1");
+        response.sendRedirect("reviewList.jsp?cpage=1");
     } else {
         System.out.println("글쓰기 실패");
     }

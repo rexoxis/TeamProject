@@ -20,7 +20,7 @@ public class DogBoardProcModifyHandler implements MVCHandler{
 
         PrintWriter out = response.getWriter();
 
-        DogBoardFactory dogdoa = new DogBoardFactory();
+        DogBoardFactory dogdao = new DogBoardFactory();
 
         String realpath = request.getServletContext().getRealPath("ttproMVC/fileupload");
         Map<String, String> frmdata = FileUpDownUtil.procUpload(request, realpath);
@@ -30,7 +30,7 @@ public class DogBoardProcModifyHandler implements MVCHandler{
         System.out.println("procModify bdno : " + bdno);
         int check = 0;
 
-        check = dogdoa.modifyView(frmdata, bdno);
+        check = dogdao.modifyView(frmdata, bdno);
 
         if (check >= 1) {
             viewPage = "2|dogView.do?bdno="+bdno;

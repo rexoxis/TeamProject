@@ -26,11 +26,11 @@ public class ReviewBoardProcCommentHandler implements MVCHandler{
 
         ReviewComments reviewComments = new ReviewComments();
         // 파라미터로 넘어온 댓글 작성자, 내용 vo클래ㅅ에 저장
-        reviewComments.setReviewc_userid(request.getParameter("reviewCommnet_userid"));
-        reviewComments.setReviewc_contents(request.getParameter("reviewComment_contents"));
+        reviewComments.setComt_userid(request.getParameter("reviewCommnet_userid"));
+        reviewComments.setComt_contents(request.getParameter("reviewComment_contents"));
 
         // 댓글등록 메소드 호출
-        check = reviewdao.commentsReviewWrite(reviewComments,reviewBoard_bdno);
+        check = reviewdao.commentsWrite(reviewComments,reviewBoard_bdno);
 
         // 처리 결과에 따라 페이지 이동
         if (check >= 1) {

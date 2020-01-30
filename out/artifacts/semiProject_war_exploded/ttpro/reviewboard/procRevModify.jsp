@@ -14,7 +14,7 @@
     check = rbdao.modifyView(frmdata, bdno);
 
     if (check >= 1) {
-        response.sendRedirect("revList.jsp?cpage=1");
+        response.sendRedirect("reviewList.jsp?cpage=1");
     } else {
         out.print("<script>history.go(-1);</script>");
     }

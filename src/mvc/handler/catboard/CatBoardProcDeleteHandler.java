@@ -23,7 +23,7 @@ public class CatBoardProcDeleteHandler implements MVCHandler{
 
         int bdno = Integer.parseInt(request.getParameter("bdno"));
 
-        check = catdao.deletecatList(bdno);
+        check = catdao.deleteCatList(bdno);
 
         if (check >= 1) {
             viewPage = "2|catList.do";

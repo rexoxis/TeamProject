@@ -51,8 +51,8 @@
                     <li class="nav-item"><a class="nav-link" href="catList.do" id="parcel">분양</a>
                         <ul>
                             <li><a class="nav-link" href="catList.do">Cat's</a></li>
-                            <li><a class="nav-link" href="<%=baseurl%>/dogboard/dogList.jsp?cpage=1">Dog's</a></li>
-                            <li><a class="nav-link" href="<%=baseurl%>/reviewboard/revList.jsp?cpage=1">분양후기</a></li>
+                            <li><a class="nav-link" href="dogList.do">Dog's</a></li>
+                            <li><a class="nav-link" href="reviewList.do">분양후기</a></li>
                         </ul>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="<%=baseurl%>/freeboard/fList.jsp?cpage=1" id="list">게시판</a>

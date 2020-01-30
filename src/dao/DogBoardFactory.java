@@ -202,9 +202,31 @@ public class DogBoardFactory {
         return rblists;
 
     }
+
+    //게시판 삭제
+    public int deleteDogList(int bdno) {
+        String deleteSQL = "DELETE FROM DogBoard  WHERE BDNO = ?";
+        int check = 0;
+
+        try {
+            conn = oracle.getConn();
+            pstmt = conn.prepareStatement(deleteSQL);
+            pstmt.setInt(1, bdno);
+
+            check = pstmt.executeUpdate();
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            System.out.println("삭제가 안되는 구만");
+        } finally {
+            oracle.closeConn(pstmt, conn);
+        }
+        return check;
+    }
+
     // 게시판 총게시물 수 구하기
     public int countBoard(){
-        String countSQL = "SELECT count(bdno) FROM reviewboard";
+        String countSQL = "SELECT count(bdno) FROM dogboard";
 
         int countbd = 0;
 
@@ -227,16 +249,18 @@ public class DogBoardFactory {
     }
 
     // 댓글 쓰기
-    public void commentsDogWrite(DogComments rdc, int dogrbdno) {
-        String commentsSQL = "INSERT INTO rev_dogcomments (dogc_bdno, dogr_bdno, dogc_userid, dogc_contents) VALUES (dogc_seq.nextval, ?, ?, ?)";
+    public int commentsDogWrite(DogComments dogComments, int dogBoard_bdno) {
+        String commentsSQL = "INSERT INTO dog_comments (dogc_bdno, dogboard_bdno, dogc_userid, dogc_contents) VALUES (dogc_seq.nextval, ?, ?, ?)";
+        int check = 0;
 
         try {
             conn = oracle.getConn();
             pstmt = conn.prepareStatement(commentsSQL);
-            pstmt.setInt(1, dogrbdno);
-            pstmt.setString(2, rdc.getDogc_userid());
-            pstmt.setString(3, rdc.getDogc_contents());
-            pstmt.executeUpdate();
+            pstmt.setInt(1, dogBoard_bdno);
+            pstmt.setString(2, dogComments.getDogc_userid());
+            pstmt.setString(3, dogComments.getDogc_contents());
+
+            check = pstmt.executeUpdate();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -244,22 +268,23 @@ public class DogBoardFactory {
         } finally {
             oracle.closeConn(pstmt, conn);
         }
+        return check;
     }
 
 
     // 게시판 댓글 보기
-    public ArrayList<DogComments> dogcommentView(int dogrbdno) {
-        String dogcommtViewSQL = "SELECT dogc_bdno, dogc_userid, dogc_contents, dogc_likes, dogc_regdate from rev_dogcomments WHERE dogr_bdno = ? ORDER BY dogc_regdate";
+    public ArrayList<DogComments> dogCommentView(int dogBoard_bdno) {
+        String dogcommtViewSQL = "SELECT dogc_bdno, dogc_userid, dogc_contents, dogc_likes, dogc_regdate from dog_comments WHERE dogboard_bdno = ? ORDER BY dogc_regdate";
 
-        ArrayList<DogComments> rdclists = null;
+        ArrayList<DogComments> dogCommentLists = null;
 
         try {
             conn = oracle.getConn();
             pstmt = conn.prepareStatement(dogcommtViewSQL);
-            pstmt.setInt(1, dogrbdno);
+            pstmt.setInt(1, dogBoard_bdno);
             rs = pstmt.executeQuery();
 
-            rdclists = new ArrayList<>();
+            dogCommentLists = new ArrayList<>();
 
             while (rs.next()) {
                 DogComments rc = new DogComments();
@@ -271,7 +296,7 @@ public class DogBoardFactory {
                 rc.setDogc_likes(rs.getInt(4));
                 rc.setDogc_regdate(rs.getString(5));
 
-                rdclists.add(rc);
+                dogCommentLists.add(rc);
             }
 
         } catch (Exception e) {
@@ -280,55 +305,32 @@ public class DogBoardFactory {
         } finally {
             oracle.closeConn(rs, pstmt, conn);
         }
-        return rdclists;
+        return dogCommentLists;
     }
 
-
-    //게시판 삭제
-    public void deletedogList(int bdno) { //delete.jsp에서 받아온 bdno 임
-        String deleteSQL = "DELETE FROM DogBoard  WHERE BDNO = ?";
-
-        try {
-            conn = oracle.getConn();
-            pstmt = conn.prepareStatement(deleteSQL);
-            pstmt.setInt(1, bdno); //커리문 ?에 값을 넣어 줘야함 LIST에서 받아온 BDNO는 위에 delete 메서드에 담겨 있는데 그것을 커리문에 넣겠다 라는 뜻
-            pstmt.executeUpdate();
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            System.out.println("삭제가 안되는 구만");
-        } finally {
-            oracle.closeConn(pstmt, conn);
-        }
-
-    }
-
-
-    // 게시글 삭제
-    public int deleteView(int bdno) {
-        String deleteSQL = "DELETE FROM reviewboard WHERE bdno = ?";
+    // 댓글 삭제
+    public int deleteComment(int Comment_bdno) {
+        String deleteSQL = "delete from dog_comments where dogc_bdno=?";
 
         int check = 0;
 
         try {
             conn = oracle.getConn();
             pstmt = conn.prepareStatement(deleteSQL);
-            pstmt.setInt(1, bdno);
-
+            pstmt.setInt(1, Comment_bdno);
             check = pstmt.executeUpdate();
-
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("deleteView 메소드 확인");
+
         } finally {
-            oracle.closeConn(pstmt, conn);
+            oracle.closeConn(rs, pstmt, conn);
         }
         return check;
     }
 
     // 조회수 증가
     public void viewsUp(int bdno) {
-        String viewsUpSQL = "UPDATE reviewboard SET views = views+1 WHERE bdno = ?";
+        String viewsUpSQL = "UPDATE dogboard SET views = views+1 WHERE bdno = ?";
 
         try {
             conn = oracle.getConn();

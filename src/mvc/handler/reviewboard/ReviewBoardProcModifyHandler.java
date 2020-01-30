@@ -1,6 +1,6 @@
 package mvc.handler.reviewboard;
 
-import dao.CatBoardFactory;
+import dao.ReviewBoardFactory;
 import mvc.handler.MVCHandler;
 import service.FileUpDownUtil;
 
@@ -20,7 +20,7 @@ public class ReviewBoardProcModifyHandler implements MVCHandler{
 
         PrintWriter out = response.getWriter();
 
-        CatBoardFactory catdoa = new CatBoardFactory();
+        ReviewBoardFactory reviewdao = new ReviewBoardFactory();
 
         String realpath = request.getServletContext().getRealPath("ttproMVC/fileupload");
         Map<String, String> frmdata = FileUpDownUtil.procUpload(request, realpath);
@@ -30,10 +30,10 @@ public class ReviewBoardProcModifyHandler implements MVCHandler{
         System.out.println("procModify bdno : " + bdno);
         int check = 0;
 
-        check = catdoa.modifyView(frmdata, bdno);
+        check = reviewdao.modifyView(frmdata, bdno);
 
         if (check >= 1) {
-            viewPage = "2|catView.do?bdno="+bdno;
+            viewPage = "2|reviewView.do?bdno="+bdno;
         } else {
             out.print("<script>history.go(-1);</script>");
         }

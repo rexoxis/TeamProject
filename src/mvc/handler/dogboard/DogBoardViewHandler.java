@@ -44,7 +44,7 @@ public class DogBoardViewHandler implements MVCHandler {
         session.setAttribute("dogLists", dogLists);
 
         // 댓글 읽어오는 메소드 호출
-        ArrayList<DogComments> dogCommentLists = dogdao.dogcommentView(bdno);
+        ArrayList<DogComments> dogCommentLists = dogdao.dogCommentView(bdno);
 
         request.setAttribute("dogCommentLists", dogCommentLists);
 

@@ -11,8 +11,8 @@
     String colname = request.getParameter("colname");
     String findtext = request.getParameter("findtext");
 
-//    System.out.println("revList.jsp 처음 호출시 colname : "+colname);
-//    System.out.println("revList.jsp 처음 호출시 findtext : "+findtext);
+//    System.out.println("reviewList.jsp 처음 호출시 colname : "+colname);
+//    System.out.println("reviewList.jsp 처음 호출시 findtext : "+findtext);
     // option 태그를 선택하고 검색어를 입력하지 않으면 findtext는 null이 아닌 ""으로 넘어온다
     // option 태그를 선택하지 않았을때 colname의 기본값은 seleted로 설정해놓음
 

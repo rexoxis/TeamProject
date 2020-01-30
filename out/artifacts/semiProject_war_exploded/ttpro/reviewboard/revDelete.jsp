@@ -13,7 +13,7 @@
     check = rbdao.deleteView(bdno);
 
     if (check >= 1) {
-        response.sendRedirect("revList.jsp");
+        response.sendRedirect("reviewList.jsp");
     } else {
         System.out.println("삭제실패");
         response.sendRedirect("procRevDelete.jsp?bdno="+bdno);

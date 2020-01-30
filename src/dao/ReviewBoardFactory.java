@@ -267,21 +267,19 @@ public class ReviewBoardFactory {
         }
     }
 
-
-
-
-
     // 댓글 쓰기
-    public void commentsWrite(ReviewComments rc, int revbdno){
+    public int commentsWrite(ReviewComments reviewComment, int revbdno){
         String commentsSQL = "INSERT INTO rev_comments (comt_bdno, rev_bdno, comt_userid, comt_contents) VALUES (comments_seq.nextval, ?, ?, ?)";
+        int check = 0;
 
         try {
             conn = oracle.getConn();
             pstmt = conn.prepareStatement(commentsSQL);
             pstmt.setInt(1, revbdno);
-            pstmt.setString(2, rc.getComt_userid());
-            pstmt.setString(3, rc.getComt_contents());
-            pstmt.executeUpdate();
+            pstmt.setString(2, reviewComment.getComt_userid());
+            pstmt.setString(3, reviewComment.getComt_contents());
+
+            check = pstmt.executeUpdate();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -289,6 +287,7 @@ public class ReviewBoardFactory {
         } finally {
             oracle.closeConn(pstmt,conn);
         }
+        return check;
     }
 
     // 게시판 댓글 보기
@@ -325,6 +324,27 @@ public class ReviewBoardFactory {
             oracle.closeConn(rs,pstmt,conn);
         }
         return rclists;
+    }
+
+    // 댓글 삭제
+    public int commentDelete(int Comment_bdno) {
+        String commentDeleteSQL = "delete from rev_comments where rev_bdno=?";
+
+        int check = 0;
+
+        try {
+            conn = oracle.getConn();
+            pstmt = conn.prepareStatement(commentDeleteSQL);
+            pstmt.setInt(1, Comment_bdno);
+
+            check = pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        } finally {
+            oracle.closeConn(rs, pstmt, conn);
+        }
+        return check;
     }
 
 }

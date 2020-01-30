@@ -65,7 +65,7 @@ public class ReviewBoardListHandler implements MVCHandler {
         // 글번호 계산
         int boardNumber = boardCount - ((cPage-1) * perPage);
 
-        ArrayList<ReviewBoard> reviewLists = reviewdao.reviewList(searchList, startnum, endnum);
+        ArrayList<ReviewBoard> reviewLists = reviewdao.boardList(searchList, startnum, endnum);
 
         request.setAttribute("reviewLists", reviewLists);
 

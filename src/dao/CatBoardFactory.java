@@ -227,6 +227,28 @@ public class CatBoardFactory {
 
     }
 
+    // 게시글 삭제
+    public int deleteCatList(int bdno) { //delete.jsp에서 받아온 bdno 임
+        String deleteSQL = "DELETE FROM CatBoard  WHERE BDNO = ?";
+
+        int check = 0;
+
+        try {
+            conn = oracle.getConn();
+            pstmt = conn.prepareStatement(deleteSQL);
+            pstmt.setInt(1, bdno); //커리문 ?에 값을 넣어 줘야함 LIST에서 받아온 BDNO는 위에 delete 메서드에 담겨 있는데 그것을 커리문에 넣겠다 라는 뜻
+
+            check = pstmt.executeUpdate();
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            oracle.closeConn(pstmt, conn);
+        }
+        return check;
+    }
+
+
     ////////// // 댓글 쓰기/////////////////////////
     public int commentsCatWrite(CatComments catComments, int catBoard_bdno) {
 
@@ -253,17 +275,17 @@ public class CatBoardFactory {
 
     // 게시판 댓글 보기
     public ArrayList<CatComments> catcommentView(int catrbdno) {
-        String catcommtViewSQL = "SELECT catc_bdno, catc_userid, catc_contents, catc_likes, catc_regdate from cat_comments WHERE catboard_bdno = ? ORDER BY catc_regdate";
+        String catCommentViewSQL = "SELECT catc_bdno, catc_userid, catc_contents, catc_likes, catc_regdate from cat_comments WHERE catboard_bdno = ? ORDER BY catc_regdate";
 
-        ArrayList<CatComments> rcclists = null;
+        ArrayList<CatComments> catCommentLists = null;
 
         try {
             conn = oracle.getConn();
-            pstmt = conn.prepareStatement(catcommtViewSQL);
+            pstmt = conn.prepareStatement(catCommentViewSQL);
             pstmt.setInt(1, catrbdno);
             rs = pstmt.executeQuery();
 
-            rcclists = new ArrayList<>();
+            catCommentLists = new ArrayList<>();
 
             while (rs.next()) {
                 CatComments rc = new CatComments();
@@ -275,40 +297,18 @@ public class CatBoardFactory {
                 rc.setCatc_likes(rs.getInt(4));
                 rc.setCatc_regdate(rs.getString(5));
 
-                rcclists.add(rc);
+                catCommentLists.add(rc);
             }
 
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("boardView 메소드 에러");
+            System.out.println("catcommentView 메소드 에러");
         } finally {
             oracle.closeConn(rs, pstmt, conn);
         }
-        return rcclists;
+        return catCommentLists;
     }
 
-
-    //게시판 삭제
-    public int deletecatList(int bdno) { //delete.jsp에서 받아온 bdno 임
-        String deleteSQL = "DELETE FROM CatBoard  WHERE BDNO = ?";
-
-        int check = 0;
-
-        try {
-            conn = oracle.getConn();
-            pstmt = conn.prepareStatement(deleteSQL);
-            pstmt.setInt(1, bdno); //커리문 ?에 값을 넣어 줘야함 LIST에서 받아온 BDNO는 위에 delete 메서드에 담겨 있는데 그것을 커리문에 넣겠다 라는 뜻
-
-            check = pstmt.executeUpdate();
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            System.out.println("삭제가 안되는 구만");
-        } finally {
-            oracle.closeConn(pstmt, conn);
-        }
-        return check;
-    }
 
     // 댓글 삭제
     public int deleteComment(int Comment_bdno) {
@@ -330,32 +330,9 @@ public class CatBoardFactory {
         return check;
     }
 
-
-    // 게시글 삭제
-    public int deleteView(int bdno) {
-        String deleteSQL = "DELETE FROM reviewboard WHERE bdno = ?";
-
-        int check = 0;
-
-        try {
-            conn = oracle.getConn();
-            pstmt = conn.prepareStatement(deleteSQL);
-            pstmt.setInt(1, bdno);
-
-            check = pstmt.executeUpdate();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("deleteView 메소드 확인");
-        } finally {
-            oracle.closeConn(pstmt, conn);
-        }
-        return check;
-    }
-
     // 조회수 증가
     public void viewsUp(int bdno) {
-        String viewsUpSQL = "UPDATE reviewboard SET views = views+1 WHERE bdno = ?";
+        String viewsUpSQL = "UPDATE catboard SET views = views+1 WHERE bdno = ?";
 
         try {
             conn = oracle.getConn();

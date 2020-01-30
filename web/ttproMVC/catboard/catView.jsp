@@ -134,7 +134,7 @@
             <div class="col-sm-9" style="margin: 20px 0 30px 0">
                 <%--uid부분은 로그인한 사용자의 아이디를 표시할 부분--%>
 
-                <form action="procComment.do?bdno=<%=catBoard.getBdno()%>" method="post">
+                <form action="catProcComment.do?bdno=<%=catBoard.getBdno()%>" method="post">
                     <div class="row" style="margin-top: 30px">
                         <div style="margin-left: 15px ">
                             <i class="fa fa-user-circle-o" aria-hidden="true"></i>
@@ -149,7 +149,7 @@
 
                 <!--입력한 댓글이 있으면 댓글을 불러옴-->
                 <% for(CatComments catComments : catCommentLists) { %>
-                <% if (catComments.getCatc_contents() != null || !(catComments.getCatc_contents().equals(""))) {%>
+                <% if (catComments.getCatc_contents() != null) {%>
                 <div class="row">
                     <div class="col-sm-2" >
                         <i class="fa fa-user-circle-o" aria-hidden="true"></i>
@@ -160,7 +160,7 @@
                         <div id="coment"><%=catComments.getCatc_regdate()%></div>
                         <%-- 대댓글은 시간상 언급하는 식으로 들어가는게 나을꺼 같아요 --%>
                     </div>
-                    <a href="commentDelete.do?Comment_bdno=<%=catComments.getCatc_bdno()%>&bdno=<%=catComments.getCatBoard_bdno()%>"
+                    <a href="catPommentDelete.do?Comment_bdno=<%=catComments.getCatc_bdno()%>&bdno=<%=catComments.getCatBoard_bdno()%>"
                        class="btn btn-outline-danger" style="height: 35px; margin-left: 65px;">
                         <i class="fa fa-trash-o" aria-hidden="true"></i></a>
                 </div>

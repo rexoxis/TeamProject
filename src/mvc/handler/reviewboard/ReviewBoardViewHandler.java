@@ -39,12 +39,12 @@ public class ReviewBoardViewHandler implements MVCHandler {
         reviewdao.viewsUp(bdno);
 
         // 글 상세보기 메소드 호출
-        ArrayList<ReviewBoard> reviewLists = reviewdao.reviewView(bdno);
+        ArrayList<ReviewBoard> reviewLists = reviewdao.boardView(bdno);
 
         session.setAttribute("reviewLists", reviewLists);
 
         // 댓글 읽어오는 메소드 호출
-        ArrayList<ReviewComments> reviewCommentLists = reviewdao.reviewcommentView(bdno);
+        ArrayList<ReviewComments> reviewCommentLists = reviewdao.commentView(bdno);
 
         request.setAttribute("reviewCommentLists", reviewCommentLists);
 

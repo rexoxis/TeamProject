@@ -31,7 +31,7 @@ public class ReviewBoardProcWriteHandler implements MVCHandler{
 
         String selectbd = frmdata.get("selectbd");
 
-        check = reviewdao.reviewWrite(frmdata, selectbd);
+        check = reviewdao.boardWrite(frmdata, selectbd);
 
         if (check >= 1) {
             viewPage = "2|reviewList.do";

@@ -1,5 +1,3 @@
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="vo.ReviewBoard" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>
@@ -32,7 +30,7 @@
         </div>
 
         <div class="row" style="margin: 10px 30px 20px 50px">
-            <form class="card card-body bg-light" name="writefrm" id="writefrm" action="procWrite.do" method="post" enctype="multipart/form-data">
+            <form class="card card-body bg-light" name="writefrm" id="writefrm" action="catProcWrite.do" method="post" enctype="multipart/form-data">
                 <div class="form-group row">
                     <label class="col-form-label col-2 text-right" for="wtitle">작성자</label>
                     <input type="text" id="userid" name="userid" class="form-control col-1" value="<%=uid%>" readonly>

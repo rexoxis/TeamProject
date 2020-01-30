@@ -1,10 +1,6 @@
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="vo.ReviewBoard" %>
-<%@ page import="java.util.HashMap" %>
 <%@ page import="vo.CatBoard" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
-<jsp:useBean id="catfdao" class="dao.CatBoardFactory" scope="session"/>
 
 <%
     request.setCharacterEncoding("utf-8");
@@ -145,7 +141,7 @@
                     <ul class="pagination justify-content-center">
                         <% if(cPage > 10) { %>
                         <li class="page-item">
-                            <a class="page-link" href="revList.jsp?cpage=<%=(startPage-10)%>" aria-label="Previous">
+                            <a class="page-link" href="catList.do?cpage=<%=(startPage-10)%>" aria-label="Previous">
                                 <span aria-hidden="true">&laquo;</span>
                                 <span class="sr-only">Previous</span>
                             </a>

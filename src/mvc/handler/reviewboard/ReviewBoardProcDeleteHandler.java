@@ -20,7 +20,7 @@ public class ReviewBoardProcDeleteHandler implements MVCHandler{
 
         int bdno = Integer.parseInt(request.getParameter("bdno"));
 
-        check = reviewdao.deletereviewList(bdno);
+        check = reviewdao.deleteView(bdno);
 
         if (check >= 1) {
             viewPage = "2|reviewList.do";

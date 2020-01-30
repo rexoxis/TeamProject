@@ -13,6 +13,6 @@
     int bdno = Integer.parseInt(request.getParameter("bdno"));
     rbdao.commentsWrite(rcvo,bdno);
 
-    response.sendRedirect("revView.jsp?bdno="+bdno);
+    response.sendRedirect("reviewView.jsp?bdno="+bdno);
 
 %>

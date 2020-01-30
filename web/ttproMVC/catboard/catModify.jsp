@@ -30,7 +30,7 @@
             <div class="col-8 text-left" style="font-size: 25px; margin: 0 45px 0 50px ; padding:30px 0 20px 0;">
                 <i class="fa fa-comments fa-2x"> Review</i></div>
             <div class="col-3">
-                <button type="button" class="btn btn-success" style="margin:40px 0 15px 110px; ">
+                <button type="button" class="btn btn-success" id="listbtn" style="margin:40px 0 15px 110px; ">
                     <i class="fa fa-plus-circle"> 목록으로</i>
                 </button>
             </div>
@@ -38,7 +38,7 @@
 
         <div class="row" style="margin: 10px 30px 20px 50px">
             <%for(CatBoard catBoard : catLists) {%>
-            <form class="card card-body bg-light" name="catModifyfrm" action="procModify.do?bdno=<%=catBoard.getBdno()%>" method="post" enctype="multipart/form-data">
+            <form class="card card-body bg-light" name="catModifyfrm" action="catProcModify.do?bdno=<%=catBoard.getBdno()%>" method="post" enctype="multipart/form-data">
                 <div class="form-group row">
                     <input type="hidden" id="userid" name="userid" class="form-control col-9" value="<%=catBoard.getUserid()%>">
                 </div>
@@ -106,6 +106,11 @@
     $(function () {
         $('#logoutbtn').on('click', function (e) {
             location.href = '/ttpro/login/logout.jsp';
+        });
+    });
+    $(function () {
+        $('#listbtn').on('click', function (e) {
+            location.href = 'catList.do';
         });
     });
 </script>

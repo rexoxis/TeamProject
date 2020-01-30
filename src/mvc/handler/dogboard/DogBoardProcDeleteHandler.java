@@ -20,7 +20,7 @@ public class DogBoardProcDeleteHandler implements MVCHandler{
 
         int bdno = Integer.parseInt(request.getParameter("bdno"));
 
-        check = dogdao.deletedogList(bdno);
+        check = dogdao.deleteDogList(bdno);
 
         if (check >= 1) {
             viewPage = "2|dogList.do";
