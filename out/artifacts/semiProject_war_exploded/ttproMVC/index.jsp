@@ -170,6 +170,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/ttproMVC/js/button.js"></script>
 
 <script language="JavaScript">
 
@@ -216,20 +217,6 @@
 
 </script>
 
-<script>
-    // 상단 로그인 버튼
-    $(function () {
-        $('#mloginbtn').on('click', function (e) {
-            location.href = '/ttpro/login/login.jsp';
-        });
-    });
-    // 회원가입 버튼
-    $(function () {
-        $('#joinbtn').on('click', function (e) {
-            location.href = '/ttpro/signup/signagree.jsp';
-        });
-    });
-</script>
 
 </body>
 </html>

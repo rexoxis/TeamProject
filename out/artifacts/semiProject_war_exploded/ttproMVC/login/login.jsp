@@ -1,5 +1,10 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 
+<%
+    // 로그인 실패시 생성된 Attribute
+    String msg = String.valueOf(request.getAttribute("failMsg"));
+%>
+
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -15,7 +20,7 @@
 <div class="container">
 <%@include file="../layout/header.jsp"%>
     <div id="main">
-        <form id="loginfrm" name="loginfrm" action="proclogin.jsp" method="post" style="margin: 100px 0 0 18%;">
+        <form id="loginfrm" name="loginfrm" action="procLogin.do" method="post" style="margin: 100px 0 0 18%;">
             <div class="form-group row text-center">
                 <label for="uid" class="col-form-label col-4" style="text-align: right;">아이디</label>
                 <input type="text" id="uid" name="userid" class="form-control col-3 " placeholder="아이디를 입력하세요">
@@ -58,6 +63,15 @@
     $(function() {
         $('#joinbtn').on('click',function(e) {location.href='/ttpro/signup/signagree.jsp';});
     });
+</script>
+
+<script>
+    // 로그인 실패시 처리, msg가 존재 한다면 로그인 실패
+    var msg = <%=msg%>;
+    if(msg != null || msg != ""){
+        alert('아이디 또는 비밀번호가 틀립니다.');
+    }
+
 </script>
 
 </body>

@@ -4,7 +4,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%
-    request.setCharacterEncoding("utf-8");
 
     ArrayList<ReviewBoard> reviewLists = (ArrayList)session.getAttribute("reviewLists");
 
@@ -65,8 +64,7 @@
                 <button type="button" class="btn btn-success" id="newbtn" style="margin:45px 0 15px 31px; ">
                     <i class="fa fa-plus-circle"> 새글쓰기</i>
                 </button>
-                <button type="button" class="btn btn-warning" onclick="location.href='reviewList.do'"
-                        style="margin:45px 0 15px 0; color: white">
+                <button type="button" class="btn btn-warning" id="listbtn" style="margin:45px 0 15px 0; color: white">
                     <i class="fa fa-list" aria-hidden="true"> 목록으로</i>
                 </button>
             </div>
@@ -133,7 +131,7 @@
             <div class="col-sm-3"></div>
             <div class="col-sm-9" style="margin: 20px 0 30px 0">
                 <%--uid부분은 로그인한 사용자의 아이디를 표시할 부분--%>
-                <form action="reviewProcComment.do?bdno=<%=reviewBoard.getBdno()%>" method="post">
+                <form action="procReviewComment.do?bdno=<%=reviewBoard.getBdno()%>" method="post">
                     <div class="row" style="margin-top: 30px">
                         <div style="margin-left: 15px ">
                             <i class="fa fa-user-circle-o" aria-hidden="true"></i>
@@ -149,7 +147,6 @@
                 </form>
                 <%--입력한 댓글이 있으면 댓글을 불러옴--%>
                 <% for (ReviewComments reviewComments : reviewCommentLists) { %>
-                <% if (reviewComments.getComt_contents() != null) {%>
                 <div class="row">
                     <div class="col-sm-2">
                         <i class="fa fa-user-circle-o" aria-hidden="true"></i>
@@ -158,14 +155,13 @@
                     </div>
                     <%-- 아이콘 뒤에 로그인된 아이디가 들어갔으면 좋겠어요 --%>
                     <div class="col-sm-7">
-                        <div id="comment"><%=reviewComments.getComt_contents()%></div>
-                        <div id="comment"><%=reviewComments.getComt_regdate()%></div>
+                        <div id="comment1"><%=reviewComments.getComt_contents()%></div>
+                        <div id="comment2"><%=reviewComments.getComt_regdate()%></div>
                     </div>
-                    <a href="catPommentDelete.do?Comment_bdno=<%=reviewComments.getComt_bdno()%>&bdno=<%=reviewComments.getRev_bdno()%>"
+                    <a href="procReviewCommentDelete.do?Comment_bdno=<%=reviewComments.getComt_bdno()%>&bdno=<%=reviewComments.getRev_bdno()%>"
                        class="btn btn-outline-danger" style="height: 35px; margin-left: 65px;">
                         <i class="fa fa-trash-o" aria-hidden="true"></i></a>
                 </div>
-                <% } %>
                 <% } %>
             </div>
         </div>
@@ -178,7 +174,7 @@
                 </button>
             </div>&nbsp;
             <div class="text-right">
-                <a href="reviewProcDelete.do?bdno=<%=reviewBoard.getBdno()%>" class="btn btn-danger"><i class="fa fa-trash-o"
+                <a href="procReviewDelete.do?bdno=<%=reviewBoard.getBdno()%>" class="btn btn-danger"><i class="fa fa-trash-o"
                                                                                         aria-hidden="true"></i> 삭제하기</a>
             </div>
         </div>
@@ -201,34 +197,23 @@
         crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="../js/loginfrm.js"></script>
+<script src="/ttproMVC/js/button.js"></script>
 
 <script>
-    // 상단 로그인 버튼
-    $(function () {
-        $('#mloginbtn').on('click', function (e) {
-            location.href = '/ttpro/login/login.jsp';
-        });
-    });
-    // 회원가입 버튼
-    $(function () {
-        $('#joinbtn').on('click', function (e) {
-            location.href = '/ttpro/signup/signagree.jsp';
-        });
-    });
-
     // 새글쓰기
     $(function () {
         $('#newbtn').on('click', function (e) {
             location.href = 'reviewWrite.do';
         });
-        // 상단 로그아웃 버튼
-        $(function () {
-            $('#logoutbtn').on('click', function (e) {
-                location.href = '/ttpro/login/logout.jsp';
-            });
+    });
+
+    // 목록 버튼
+    $(function () {
+        $('#listbtn').on('click', function (e) {
+            location.href = 'reviewList.do';
         });
     });
-</script>
 
+</script>
 </body>
 </html>

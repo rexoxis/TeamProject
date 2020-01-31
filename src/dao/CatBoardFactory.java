@@ -274,30 +274,25 @@ public class CatBoardFactory {
 
 
     // 게시판 댓글 보기
-    public ArrayList<CatComments> catcommentView(int catrbdno) {
-        String catCommentViewSQL = "SELECT catc_bdno, catc_userid, catc_contents, catc_likes, catc_regdate from cat_comments WHERE catboard_bdno = ? ORDER BY catc_regdate";
+    public ArrayList<CatComments> catcommentView(int catborad_bdno) {
+        String catCommentViewSQL = "SELECT catc_bdno, catboard_bdno, catc_userid, catc_contents, catc_likes, catc_regdate from cat_comments WHERE catboard_bdno = ? ORDER BY catc_regdate";
 
         ArrayList<CatComments> catCommentLists = null;
 
         try {
             conn = oracle.getConn();
             pstmt = conn.prepareStatement(catCommentViewSQL);
-            pstmt.setInt(1, catrbdno);
+            pstmt.setInt(1, catborad_bdno);
             rs = pstmt.executeQuery();
 
             catCommentLists = new ArrayList<>();
 
             while (rs.next()) {
-                CatComments rc = new CatComments();
+                CatComments catComment = new CatComments();
 
-//                PropertySetter.setProperties(rs,rc,false,false);
-                rc.setCatc_bdno(rs.getInt(1));
-                rc.setCatc_userid(rs.getString(2));
-                rc.setCatc_contents(rs.getString(3));
-                rc.setCatc_likes(rs.getInt(4));
-                rc.setCatc_regdate(rs.getString(5));
+                PropertySetter.setProperties(rs, catComment,false,false);
 
-                catCommentLists.add(rc);
+                catCommentLists.add(catComment);
             }
 
         } catch (Exception e) {

@@ -17,6 +17,7 @@
         <div class="row" style="min-height: 350px;">
             <div class="col-md-12 text-center">
                 <h1 class="display-3" style="margin-top: 50px;">찾으시려는 페이지가 없습니다. </h1>
+                <h1 class="display-3" style="margin-top: 50px;">잘못된 접근입니다. </h1>
             </div>
         </div>
     </div>

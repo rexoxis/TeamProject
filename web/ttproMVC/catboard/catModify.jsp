@@ -38,7 +38,7 @@
 
         <div class="row" style="margin: 10px 30px 20px 50px">
             <%for(CatBoard catBoard : catLists) {%>
-            <form class="card card-body bg-light" name="catModifyfrm" action="catProcModify.do?bdno=<%=catBoard.getBdno()%>" method="post" enctype="multipart/form-data">
+            <form class="card card-body bg-light" name="catModifyfrm" action="procCatModify.do?bdno=<%=catBoard.getBdno()%>" method="post" enctype="multipart/form-data">
                 <div class="form-group row">
                     <input type="hidden" id="userid" name="userid" class="form-control col-9" value="<%=catBoard.getUserid()%>">
                 </div>
@@ -68,7 +68,7 @@
                     <div class="col-12 text-center"
                          style="border-top: 1px solid #000000; padding-top: 20px; ">
                         <button type="submit" class="btn btn-primary" id="newbtn"><i class="fa fa-check"> 입력완료</i></button>
-                        <button type="button" class="btn btn-danger" id="cbtn"><i class="fa fa-times" onclick="history.go(-1);"> 취소하기</i></button>
+                        <button type="button" class="btn btn-danger" id="cancelbtn"><i class="fa fa-times" onclick="history.go(-1);"> 취소하기</i></button>
                     </div>
                 </div>
             </form>
@@ -89,25 +89,17 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/ttproMVC/js/button.js"></script>
+
 <script>
-    // 상단 로그인 버튼
+
+    // 작성취소 버튼
     $(function () {
-        $('#mloginbtn').on('click', function (e) {
-            location.href = '/ttpro/login/login.jsp';
+        $('#cancelbtn').on('click', function (e) {
+           history.back();
         });
     });
-    // 회원가입 버튼
-    $(function () {
-        $('#joinbtn').on('click', function (e) {
-            location.href = '/ttpro/signup/signagree.jsp';
-        });
-    });
-    // 상단 로그아웃 버튼
-    $(function () {
-        $('#logoutbtn').on('click', function (e) {
-            location.href = '/ttpro/login/logout.jsp';
-        });
-    });
+    // 목록 버튼
     $(function () {
         $('#listbtn').on('click', function (e) {
             location.href = 'catList.do';

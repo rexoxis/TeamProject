@@ -291,30 +291,25 @@ public class ReviewBoardFactory {
     }
 
     // 게시판 댓글 보기
-    public ArrayList<ReviewComments> commentView(int revbdno){
-        String commtViewSQL = "SELECT comt_bdno, comt_userid, comt_contents, comt_likes, comt_regdate from rev_comments WHERE rev_bdno = ? ORDER BY comt_regdate";
+    public ArrayList<ReviewComments> commentView(int reviewBoard_bdno){
+        String commtViewSQL = "SELECT comt_bdno, rev_bdno, comt_userid, comt_contents, comt_likes, comt_regdate from rev_comments WHERE rev_bdno = ? ORDER BY comt_regdate";
 
-        ArrayList<ReviewComments> rclists = null;
+        ArrayList<ReviewComments> reviewCommentLists = null;
 
         try {
             conn = oracle.getConn();
             pstmt = conn.prepareStatement(commtViewSQL);
-            pstmt.setInt(1, revbdno);
+            pstmt.setInt(1, reviewBoard_bdno);
             rs = pstmt.executeQuery();
 
-            rclists = new ArrayList<>();
+            reviewCommentLists = new ArrayList<>();
 
             while (rs.next()) {
-                ReviewComments rc = new ReviewComments();
+                ReviewComments reviewComment = new ReviewComments();
 
-//                PropertySetter.setProperties(rs,rc,false,false);
-                rc.setComt_bdno(rs.getInt(1));
-                rc.setComt_userid(rs.getString(2));
-                rc.setComt_contents(rs.getString(3));
-                rc.setComt_likes(rs.getInt(4));
-                rc.setComt_regdate(rs.getString(5));
+                PropertySetter.setProperties(rs, reviewComment,false,false);
 
-                rclists.add(rc);
+                reviewCommentLists.add(reviewComment);
             }
 
         } catch (Exception e) {
@@ -323,7 +318,7 @@ public class ReviewBoardFactory {
         } finally {
             oracle.closeConn(rs,pstmt,conn);
         }
-        return rclists;
+        return reviewCommentLists;
     }
 
     // 댓글 삭제

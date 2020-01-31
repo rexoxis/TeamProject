@@ -78,8 +78,8 @@
                 <ul>
                     <%--해당 카테고리 a태그는 지워고 색깔 바꿔주세요--%>
                     <li style="color:#919191">&block;&nbsp;&nbsp;Cat's</li>
-                    <li><a href="<%=baseurl%>/dogboard/dogList.jsp?cpage=1">&block;&nbsp;&nbsp;Dog's</a></li>
-                    <li><a href="<%=baseurl%>/reviewboard/revList.jsp?cpage=1">&block;&nbsp;&nbsp;분양후기</a></li>
+                    <li><a href="dogList.do">&block;&nbsp;&nbsp;Dog's</a></li>
+                    <li><a href="reviewList.do">&block;&nbsp;&nbsp;분양후기</a></li>
                 </ul>
             </div>
 
@@ -182,28 +182,10 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-<script src="../js/loginfrm.js"></script>
+<script src="ttproMVC/js/loginfrm.js"></script>
+<script src="/ttproMVC/js/button.js"></script>
 
 <script>
-    // 상단 로그인 버튼
-    $(function () {
-        $('#mloginbtn').on('click', function (e) {
-            location.href = '/ttpro/login/login.jsp';
-        });
-    });
-    // 회원가입 버튼
-    $(function () {
-        $('#joinbtn').on('click', function (e) {
-            location.href = '/ttpro/signup/signagree.jsp';
-        });
-    });
-
-    $(function () {
-        $('#newbtn').on('click', function (e) {
-            location.href = 'catWrite.do';
-        });
-    });
-
     $(function() {    //화면 다 뜨면 시작
         var searchSource = ["푸들","골든리트리버","시츄","페키니즈","시바","포메","폼스키","말티즈",
             "라가머핀","노르웨이숲","데본렉스","샴","페르시아","강아지용품","강아지사료","고양이용품","고양이사료"]; // 배열 형태로
@@ -229,12 +211,13 @@
         });
 
     });
-    // 상단 로그아웃 버튼
+
+    // 새글쓰기
     $(function () {
-        $('#logoutbtn').on('click', function (e) {
-            location.href = '/ttpro/login/logout.jsp';
+        $('#newbtn').on('click', function (e) {
+            location.href = 'catWrite.do';
         });
-    });
+
 </script>
 
 </body>

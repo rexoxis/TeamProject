@@ -4,12 +4,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%
-    request.setCharacterEncoding("utf-8");
-
     ArrayList<CatBoard> catLists = (ArrayList)session.getAttribute("catLists");
 
     ArrayList<CatComments> catCommentLists = (ArrayList)request.getAttribute("catCommentLists");
-
 %>
 
 <html>
@@ -134,7 +131,7 @@
             <div class="col-sm-9" style="margin: 20px 0 30px 0">
                 <%--uid부분은 로그인한 사용자의 아이디를 표시할 부분--%>
 
-                <form action="catProcComment.do?bdno=<%=catBoard.getBdno()%>" method="post">
+                <form action="procCatComment.do?bdno=<%=catBoard.getBdno()%>" method="post">
                     <div class="row" style="margin-top: 30px">
                         <div style="margin-left: 15px ">
                             <i class="fa fa-user-circle-o" aria-hidden="true"></i>
@@ -149,7 +146,6 @@
 
                 <!--입력한 댓글이 있으면 댓글을 불러옴-->
                 <% for(CatComments catComments : catCommentLists) { %>
-                <% if (catComments.getCatc_contents() != null) {%>
                 <div class="row">
                     <div class="col-sm-2" >
                         <i class="fa fa-user-circle-o" aria-hidden="true"></i>
@@ -160,11 +156,10 @@
                         <div id="coment"><%=catComments.getCatc_regdate()%></div>
                         <%-- 대댓글은 시간상 언급하는 식으로 들어가는게 나을꺼 같아요 --%>
                     </div>
-                    <a href="catPommentDelete.do?Comment_bdno=<%=catComments.getCatc_bdno()%>&bdno=<%=catComments.getCatBoard_bdno()%>"
+                    <a href="procCatCommentDelete.do?Comment_bdno=<%=catComments.getCatc_bdno()%>&bdno=<%=catComments.getCatBoard_bdno()%>"
                        class="btn btn-outline-danger" style="height: 35px; margin-left: 65px;">
                         <i class="fa fa-trash-o" aria-hidden="true"></i></a>
                 </div>
-                <% } %>
                 <% } %>
             </div>
         </div>   <%-- 댓글부분 --%>
@@ -174,7 +169,7 @@
                 <button type="button" class="btn btn-info" onclick="location.href='catModify.do'"><i class="fa fa-pencil" aria-hidden="true"></i> 수정하기</button>
             </div>&nbsp;
             <div class="text-right">
-                <a href="procDelete.do?bdno=<%=catBoard.getBdno()%>" class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i> 삭제하기</a>
+                <a href="procCatDelete.do?bdno=<%=catBoard.getBdno()%>" class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i> 삭제하기</a>
             </div>
         </div>  <%-- 수정/삭제 버튼 --%>
 
@@ -195,30 +190,20 @@
         crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="../js/loginfrm.js"></script>
+<script src="/ttproMVC/js/button.js"></script>
 
 <script>
-    // 상단 로그인 버튼
-    $(function () {
-        $('#mloginbtn').on('click', function (e) {
-            location.href = '/ttpro/login/login.jsp';
-        });
-    });
-    // 회원가입 버튼
-    $(function () {
-        $('#joinbtn').on('click', function (e) {
-            location.href = '/ttpro/signup/signagree.jsp';
-        });
-    });
-
-
     // 새글쓰기
-    $(function() {
-        $('#newbtn').on('click',function(e)  {location.href='catWrite.do';});
-    });
-    // 상단 로그아웃 버튼
     $(function () {
-        $('#logoutbtn').on('click', function (e) {
-            location.href = '/ttpro/login/logout.jsp';
+        $('#newbtn').on('click', function (e) {
+            location.href = 'catWrite.do';
+        });
+    });
+
+    // 목록 버튼
+    $(function () {
+        $('#listbtn').on('click', function (e) {
+            location.href = 'catList.do';
         });
     });
 </script>

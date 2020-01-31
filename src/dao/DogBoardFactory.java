@@ -274,7 +274,7 @@ public class DogBoardFactory {
 
     // 게시판 댓글 보기
     public ArrayList<DogComments> dogCommentView(int dogBoard_bdno) {
-        String dogcommtViewSQL = "SELECT dogc_bdno, dogc_userid, dogc_contents, dogc_likes, dogc_regdate from dog_comments WHERE dogboard_bdno = ? ORDER BY dogc_regdate";
+        String dogcommtViewSQL = "SELECT dogc_bdno, dogboard_bdno, dogc_userid, dogc_contents, dogc_likes, dogc_regdate from dog_comments WHERE dogboard_bdno = ? ORDER BY dogc_regdate";
 
         ArrayList<DogComments> dogCommentLists = null;
 
