@@ -2,7 +2,7 @@
 
 <% request.setCharacterEncoding("utf-8"); %>
 
-<jsp:useBean id="gmbdao" class="dao.goodMembersDAO" scope="session"/>
+<jsp:useBean id="gmbdao" class="dao.GoodMembersDAO" scope="session"/>
 <jsp:useBean id="gmb" class="vo.GoodMembers" scope="page"/>
 <jsp:setProperty name="gmb" property="*"/>
 
@@ -12,6 +12,6 @@
 
         System.out.print("가입성공");
 
-        response.sendRedirect("signright.jsp");
+        response.sendRedirect("signRight.jsp");
 
 %>

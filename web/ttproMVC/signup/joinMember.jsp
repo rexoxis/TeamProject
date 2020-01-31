@@ -43,7 +43,7 @@
 
             <h3>일반회원</h3>
 
-            <form name="joinfrm" method="post" action="procsign.jsp">
+            <form name="joinfrm" method="post" action="procJoinMember.do">
                 <div class="row" style="margin-top: 30px">
                     <div class="col"></div>
                     <div class="col-11">
@@ -136,7 +136,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <iframe src="showcaptcha.jsp" frameborder="0" scrolling="no"
+                            <iframe src="showcaptcha.do" frameborder="0" scrolling="no"
                                     style="margin-left: 158px;" id="capimg"></iframe>
                             <div style="margin: 40px 0 0 15px;">
                                 <button type="button" class="btn btn-dark" id="recta">
@@ -190,7 +190,7 @@
 
     function reloadcta() {
 
-        var url = "showcaptcha.jsp";
+        var url = "showcaptcha.do";
         $('#capimg').attr('src',url);
     }
 
@@ -204,7 +204,7 @@
 
     function frmcheckid() {
         var inputID = frm.userid.value;
-        var url = "/ttpro/signup/checkid.jsp?inputID=" + inputID;
+        var url = "/ttpro/signup/checkId.jsp?inputID=" + inputID;
 
         if (inputID == "") {
             alert('아이디를 먼저 입력해주세요.');
@@ -215,12 +215,6 @@
         }
     }
 
-    // 상단 로그인 버튼
-    $(function () {
-        $('#mloginbtn').on('click', function (e) {
-            location.href = '/ttpro/login/login.jsp';
-        });
-    });
 </script>
 
 </body>

@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean id="gmdao" class="dao.goodMembersDAO"/>
+<jsp:useBean id="gmdao" class="dao.GoodMembersDAO"/>
 
 <%
     request.setCharacterEncoding("utf-8");

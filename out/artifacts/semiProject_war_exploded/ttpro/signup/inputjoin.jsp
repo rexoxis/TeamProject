@@ -190,7 +190,7 @@
 
     function reloadcta() {
 
-        var url = "showcaptcha.jsp";
+        var url = "showcaptcha.do";
         $('#capimg').attr('src',url);
     }
 
@@ -204,7 +204,7 @@
 
     function frmcheckid() {
         var inputID = frm.userid.value;
-        var url = "/ttpro/signup/checkid.jsp?inputID=" + inputID;
+        var url = "/ttpro/signup/checkId.jsp?inputID=" + inputID;
 
         if (inputID == "") {
             alert('아이디를 먼저 입력해주세요.');
