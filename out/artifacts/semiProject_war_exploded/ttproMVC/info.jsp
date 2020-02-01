@@ -44,7 +44,7 @@
         });
         // 회원가입 버튼
         $(function() {
-            $('#joinbtn').on('click',function(e) {location.href='signup/signagree.jsp';});
+            $('#joinbtn').on('click',function(e) {location.href='signup/signAgree.jsp';});
         });
 
         var con = document.getElementById("b");

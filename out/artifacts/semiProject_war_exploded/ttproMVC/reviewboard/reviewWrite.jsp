@@ -30,7 +30,7 @@
         </div>
 
         <div class="row" style="margin: 10px 30px 20px 50px">
-            <form class="card card-body bg-light" name="writefrm" action="reviewProcWrite.do" method="post" enctype="multipart/form-data">
+            <form class="card card-body bg-light" name="writefrm" action="procReviewWrite.do" method="post" enctype="multipart/form-data">
                 <div class="form-group row">
                     <input type="hidden" id="userid" name="userid" class="form-control col-9" value="<%=uid%>">
                 </div>
@@ -90,41 +90,23 @@
         crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="../js/writefrmcheck.js"></script>
+<script src="/ttproMVC/js/button.js"></script>
 
 <script>
-    // 상단 로그인 버튼
-    $(function () {
-        $('#mloginbtn').on('click', function (e) {
-            location.href = '/ttpro/login/login.jsp';
-        });
-    });
-    // 회원가입 버튼
-    $(function () {
-        $('#joinbtn').on('click', function (e) {
-            location.href = '/ttpro/signup/signagree.jsp';
-        });
-    });
 
     // 작성취소 버튼
     $(function () {
         $('#cancelbtn').on('click', function (e) {
-            location.href = 'reviewList.do';
+            history.back();
         });
     });
 
+    // 목록 버튼
     $(function () {
         $('#listbtn').on('click', function (e) {
             location.href = 'reviewList.do';
         });
     });
-    // 상단 로그아웃 버튼
-    $(function () {
-        $('#logoutbtn').on('click', function (e) {
-            location.href = '/ttpro/login/logout.jsp';
-        });
-    });
-
 </script>
-
 </body>
 </html>

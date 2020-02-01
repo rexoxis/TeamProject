@@ -23,14 +23,14 @@
             <div class="col-8 text-left" style="font-size: 25px; margin: 0 45px 0 50px ; padding:30px 0 20px 0;">
                 <i class="fa fa-comments fa-2x"> Cat's</i></div>
             <div class="col-3">
-                <button type="button" class="btn btn-success" onclick="location.href='catList.do'" style="margin:40px 0 15px 110px; ">
+                <button type="button" class="btn btn-success" id="listbtn" style="margin:40px 0 15px 110px; ">
                     <i class="fa fa-plus-circle"> 목록으로</i>
                 </button>
             </div>
         </div>
 
         <div class="row" style="margin: 10px 30px 20px 50px">
-            <form class="card card-body bg-light" name="writefrm" id="writefrm" action="catProcWrite.do" method="post" enctype="multipart/form-data">
+            <form class="card card-body bg-light" name="writefrm" id="writefrm" action="procCatWrite.do" method="post" enctype="multipart/form-data">
                 <div class="form-group row">
                     <label class="col-form-label col-2 text-right" for="wtitle">작성자</label>
                     <input type="text" id="userid" name="userid" class="form-control col-1" value="<%=uid%>" readonly>
@@ -69,7 +69,7 @@
                     <div class="col-12 text-center"
                          style="border-top: 1px solid #000000; padding-top: 20px; ">
                         <button type="button" class="btn btn-primary" id="okbtn"><i class="fa fa-check"> 입력완료</i></button>
-                        <button type="button" class="btn btn-danger" id="cbtn"><i class="fa fa-times"> 취소하기</i></button>
+                        <button type="button" class="btn btn-danger" id="cancelbtn"><i class="fa fa-times"> 취소하기</i></button>
                     </div>
                 </div>
             </form>
@@ -91,27 +91,31 @@
         crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/ttproMVC/js/writefrmcheck.js"></script>
-
+<script src="/ttproMVC/js/button.js"></script>
 
 <script>
-    // 상단 로그인 버튼
+    // 작성취소 버튼
     $(function () {
-        $('#mloginbtn').on('click', function (e) {
-            location.href = '/ttpro/login/login.jsp';
+        $('#cancelbtn').on('click', function (e) {
+            location.href = 'catList.do';
         });
     });
-    // 회원가입 버튼
+
+    // 목록 버튼
     $(function () {
-        $('#joinbtn').on('click', function (e) {
-            location.href = '/ttpro/signup/signagree.jsp';
+        $('#listbtn').on('click', function (e) {
+            location.href = 'catList.do';
         });
     });
-    // 상단 로그아웃 버튼
-    $(function () {
-        $('#logoutbtn').on('click', function (e) {
-            location.href = '/ttpro/login/logout.jsp';
-        });
-    });
+
+    // 미로그인시 접근제한
+    var uid = "<%=uid%>";
+
+    if (uid === "" || uid == null) {
+        alert('로그인 후 사용해주세요!');
+        location.href='login.do';
+    }
 </script>
+
 </body>
 </html>

@@ -1,5 +1,22 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 
+<%
+    // 로그인 실패시 생성된 Attribute
+    String msg = String.valueOf(request.getAttribute("failMsg"));
+%>
+
+<script>
+    // 로그인 실패시 처리, msg가 존재 한다면 로그인 실패
+    var msg = "<%=msg%>";
+    if (msg !== "") {
+        if(msg === "fail"){
+            alert('아이디 또는 비밀번호가 틀립니다.');
+        } else if (msg === "notExist") {
+            alert('존재하지 않는 아이디입니다.');
+        }
+    }
+</script>
+
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -15,7 +32,7 @@
 <div class="container">
 <%@include file="../layout/header.jsp"%>
     <div id="main">
-        <form id="loginfrm" name="loginfrm" action="proclogin.jsp" method="post" style="margin: 100px 0 0 18%;">
+        <form id="loginfrm" name="loginfrm" action="procLogin.do" method="post" style="margin: 100px 0 0 18%;">
             <div class="form-group row text-center">
                 <label for="uid" class="col-form-label col-4" style="text-align: right;">아이디</label>
                 <input type="text" id="uid" name="userid" class="form-control col-3 " placeholder="아이디를 입력하세요">
@@ -48,17 +65,10 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<script src="../js/loginfrm.js"></script>
+<script src="/ttproMVC/js/loginfrm.js"></script>
+<script src="/ttproMVC/js/button.js"></script>
 
-<script>
-    <%--상단 로그인 버튼--%>
-    $(function() {
-        $('#mloginbtn').on('click',function(e) {location.href='/ttpro/login/login.jsp';});
-    });
-    $(function() {
-        $('#joinbtn').on('click',function(e) {location.href='/ttpro/signup/signagree.jsp';});
-    });
-</script>
+
 
 </body>
 </html>

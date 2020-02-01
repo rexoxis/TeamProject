@@ -185,26 +185,9 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 <script src="../js/loginfrm.js"></script>
+<script src="/ttproMVC/js/button.js"></script>
 
 <script>
-    // 상단 로그인 버튼
-    $(function () {
-        $('#mloginbtn').on('click', function (e) {
-            location.href = 'login.do';
-        });
-    });
-    // 회원가입 버튼
-    $(function () {
-        $('#joinbtn').on('click', function (e) {
-            location.href = 'signagree.do';
-        });
-    });
-
-    $(function () {
-        $('#newbtn').on('click', function (e) {
-            location.href = 'dogWrite.do';
-        });
-    });
 
     $(function() {    //화면 다 뜨면 시작
         var searchSource = ["푸들","골든리트리버","시츄","페키니즈","시바","포메","폼스키","말티즈",
@@ -231,12 +214,13 @@
         });
 
     });
-    // 상단 로그아웃 버튼
+    // 새글쓰기
     $(function () {
-        $('#logoutbtn').on('click', function (e) {
-            location.href = 'logout.do';
+        $('#newbtn').on('click', function (e) {
+            location.href = 'dogWrite.do';
         });
     });
+
 </script>
 
 </body>

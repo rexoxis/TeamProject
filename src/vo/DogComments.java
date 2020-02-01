@@ -3,7 +3,7 @@ package vo;
 public class DogComments {
 
     int dogc_bdno;
-    int dogBoard_bdno;
+    int dogboard_bdno;
     String dogc_userid;
     String dogc_contents;
     int dogc_likes;
@@ -17,12 +17,12 @@ public class DogComments {
         this.dogc_bdno = dogc_bdno;
     }
 
-    public int getDogBoard_bdno() {
-        return dogBoard_bdno;
+    public int getDogboard_bdno() {
+        return dogboard_bdno;
     }
 
-    public void setDogBoard_bdno(int dogBoard_bdno) {
-        this.dogBoard_bdno = dogBoard_bdno;
+    public void setDogboard_bdno(int dogboard_bdno) {
+        this.dogboard_bdno = dogboard_bdno;
     }
 
     public String getDogc_userid() {

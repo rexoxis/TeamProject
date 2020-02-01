@@ -274,7 +274,7 @@ public class DogBoardFactory {
 
     // 게시판 댓글 보기
     public ArrayList<DogComments> dogCommentView(int dogBoard_bdno) {
-        String dogcommtViewSQL = "SELECT dogc_bdno, dogc_userid, dogc_contents, dogc_likes, dogc_regdate from dog_comments WHERE dogboard_bdno = ? ORDER BY dogc_regdate";
+        String dogcommtViewSQL = "SELECT dogc_bdno, dogboard_bdno, dogc_userid, dogc_contents, dogc_likes, dogc_regdate from dog_comments WHERE dogboard_bdno = ? ORDER BY dogc_regdate";
 
         ArrayList<DogComments> dogCommentLists = null;
 
@@ -287,16 +287,16 @@ public class DogBoardFactory {
             dogCommentLists = new ArrayList<>();
 
             while (rs.next()) {
-                DogComments rc = new DogComments();
+                DogComments dogComment = new DogComments();
 
-//                PropertySetter.setProperties(rs,rc,false,false);
-                rc.setDogc_bdno(rs.getInt(1));
-                rc.setDogc_userid(rs.getString(2));
-                rc.setDogc_contents(rs.getString(3));
-                rc.setDogc_likes(rs.getInt(4));
-                rc.setDogc_regdate(rs.getString(5));
+                PropertySetter.setProperties(rs, dogComment,false,false);
+//                rc.setDogc_bdno(rs.getInt(1));
+//                rc.setDogc_userid(rs.getString(2));
+//                rc.setDogc_contents(rs.getString(3));
+//                rc.setDogc_likes(rs.getInt(4));
+//                rc.setDogc_regdate(rs.getString(5));
 
-                dogCommentLists.add(rc);
+                dogCommentLists.add(dogComment);
             }
 
         } catch (Exception e) {
