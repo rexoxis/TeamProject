@@ -1,9 +1,12 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="vo.CatBoard" %>
 <%@ page import="vo.CatComments" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%
+    request.setCharacterEncoding("utf-8");
+
     ArrayList<CatBoard> catLists = (ArrayList)session.getAttribute("catLists");
 
     ArrayList<CatComments> catCommentLists = (ArrayList)request.getAttribute("catCommentLists");
@@ -51,12 +54,6 @@
 <body>
 <div class="container">
     <%@include file="../layout/header.jsp" %>
-
-    <%
-        if(uid == null || uid.equals("")) {
-            out.println("<script> alert('로그인 후 이용해주세요^^'); location.href='/ttproMVC/login/login.jsp';</script>");
-        }
-    %>
 
     <div class="main">
         <div class="row">
@@ -119,7 +116,7 @@
                         <% } %>
                     </div>
                     <div class="row">
-                        <div id="contents" style="margin-top: 5px"><%=catBoard.getContents()%></div>
+                        <div id="contents" style="margin-top: 5px"><%=catBoard.getContents().replace("\r\n", "<br>")%></div>
                     </div>
                 </div>
             </div> <%-- 메인 내용부분 --%>
@@ -156,7 +153,7 @@
                         <div id="coment"><%=catComments.getCatc_regdate()%></div>
                         <%-- 대댓글은 시간상 언급하는 식으로 들어가는게 나을꺼 같아요 --%>
                     </div>
-                    <a href="procCatCommentDelete.do?Comment_bdno=<%=catComments.getCatc_bdno()%>&bdno=<%=catComments.getCatBoard_bdno()%>"
+                    <a href="procCatCommentDelete.do?comment_bdno=<%=catComments.getCatc_bdno()%>&bdno=<%=catComments.getCatboard_bdno()%>"
                        class="btn btn-outline-danger" style="height: 35px; margin-left: 65px;">
                         <i class="fa fa-trash-o" aria-hidden="true"></i></a>
                 </div>
@@ -206,6 +203,15 @@
             location.href = 'catList.do';
         });
     });
+
+    // 미로그인시 접근제한
+    var uid = "<%=uid%>";
+
+    if (uid === "" || uid == null) {
+        alert('로그인 후 사용해주세요!');
+        location.href='login.do';
+    }
+
 </script>
 
 </body>

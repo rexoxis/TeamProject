@@ -114,6 +114,7 @@ public class GoodMembersDAO {
                 dbpwd = rs.getString(1);
 
                 if(dbpwd.equals(passwd)){
+                    //
                     check = 1;
                 } else {
                     check = 0;

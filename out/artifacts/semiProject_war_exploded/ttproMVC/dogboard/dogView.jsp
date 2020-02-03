@@ -114,7 +114,7 @@
                         <% } %>
                     </div>
                     <div class="row">
-                        <div id="contents" style="margin-top: 5px"><%=dogBoard.getContents()%></div>
+                        <div id="contents" style="margin-top: 5px"><%=dogBoard.getContents().replace("\r\n", "<br>")%></div>
                     </div>
                 </div>
             </div> <%-- 메인 내용부분 --%>
@@ -147,10 +147,10 @@
                         <%=dogComments.getDogc_userid()%> <div class="user"></div>
                     </div>
                     <div class="col-sm-7">
-                        <div id="coment"><%=dogComments.getDogc_contents()%></div>
-                        <div id="coment"><%=dogComments.getDogc_regdate()%></div>
+                        <div id="coment1"><%=dogComments.getDogc_contents()%></div>
+                        <div id="coment2"><%=dogComments.getDogc_regdate()%></div>
                     </div>
-                    <a href="procDogCommentDelete.do?Comment_bdno=<%=dogComments.getDogc_bdno()%>&bdno=<%=dogComments.getDogBoard_bdno()%>"
+                    <a href="procDogCommentDelete.do?Comment_bdno=<%=dogComments.getDogc_bdno()%>&bdno=<%=dogComments.getDogboard_bdno()%>"
                        class="btn btn-outline-danger" style="height: 35px; margin-left: 65px;">
                         <i class="fa fa-trash-o" aria-hidden="true"></i></a>
                 </div>

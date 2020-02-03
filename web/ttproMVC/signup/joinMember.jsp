@@ -165,7 +165,8 @@
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="../js/joinfrmcheck.js"></script>
+<script src="/ttproMVC/js/joinfrmcheck.js"></script>
+<script src="/ttproMVC/js/button.js"></script>
 
 <script>
     $(function() {
@@ -178,7 +179,7 @@
     zipcodefind.addEventListener("click", zipcodepopup);
 
     function zipcodepopup() {
-        var url = "/ttpro/signup/zipcode.jsp";
+        var url = "/ttproMVC/signup/zipcode.jsp";
         window.open(url,"zipcode","width=700,height=500");
     }
 </script>
@@ -204,14 +205,18 @@
 
     function frmcheckid() {
         var inputID = frm.userid.value;
+<<<<<<< HEAD:out/artifacts/semiProject_war_exploded/ttproMVC/signup/joinMember.jsp
+        var url = "/ttproMVC/signup/checkId.jsp?inputID=" + inputID;
+=======
         var url = "/ttpro/signup/checkId.jsp?inputID=" + inputID;
+>>>>>>> origin/master:web/ttproMVC/signup/joinMember.jsp
 
         if (inputID == "") {
             alert('아이디를 먼저 입력해주세요.');
         } else if (!joinuidrex.test(inputID)) {
             alert('올바른 형식이 아닙니다.');
         } else {
-            window.open(url,"checkid","width=350,height=150,left=885,top=465");
+            window.open(url,"checkid","width=350,height=150,left=785,top=465");
         }
     }
 

@@ -41,7 +41,6 @@ public class ProcJoinMemberHandler implements MVCHandler {
         isOk = mdao.joinMember(gmb);
 
         if (isOk >= 1) {
-            System.out.print("가입성공");
             viewPage = "2|signRight.do";
         }
 //        } else {

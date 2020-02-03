@@ -17,14 +17,14 @@ public class ProcCatBoardCommentDeleteHandler implements MVCHandler{
 
         int check = 0;
         int bdno = Integer.parseInt(request.getParameter("bdno"));
-        int Comment_bdno = Integer.parseInt(request.getParameter("Comment_bdno"));
+        int Comment_bdno = Integer.parseInt(request.getParameter("comment_bdno"));
 
         CatBoardFactory catdao = new CatBoardFactory();
 
         check = catdao.deleteComment(Comment_bdno);
 
         System.out.println("deleteComment bdno : " + bdno);
-        System.out.println("deleteComment bdno : " + Comment_bdno);
+        System.out.println("deleteComment Comment_bdno : " + Comment_bdno);
 
         if (check >= 1) {
             viewPage = "2|catView.do?bdno="+bdno;

@@ -119,7 +119,7 @@
                         <% } %>
                     </div>
                     <div class="row">
-                        <div id="contents" style="margin-top: 5px"><%=reviewBoard.getContents()%></div>
+                        <div id="contents" style="margin-top: 5px"><%=reviewBoard.getContents().replace("\r\n", "<br>")%></div>
                     </div>
                 </div>
             </div>
@@ -169,7 +169,7 @@
 
         <div class="row" style="margin: 0 0 0 53%">
             <div>
-                <button type="button" class="btn btn-info" onclick="location.href='revModify.do'"><i
+                <button type="button" class="btn btn-info" onclick="location.href='reviewModify.do'"><i
                         class="fa fa-pencil" aria-hidden="true"></i> 수정하기
                 </button>
             </div>&nbsp;
@@ -213,6 +213,14 @@
             location.href = 'reviewList.do';
         });
     });
+
+    // 미로그인시 접근제한
+    var uid = "<%=uid%>";
+
+    if (uid === "" || uid == null) {
+        alert('로그인 후 사용해주세요!');
+        location.href='login.do';
+    }
 
 </script>
 </body>

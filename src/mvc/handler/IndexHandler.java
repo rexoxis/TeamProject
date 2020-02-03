@@ -11,7 +11,7 @@ import java.io.IOException;
 public class IndexHandler implements MVCHandler {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String viewPage = "1|ttproMVC/index.jsp";
+        String viewPage = "1|/ttproMVC/index.jsp";
 
         return viewPage;
     }

@@ -23,20 +23,20 @@ function loginfrm(){
     idmsg.innerHTML = "";
     pwmsg.innerHTML = "";
 
-    if(frm.userid.value == ""){
+    if(frm.userid.value === ""){
         idmsg.innerHTML = "아이디를 입력하세요.";
     }
 
-    if(frm.passwd.value == ""){
+    if(frm.passwd.value === ""){
         pwmsg.innerHTML = "비밀번호를 입력하세요.";
     }
 
-    if(frm.userid.value != "" & frm.passwd.value != ""){
+    if(frm.userid.value !== "" & frm.passwd.value !== ""){
         frm.submit();
     }
 }
 
 function gologout(){
-    location.href = '/ttpro/login/logout.jsp';
+    location.href = 'logout.do';
 }
 

@@ -1,7 +1,5 @@
 var loginbtn = document.getElementById("loginbtn");
-var logoutbtn = document.getElementById("logoutbtn");
 loginbtn.addEventListener("click", loginfrm);
-logoutbtn.addEventListener("click", gologout);
 
 // alert창 띄우는 함수
 // function loginfrm_() {
@@ -23,20 +21,15 @@ function loginfrm(){
     idmsg.innerHTML = "";
     pwmsg.innerHTML = "";
 
-    if(frm.userid.value == ""){
+    if(frm.userid.value === ""){
         idmsg.innerHTML = "아이디를 입력하세요.";
     }
 
-    if(frm.passwd.value == ""){
+    if(frm.passwd.value === ""){
         pwmsg.innerHTML = "비밀번호를 입력하세요.";
     }
 
-    if(frm.userid.value != "" & frm.passwd.value != ""){
+    if(frm.userid.value !== "" & frm.passwd.value !== ""){
         frm.submit();
     }
 }
-
-function gologout(){
-    location.href = '/ttpro/login/logout.jsp';
-}
-
