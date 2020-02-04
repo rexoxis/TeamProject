@@ -42,12 +42,12 @@ public class CatBoardListHandler implements MVCHandler {
         int perPage = 16;
         int pageBlock = 10;
         int cPage = 1;
+        int totalPage = boardCount / perPage;
 
         if (request.getParameter("cpage") != null){
             cPage = Integer.parseInt(request.getParameter("cpage"));
         }
 
-        int totalPage = boardCount / perPage;
 
         if(boardCount % perPage > 0) ++totalPage;
 

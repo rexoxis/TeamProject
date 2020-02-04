@@ -58,7 +58,7 @@ public class FreeBoardDAO {
     }
     // 게시판 총게시물 수 구하기
     public int countBoard(){
-        String countSQL = "SELECT count(bdno) FROM reviewboard";
+        String countSQL = "SELECT count(bdno) FROM semilist1";
 
         int countbd = 0;
 
@@ -299,7 +299,9 @@ public class FreeBoardDAO {
             conn = oracle.getConn();
             pstmt = conn.prepareStatement(deleteSQL);
             pstmt.setInt(1, COMT_BDNO);
+
             isok2 = pstmt.executeUpdate();
+
         } catch (Exception e) {
             e.printStackTrace();
 

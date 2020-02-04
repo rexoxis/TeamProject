@@ -323,7 +323,7 @@ public class ReviewBoardDAO {
 
     // 댓글 삭제
     public int commentDelete(int Comment_bdno) {
-        String commentDeleteSQL = "delete from rev_comments where rev_bdno=?";
+        String commentDeleteSQL = "delete from rev_comments where comt_bdno=?";
 
         int check = 0;
 
@@ -333,6 +333,7 @@ public class ReviewBoardDAO {
             pstmt.setInt(1, Comment_bdno);
 
             check = pstmt.executeUpdate();
+
         } catch (Exception e) {
             e.printStackTrace();
 

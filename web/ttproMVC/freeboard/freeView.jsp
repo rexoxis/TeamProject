@@ -8,7 +8,7 @@
 
     ArrayList<FreeBoard> freeLists = (ArrayList)session.getAttribute("freeLists");
 
-    ArrayList<FreeBoard> freeCommentLists = (ArrayList)request.getAttribute("freeCommentLists");
+    ArrayList<FreeComments> freeCommentLists = (ArrayList)request.getAttribute("freeCommentLists");
 
 %>
 <html>
@@ -83,26 +83,26 @@
             <%-- 왼쪽 카테고리부분 --%>
 
             <div class="col-sm-9" style="height: auto; border: 0.3mm solid #cfcfcf; border-radius: 10px; padding: 20px">
-                <% for (FreeBoard a : freeLists) { %>
+                <% for (FreeBoard freeBoard : freeLists) { %>
                 <div class="row">
                     <div class="col-sm-12">
-                        <h1 id="title" style="text-align: center"><%=a.getTitle()%>
+                        <h1 id="title" style="text-align: center"><%=freeBoard.getTitle()%>
                         </h1>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
                         <div id="name" style="text-align: right; margin: 20px 20px 20px 0; color: #404040">
-                            <%=a.getUserid()%> &#124;
+                            <%=freeBoard.getUserid()%> &#124;
                             <button type="button" class="btn btn-outline-danger"
-                                    onclick="location.href='freeThumbsUP.do?bdno=<%=a.getBdno()%>'">
+                                    onclick="location.href='freeThumbsUP.do?bdno=<%=freeBoard.getBdno()%>'">
                                 <i class="fa fa-thumbs-o-up" aria-hidden="true"></i></button>
                         </div>
                     </div>
                 </div>
                 <hr color="#cfcfcf">
                 <div class="col-sm-12" style="margin-left: 15%">
-                    <div id="contents" style="margin-top: 5px"><%=a.getContents()%></div>
+                    <div id="contents" style="margin-top: 5px"><%=freeBoard.getContents()%></div>
                 </div>
             </div>
         </div>
@@ -113,7 +113,7 @@
         <div class="col-sm-3"></div>
         <div class="col-sm-9" style="margin: 20px 0 30px 0">
             <%--uid부분은 로그인한 사용자의 아이디를 표시할 부분--%>
-            <form action="procfreeComment.do?bdno=<%=a.getBdno()%>" method="post">
+            <form action="procfreeComment.do?bdno=<%=freeBoard.getBdno()%>" method="post">
                 <div class="row" style="margin: 20px 0 30px 0">
                     <div style="margin-left: 15px">
                         <i class="fa fa-user-circle-o" aria-hidden="true"></i>
@@ -121,28 +121,28 @@
                         <div class="user"></div>
                     </div>
                     <%-- 아이콘 뒤에 로그인된 아이디가 들어갔으면 좋겠어요 --%>
-                    <input type="hidden" name="comt_userid" value="<%=uid%>">
-                    <input type="text" id="comentWr" name="comt_contents" style="width: 70%; margin: 0 15px 0 35px ">
+                    <input type="hidden" name="freeCommnet_userid" value="<%=uid%>">
+                    <input type="text" id="comentWr" name="freeComment_contents" style="width: 70%; margin: 0 15px 0 35px ">
                     <button type="submit" class="btn btn-outline-success" id="comentOk"> 등록</button>
                 </div>
                 <%-- 댓글 입력창 --%>
             </form>
             <%-- 입력한 댓글이 있으면 댓글을 불러옴--%>
-            <% for (FreeComments qc : freeCommentLists) { %>
-            <% if (qc.getComt_contents() != null || !(qc.getComt_contents().equals(""))) {%>
+            <% for (FreeComments freeComments : freeCommentLists) { %>
+            <% if (freeComments.getComt_contents() != null || !(freeComments.getComt_contents().equals(""))) {%>
             <div class="row">
                 <div class="col-sm-2">
                     <i class="fa fa-user-circle-o" aria-hidden="true"></i>
-                    <%=qc.getComt_userid()%>
+                    <%=freeComments.getComt_userid()%>
                     <div class="user"></div>
                 </div>
                 <%-- 아이콘 뒤에 로그인된 아이디가 들어갔으면 좋겠어요 --%>
                 <div class="col-sm-7">
-                    <div id="coment1"><%=qc.getComt_contents()%></div>
-                    <div id="coment2" style="font-size: 10pt"><%=qc.getComt_regdate()%></div>
+                    <div id="coment1"><%=freeComments.getComt_contents()%></div>
+                    <div id="coment2" style="font-size: 10pt"><%=freeComments.getComt_regdate()%></div>
                     <%-- 대댓글은 시간상 언급하는 식으로 들어가는게 나을꺼 같아요 --%>
                 </div>
-                <a href="procfreeCommentDelete.do?comt_bdno=<%=qc.getComt_bdno()%>&bdno=<%=a.getBdno()%>"
+                <a href="procfreeCommentDelete.do?Comment_bdno=<%=freeComments.getComt_bdno()%>&bdno=<%=freeBoard.getBdno()%>"
                    class="btn btn-outline-danger" style="height: 35px; margin-left: 65px;">
                     <i class="fa fa-trash-o" aria-hidden="true"></i></a>
             </div>
@@ -160,7 +160,7 @@
             </button>
         </div>&nbsp;
         <div class="text-right">
-            <a href="procfreeDelete.do?bdno=<%=a.getBdno()%>" class="btn btn-danger"><i class="fa fa-trash-o"
+            <a href="procfreeDelete.do?bdno=<%=freeBoard.getBdno()%>" class="btn btn-danger"><i class="fa fa-trash-o"
                                                                                   aria-hidden="true"></i> 삭제하기</a>
         </div>
     </div>
@@ -190,6 +190,13 @@
             location.href = 'freeWrite.do';
         });
     });
+    // 미로그인시 접근제한
+    var uid = <%=uid%>;
+
+    if (uid === "" || uid == null) {
+        alert('로그인 후 사용해주세요!');
+        location.href='login.do';
+    }
 </script>
 </body>
 </html>

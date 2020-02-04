@@ -1,7 +1,6 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="vo.CatBoard" %>
 <%@ page import="vo.CatComments" %>
-<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%
@@ -10,6 +9,7 @@
     ArrayList<CatBoard> catLists = (ArrayList)session.getAttribute("catLists");
 
     ArrayList<CatComments> catCommentLists = (ArrayList)request.getAttribute("catCommentLists");
+
 %>
 
 <html>
@@ -54,6 +54,10 @@
 <body>
 <div class="container">
     <%@include file="../layout/header.jsp" %>
+    <%
+        System.out.println("사용자 아이디 : " + uid);
+
+    %>
 
     <div class="main">
         <div class="row">
@@ -186,7 +190,6 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="../js/loginfrm.js"></script>
 <script src="/ttproMVC/js/button.js"></script>
 
 <script>
@@ -205,7 +208,7 @@
     });
 
     // 미로그인시 접근제한
-    var uid = "<%=uid%>";
+    var uid = <%=uid%>;
 
     if (uid === "" || uid == null) {
         alert('로그인 후 사용해주세요!');

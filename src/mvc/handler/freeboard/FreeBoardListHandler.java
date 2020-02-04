@@ -29,22 +29,27 @@ public class FreeBoardListHandler implements MVCHandler {
             searchText = "baselist";
         }
 
+        FreeBoardDAO freedao = new FreeBoardDAO();
 
         // 페이징 부분
 
-        FreeBoardDAO freedao = new FreeBoardDAO();
 
         int boardCount = freedao.countBoard();
 
-        int perPage = 10;
+        int cPage = 1;
+        int perPage = 15;
+        int pageBlock = 10;
         int totalPage = boardCount / perPage;
+
+        if (request.getParameter("cpage") != null){
+            cPage = Integer.parseInt(request.getParameter("cpage"));
+        }
 
         if(boardCount % perPage > 0) ++totalPage;
 
-        int cPage = Integer.parseInt(request.getParameter("cpage"));
 
-        int startPage = ((cPage - 1)/10) * 10 + 1;
-        int endPage = startPage + 10 - 1;
+        int startPage = ((cPage - 1)/pageBlock) * pageBlock + 1;
+        int endPage = startPage + pageBlock - 1;
 
         if(cPage > totalPage){
             viewPage = "1|/ttproMvc/error.jsp";

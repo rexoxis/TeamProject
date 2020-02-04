@@ -3,43 +3,13 @@
 <%@ page import="vo.QnaComments" %>
 <%@ page contentType="text/html; charset=UTF-8"%>
 
-<jsp:useBean id="qnaf" class="dao.QnaBoardDAO" scope="session"/>
 <%
-    // 로그인한 사용자의 아이디 가져옴
-    String uid = (String)session.getAttribute("userid");
+    request.setCharacterEncoding("utf-8");
 
-    if(uid==null|| uid.equals("")) {
-    out.println("<script>alert('로그인 후 이용해주세요^^'); location.href='/ttpro/login/login.jsp';</script>");
-    }
+    ArrayList<QnaBoard> qnaLists = (ArrayList)session.getAttribute("qnaLists");
 
-    // 처음 view.jsp로 이동했을때 bdno를 셋팅하는 방식
-    int bdno = 0;
-
-    if (request.getParameter("bdno") != null) {
-        bdno = Integer.parseInt(request.getParameter("bdno"));
-    }
-
-    // 조회수 증가 메소드 호출
-    qnaf.ReadCnt(bdno);
-
-    // 글 상세보기 메소드 호출
-    ArrayList<QnaBoard> q = qnaf.views(bdno);
-
-    session.setAttribute("q",q);
-
-    //댓글 읽어오는 메소드 호출
-    ArrayList<QnaComments> qclists = qnaf.commentView(bdno);
+    ArrayList<QnaComments> qnaCommentLists = (ArrayList)request.getAttribute("qnaCommentLists");
 %>
-
-
-<%--<%--%>
-<%--//로그인 하지 않은 사용자는 상품페이지에서 접금근지--%>
-<%--// 로그인 하도록 login.jsp로 페이지 전환--%>
-<%--String uid = (String)session.getAttribute("uid");--%>
-<%--if(uid==null)response.sendRedirect("../layout/login.jsp");--%>
-
-
-<%--%>--%>
 
 <!DOCTYPE html>
 <html>
@@ -74,7 +44,7 @@
                 <button type="button" class="btn btn-success" id="newbtn" style="margin:45px 10px 15px 45%; ">
                     <i class="fa fa-plus-circle"> 새글쓰기</i>
                 </button>
-                <button type="button" class="btn btn-warning" onclick="location.href='qList.jsp'" style="margin:45px 0 15px 0; color: white">
+                <button type="button" class="btn btn-warning" onclick="location.href='qnaList.do'" style="margin:45px 0 15px 0; color: white">
                     <i class="fa fa-list" aria-hidden="true"> 목록으로</i>
                 </button>
             </div>
@@ -85,24 +55,24 @@
                 <h3><i class="fa fa-assistive-listening-systems" aria-hidden="true"></i> 게시판</h3>
                 <ul>
                     <%--해당 카테고리 a태그는 지워고 색깔 바꿔주세요--%>
-                    <li><a href="<%=baseurl%>/freeboard/fList.jsp"> &block;&nbsp;&nbsp;자유게시판</a></li>
-                    <li><a href="<%=baseurl%>/qnaboard/QnA.jsp">&block;&nbsp;&nbsp;자주하는 질문</a></li>
+                    <li><a href="freeList.do"> &block;&nbsp;&nbsp;자유게시판</a></li>
+                    <li><a href="QnA.do">&block;&nbsp;&nbsp;자주하는 질문</a></li>
                     <li style="color:#919191"> &block;&nbsp;&nbsp;QnA</li>
                 </ul>
             </div>   <%-- 왼쪽 카테고리부분 --%>
 
             <div class="col-sm-9" style="height: auto; border: 0.3mm solid #cfcfcf; border-radius: 10px; padding: 20px">
-                <% for(QnaBoard a : q) { %>
+                <% for(QnaBoard qnaBoard : qnaLists) { %>
                 <div class="row">
                     <div class="col-sm-12">
-                        <h1 id="title" style="text-align: center"><%=a.getTitle()%></h1>
+                        <h1 id="title" style="text-align: center"><%=qnaBoard.getTitle()%></h1>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
                         <div id="name" style="text-align: right; margin: 20px 20px 20px 0; color: #404040">
-                            <%=a.getUserid()%> &#124;
-                            <button type="button" class="btn btn-outline-danger" onclick="location.href='qThumbs.jsp?bdno=<%=a.getBdno()%>'">
+                            <%=qnaBoard.getUserid()%> &#124;
+                            <button type="button" class="btn btn-outline-danger" onclick="location.href='qThumbs.jsp?bdno=<%=qnaBoard.getBdno()%>'">
                                 <i class="fa fa-thumbs-o-up" aria-hidden="true"></i></button>
                         </div>
                     </div>
@@ -110,7 +80,7 @@
                 <hr color="#cfcfcf">
                 <div class="col-sm-12" style="margin-left: 15%">
                     <div class="row">
-                        <div id="contents" style="margin-top: 5px"><%=a.getContents()%></div>
+                        <div id="contents" style="margin-top: 5px"><%=qnaBoard.getContents()%></div>
                     </div>
                 </div>
             </div>   <%-- 메인내용 부분 --%>
@@ -120,42 +90,43 @@
             <div class="col-sm-3"></div>
             <div class="col-sm-9" style="margin: 20px 0 30px 0">
                 <%--uid부분은 로그인한 사용자의 아이디를 표시할 부분--%>
-                <form action="procComments.jsp?bdno=<%=a.getBdno()%>" method="post">
+                <form action="procQnaComment.do?bdno=<%=qnaBoard.getBdno()%>" method="post">
                     <div class="row" style="margin: 20px 0 30px 0">
                         <div style="margin-left: 15px" >
                             <i class="fa fa-user-circle-o" aria-hidden="true"></i>
                             <%=uid%> <div class="user"></div>
                         </div> <%-- 아이콘 뒤에 로그인된 아이디가 들어갔으면 좋겠어요 --%>
-                        <input type="hidden" name="comt_userid" value="<%=uid%>">
-                        <input type="text" id="comentWr" name="comt_contents" style="width: 70%; margin: 0 15px 0 35px ">
+                        <input type="hidden" name="qnaCommnet_userid" value="<%=uid%>">
+                        <input type="text" id="comentWr" name="qnaComment_contents" style="width: 70%; margin: 0 15px 0 35px ">
                         <button type="submit" class="btn btn-outline-success" id="comentOk"> 등록</button>
                     </div>    <%-- 댓글 입력창 --%>
                 </form>
                 <%-- 입력한 댓글이 있으면 댓글을 불러옴--%>
-                <% for(QnaComments qc : qclists) { %>
-                <% if (qc.getComt_contents() != null || !(qc.getComt_contents().equals(""))) {%>
+                <% for(QnaComments qnaComments : qnaCommentLists) { %>
                 <div class="row">
                     <div class="col-sm-2">
                         <i class="fa fa-user-circle-o" aria-hidden="true"></i>
-                        <%=qc.getComt_userid()%> <div class="user"></div>
+                        <%=qnaComments.getComt_userid()%> <div class="user"></div>
                     </div> <%-- 아이콘 뒤에 로그인된 아이디가 들어갔으면 좋겠어요 --%>
                     <div class="col-sm-7">
-                        <div id="coment"><%=qc.getComt_contents()%></div>
-                        <div id="coment"><%=qc.getComt_regdate()%></div>
+                        <div id="coment1"><%=qnaComments.getComt_contents()%></div>
+                        <div id="coment2"><%=qnaComments.getComt_regdate()%></div>
                         <%-- 대댓글은 시간상 언급하는 식으로 들어가는게 나을꺼 같아요 --%>
                     </div>
+                    <a href="procQnaCommentDelete.do?Comment_bdno=<%=qnaComments.getComt_bdno()%>&bdno=<%=qnaBoard.getBdno()%>"
+                       class="btn btn-outline-danger" style="height: 35px; margin-left: 65px;">
+                        <i class="fa fa-trash-o" aria-hidden="true"></i></a>
                 </div>
-                <%}%>
                 <%}%>
             </div>
         </div>   <%-- 댓글부분 --%>
 
         <div class="row" style="margin: 0 0 0 53%">
             <div>
-                <button type="button" class="btn btn-info" onclick="location.href='qModify.jsp'"><i class="fa fa-pencil" aria-hidden="true"></i> 수정하기</button>
+                <button type="button" class="btn btn-info" onclick="location.href='qnaModify.do'"><i class="fa fa-pencil" aria-hidden="true"></i> 수정하기</button>
             </div>&nbsp;
             <div class="text-right">
-                <a href="qDelete.jsp?bdno=<%=a.getBdno()%>" class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i> 삭제하기</a>
+                <a href="procQnaDelete.do?bdno=<%=qnaBoard.getBdno()%>" class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i> 삭제하기</a>
             </div>
         </div>  <%-- 수정/삭제 버튼 --%>
 
@@ -169,39 +140,23 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
+<script src="/ttproMVC/js/button.js"></script>
 
 <script>
-
-    // 상단 로그인 버튼
-    $(function () {
-        $('#mloginbtn').on('click', function (e) {
-            location.href = '/ttpro/login/login.jsp';
-        });
-    });
-    // 회원가입 버튼
-    $(function () {
-        $('#joinbtn').on('click', function (e) {
-            location.href = '/ttpro/signup/signagree.jsp';
-        });
-    });
-
     // 새글쓰기
-    $(function() {
-        $('#newbtn').on('click',function(e)  {location.href='qWrite.jsp';});
-    });
-    // 상단 로그아웃 버튼
     $(function () {
-        $('#logoutbtn').on('click', function (e) {
-            location.href = '/ttpro/login/logout.jsp';
+        $('#newbtn').on('click', function (e) {
+            location.href = 'freeWrite.do';
         });
     });
+    // 미로그인시 접근제한
+    var uid = <%=uid%>;
 
+    if (uid === "" || uid == null) {
+        alert('로그인 후 사용해주세요!');
+        location.href='login.do';
+    }
 </script>
 
-
-
-
-</div>
 </body>
 </html>

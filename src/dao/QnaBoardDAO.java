@@ -39,6 +39,7 @@ public class QnaBoardDAO {
         try {
             conn = oracle.getConn();
             pstmt = conn.prepareStatement(qnalistSQL);
+
             if(searchText.equals("baselist")){
                 pstmt.setInt(1, endnum);
                 pstmt.setInt(2, startnum);
@@ -72,7 +73,7 @@ public class QnaBoardDAO {
 
     // 게시판 총게시물 수 구하기
     public int countBoard(){
-        String countSQL = "SELECT count(bdno) FROM reviewboard";
+        String countSQL = "SELECT count(bdno) FROM qnaboard";
 
         int countbd = 0;
 
@@ -152,8 +153,10 @@ public class QnaBoardDAO {
         return isOk;
     }
 
-    public void modifyQnaList(QnaBoard qb) {
+    public int modifyQnaList(QnaBoard qb) {
         String modipySQL = "update QNABOARD set TITLE=?,CONTENTS=? where BDNO=?";
+
+        int check = 0;
 
         try {
             conn = oracle.getConn();
@@ -161,25 +164,31 @@ public class QnaBoardDAO {
             pstmt.setString(1, qb.getTitle());
             pstmt.setString(2, qb.getContents());
             pstmt.setInt(3, qb.getBdno());
-            pstmt.executeUpdate();
+
+            check = pstmt.executeUpdate();
+
         } catch (Exception ex) {
             ex.printStackTrace();
             System.out.println("modipyBoard 확인바람");
         } finally {
             oracle.closeConn(pstmt, conn);
         }
+        return check;
     }
 
 
     //게시판 삭제
-    public void deleteqnaList(int bdno) { //delete.jsp에서 받아온 bdno 임
+    public int deleteqnaList(int bdno) { //delete.jsp에서 받아온 bdno 임
         String deleteSQL = "DELETE FROM QnaBoard  WHERE BDNO = ?";
+
+        int check = 0;
 
         try {
             conn = oracle.getConn();
             pstmt = conn.prepareStatement(deleteSQL);
-            pstmt.setInt(1, bdno); //커리문 ?에 값을 넣어 줘야함 LIST에서 받아온 BDNO는 위에 delete 메서드에 담겨 있는데 그것을 커리문에 넣겠다 라는 뜻
-            pstmt.executeUpdate();
+            pstmt.setInt(1, bdno);
+
+            check = pstmt.executeUpdate();
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -187,6 +196,8 @@ public class QnaBoardDAO {
         } finally {
             oracle.closeConn(pstmt, conn);
         }
+
+        return check;
 
     }
 
@@ -229,8 +240,10 @@ public class QnaBoardDAO {
     }
 
     // 댓글쓰기
-    public void commentsWrite(QnaComments qc, int qavbdno) {
-        String commentsSQL = "INSERT INTO qav_comments (comt_bdno, qav_bdno, comt_userid, comt_contents) VALUES (comments_seq.nextval, ?, ?, ?)";
+    public int commentsWrite(QnaComments qc, int qavbdno) {
+        String commentsSQL = "INSERT INTO qna_comments (comt_bdno, qav_bdno, comt_userid, comt_contents) VALUES (comments_seq.nextval, ?, ?, ?)";
+
+        int check = 0;
 
         try {
             conn = oracle.getConn();
@@ -238,7 +251,8 @@ public class QnaBoardDAO {
             pstmt.setInt(1, qavbdno);
             pstmt.setString(2, qc.getComt_userid());
             pstmt.setString(3, qc.getComt_contents());
-            pstmt.executeUpdate();
+
+            check = pstmt.executeUpdate();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -246,11 +260,12 @@ public class QnaBoardDAO {
         } finally {
             oracle.closeConn(pstmt, conn);
         }
+        return check;
     }
 
     // 게시판 댓글 보기
     public ArrayList<QnaComments> commentView(int qavbdno) {
-        String commtViewSQL = "SELECT comt_bdno, comt_userid, comt_contents, comt_likes, comt_regdate from qav_comments WHERE qav_bdno = ? ORDER BY comt_regdate";
+        String commtViewSQL = "SELECT comt_bdno, qav_bdno, comt_userid, comt_contents, comt_likes, comt_regdate from qna_comments WHERE qav_bdno = ? ORDER BY comt_regdate";
 
         ArrayList<QnaComments> qclists = null;
 
@@ -266,13 +281,15 @@ public class QnaBoardDAO {
                 QnaComments qc = new QnaComments();
 
                 qc.setComt_bdno(rs.getInt(1));
-                qc.setComt_userid(rs.getString(2));
-                qc.setComt_contents(rs.getString(3));
-                qc.setComt_likes(rs.getInt(4));
-                qc.setComt_regdate(rs.getString(5));
+                qc.setQav_bdno(rs.getInt(2));
+                qc.setComt_userid(rs.getString(3));
+                qc.setComt_contents(rs.getString(4));
+                qc.setComt_likes(rs.getInt(5));
+                qc.setComt_regdate(rs.getString(6));
 
                 qclists.add(qc);
             }
+
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("boardView 메소드 에러");
@@ -281,6 +298,28 @@ public class QnaBoardDAO {
         }
 
         return qclists;
+    }
+
+    // 댓글 삭제
+    public int deleteComment(int Comment_bdno) {
+        String deleteSQL = "delete from qna_comments where comt_bdno=?";
+
+        int check = 0;
+
+        try {
+            conn = oracle.getConn();
+            pstmt = conn.prepareStatement(deleteSQL);
+            pstmt.setInt(1, Comment_bdno);
+
+            check = pstmt.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        } finally {
+            oracle.closeConn(rs, pstmt, conn);
+        }
+        return check;
     }
 
 }

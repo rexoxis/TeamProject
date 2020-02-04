@@ -8,6 +8,7 @@
 
     ArrayList<CatBoard> catLists = (ArrayList)request.getAttribute("catLists");
 
+
     int totalPage = (int)request.getAttribute("totalPage");
     int startPage = (int)request.getAttribute("startPage");
     int endPage = (int)request.getAttribute("endPage");

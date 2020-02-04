@@ -1,6 +1,5 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="vo.FreeBoard" %>
-<%@ page import="vo.FreeComments" %>
 <%@ page contentType="text/html; charset=utf-8" %>
 
 <%
@@ -15,7 +14,7 @@
 </head>
 <body>
 <div class="container">
-    <jsp:include page="../layout/header.jsp"/>
+    <%@ include file="../layout/header.jsp" %>
     <div class="main">
         <div class="col-8" style="font-size: 45px; margin: 0 20px 0 40px ; padding:30px 0 20px 0;">
             <i class="fa fa-question-circle"> Free Board</i></div>
@@ -69,7 +68,7 @@
             </form>
         </div>
     </div>
-    <jsp:include page="../layout/footer.jsp"/>
+    <%@ include file="../layout/footer.jsp" %>
 </div>
 
 
@@ -98,6 +97,13 @@
         });
     });
 
+    // 미로그인시 접근제한
+    var uid = <%=uid%>;
+
+    if (uid === "" || uid == null) {
+        alert('로그인 후 사용해주세요!');
+        location.href='login.do';
+    }
 </script>
 </body>
 </html>

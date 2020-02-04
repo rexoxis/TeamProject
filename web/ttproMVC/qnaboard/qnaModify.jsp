@@ -1,10 +1,9 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="vo.QnaBoard" %>
 <%@ page contentType="text/html; charset=utf-8"%>
-<jsp:useBean id="qb" class="dao.QnaBoardDAO" scope="session"/>
 
 <%
-    ArrayList<QnaBoard> qnalists = (ArrayList)session.getAttribute("q");
+    ArrayList<QnaBoard> qnaLists = (ArrayList)session.getAttribute("qnaLists");
 %>
 <html>
 <head>
@@ -36,8 +35,8 @@
         </div> <!--버튼-->
 
         <div class="row" style="margin: 10px 30px 20px 30px">
-            <% for (QnaBoard qna : qnalists) { %>
-            <form method="post" action="procQnaModify.jsp?bdno=<%=qna.getBdno()%>" name="bdfrm" class="card card-body bg-light">
+            <% for (QnaBoard qna : qnaLists) { %>
+            <form method="post" action="procqnaModify.do?bdno=<%=qna.getBdno()%>" name="bdfrm" class="card card-body bg-light">
                 <div class="form-group row">
                     <label class="col-sm-2 control-label" >이름</label>
                     <div class="col-sm-3">
@@ -46,15 +45,11 @@
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 control-label" >제목</label>
-                    <div class="col-sm-5">
-                        <textarea name="title" class="form-control col-sm-5"><%=qna.getTitle()%></textarea>
-                    </div>
+                    <input name="title" class="form-control col-sm-9"><%=qna.getTitle()%>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 control-label" >내용</label>
-                    <div class="col-sm-8" style="word-break: break-all;">
-                        <textarea cols="30" rows="15" name="contents" class="form-control col-sm-5"><%=qna.getContents()%></textarea>
-                    </div>
+                        <textarea cols="30" rows="15" name="contents" class="form-control col-sm-9"><%=qna.getContents()%></textarea>
                 </div>
 
                 <div class="form-group row">
@@ -70,13 +65,40 @@
 
     <%@ include file = "../layout/footer.jsp"%>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<script src="/ttproMVC/js/button.js"></script>
+
 <script>
-    // 상단 로그아웃 버튼
+    // 작성취소 버튼
     $(function () {
-        $('#logoutbtn').on('click', function (e) {
-            location.href = '/ttpro/login/logout.jsp';
+        $('#cancelbtn').on('click', function (e) {
+            history.back();
         });
     });
+    // 목록 버튼
+    $(function () {
+        $('#listbtn').on('click', function (e) {
+            location.href = 'qnaList.do';
+        });
+    });
+
+    // 미로그인시 접근제한
+    var uid = <%=uid%>;
+
+    if (uid === "" || uid == null) {
+        alert('로그인 후 사용해주세요!');
+        location.href='login.do';
+    }
+
 </script>
 </body>
 </html>

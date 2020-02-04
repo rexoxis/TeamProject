@@ -8,7 +8,7 @@
     int like = qnaf.LikeCnt(bdno);
 
     if (like >= 1){
-        response.sendRedirect("qView.jsp?bdno="+bdno);
+        response.sendRedirect("qnaView.jsp?bdno="+bdno);
     }else {
         out.print("<script> history.go(-1); </script>");
     }

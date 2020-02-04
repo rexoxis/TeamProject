@@ -3,40 +3,16 @@
 <%@ page import="java.util.ArrayList" %>
 
 
-<jsp:useBean id="qnaf" class="dao.QnaBoardDAO" scope="session"/>
-<jsp:useBean id="qb" class="vo.QnaBoard"/>
-
 <%
     request.setCharacterEncoding("utf-8");
 
-    String searchText = request.getParameter("searchText");
+    ArrayList<QnaBoard> qnaLists = (ArrayList)request.getAttribute("qnaLists");
 
-    if (searchText == null || searchText.equals("")) {
-        searchText = "baselist";
-    }
-
-    // 페이징 부분
-
-    int bdcnt = qnaf.countBoard();
-
-    int perPage = 10;
-    int totalPage = bdcnt / perPage;
-
-    if(bdcnt % perPage > 0) ++totalPage;
-
-    int cPage = Integer.parseInt(request.getParameter("cpage"));
-
-    int startPage = ((cPage - 1)/10) * 10 + 1;
-    int endPage = startPage + 10 - 1;
-
-    if(cPage > totalPage){
-        response.sendRedirect("listerror.jsp");
-    }
-
-    int startnum = ((cPage-1) * perPage) + 1;
-    int endnum = startnum + perPage - 1;
-
-    ArrayList<QnaBoard> qna = qnaf.qnalist(searchText, startnum, endnum);
+    int boardNumber = (int)request.getAttribute("boardNumber");
+    int totalPage = (int)request.getAttribute("totalPage");
+    int startPage = (int)request.getAttribute("startPage");
+    int endPage = (int)request.getAttribute("endPage");
+    int cPage = (int)request.getAttribute("cPage");
 %>
 
 
@@ -106,15 +82,15 @@
                 <h3><i class="fa fa-assistive-listening-systems" aria-hidden="true"></i> 게시판</h3>
                 <ul>
                     <%--해당 카테고리 a태그는 지워고 색깔 바꿔주세요--%>
-                    <li><a href="<%=baseurl%>/freeboard/fList.jsp?cpage=1"> &block;&nbsp;&nbsp;자유게시판</a></li>
-                    <li><a href="<%=baseurl%>/qnaboard/QnA.jsp">&block;&nbsp;&nbsp;자주하는 질문</a></li>
+                    <li><a href="freeList.do"> &block;&nbsp;&nbsp;자유게시판</a></li>
+                    <li><a href="QnA.do">&block;&nbsp;&nbsp;자주하는 질문</a></li>
                     <li style="color:#919191"> &block;&nbsp;&nbsp;QnA</li>
                 </ul>
             </div>
 
             <!--게시판 목록-->
             <div class="col-sm-9">
-                <form action="qList.jsp?cpage=1" method="post">
+                <form action="qnaList.do" method="post">
                 <div class="row">
                     <span style="margin-left: 2%; font-weight: bold; color: #2c2cbd">&block;&nbsp;&nbsp;무엇이든 물어보세요!</span>
                     <!-- 검색 창 -->
@@ -149,22 +125,22 @@
                         <th>128</th>
                     </tr>
 
-                    <% for (QnaBoard q : qna) {%>
+                    <% for (QnaBoard qnaBoard : qnaLists) {%>
                     <tr>
                         <%--<td><%=cnt</td> <!--실제 번호가 아니고 가 번호 등록 -->--%>
                         <!--프라이머리키로 설정되어 있는 부분을 매개변수로 넘겨주어야함 -->
 
-                        <td><%=q.getBdno()%>
+                        <td><%=boardNumber--%>
                         </td>
-                        <td><a href="qView.jsp?bdno=<%=q.getBdno()%>"><%=q.getTitle()%>
+                        <td><a href="qnaView.do?bdno=<%=qnaBoard.getBdno()%>"><%=qnaBoard.getTitle()%>
                         </a></td>
-                        <td><%=q.getUserid()%>
+                        <td><%=qnaBoard.getUserid()%>
                         </td>
-                        <td><%=q.getRegdate().substring(0, 10)%>
+                        <td><%=qnaBoard.getRegdate().substring(0, 10)%>
                         </td>
-                        <td><%=q.getThumb()%>
+                        <td><%=qnaBoard.getThumb()%>
                         </td>
-                        <td><%=q.getViews()%>
+                        <td><%=qnaBoard.getViews()%>
                         </td>
                     </tr>
                     <% } %>
@@ -180,7 +156,7 @@
                     <ul class="pagination justify-content-center">
                         <% if(cPage > 10) { %>
                         <li class="page-item">
-                            <a class="page-link" href="qList.jsp?cpage=<%=(startPage-10)%>" aria-label="Previous">
+                            <a class="page-link" href="qnaList.do?cpage=<%=(startPage-10)%>" aria-label="Previous">
                                 <span aria-hidden="true">&laquo;</span>
                                 <span class="sr-only">Previous</span>
                             </a>
@@ -192,13 +168,13 @@
                             if(cPage == i) { %>
                         <li class="page-item"><a class="page-link" style="color: red"><%=i%></a></li>
                         <% } else { %>
-                        <li class="page-item"><a class="page-link" href="qList.jsp?cpage=<%=i%>"><%=i%></a></li>
+                        <li class="page-item"><a class="page-link" href="qnaList.do?cpage=<%=i%>"><%=i%></a></li>
                         <% } %>
                         <% } %>
 
                         <% if(endPage <= totalPage) { %>
                         <li class="page-item">
-                            <a class="page-link" href="qList.jsp?cpage=<%=(endPage+1)%>" aria-label="Next">
+                            <a class="page-link" href="qnaList.do?cpage=<%=(endPage+1)%>" aria-label="Next">
                                 <span aria-hidden="true">&raquo;</span>
                                 <span class="sr-only">Next</span>
                             </a>
@@ -221,30 +197,16 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-<script src="../js/loginfrm.js"></script>
+<script src="ttproMVC/js/loginfrm.js"></script>
+<script src="/ttproMVC/js/button.js"></script>
 
 <script>
-    // 상단 로그인 버튼
-    $(function () {
-        $('#mloginbtn').on('click', function (e) {
-            location.href = '/ttpro/login/login.jsp';
-        });
-    });
-    // 회원가입 버튼
-    $(function () {
-        $('#joinbtn').on('click', function (e) {
-            location.href = '/ttpro/signup/signagree.jsp';
-        });
-    });
-
-
     // 새글쓰기
     $(function () {
         $('#newbtn').on('click', function (e) {
-            location.href = 'qWrite.jsp';
+            location.href = 'qnaWrite.do';
         });
     });
-
 
     //ajax로 구현하지 않고 일반 배열 및 자바스크립트로 구현
     $(function () {    //화면 다 뜨면 시작
@@ -271,12 +233,7 @@
         });
 
     });
-    // 상단 로그아웃 버튼
-    $(function () {
-        $('#logoutbtn').on('click', function (e) {
-            location.href = '/ttpro/login/logout.jsp';
-        });
-    });
+
 </script>
 
 

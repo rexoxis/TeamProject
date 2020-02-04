@@ -1,9 +1,9 @@
 <%@ page pageEncoding="UTF-8" %>
 <%-- 절대경로 설정 --%>
-<% String baseurl = "/ttpro"; %>
+<% String baseurl = "/ttproMVC"; %>
 
 <%
-    String uid = String.valueOf(session.getAttribute("userid"));
+    String uid = (String)session.getAttribute("userid");
 
     boolean islogin = false;
 

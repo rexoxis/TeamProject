@@ -64,9 +64,9 @@
                 <h3><i class="fa fa-assistive-listening-systems" aria-hidden="true"></i> 게시판</h3>
                 <ul>
                     <%--해당 카테고리 a태그는 지워고 색깔 바꿔주세요--%>
-                    <li><a href="<%=baseurl%>/freeboard/fList.jsp"> &block;&nbsp;&nbsp;자유게시판</a></li>
+                    <li><a href="freeList.do"> &block;&nbsp;&nbsp;자유게시판</a></li>
                     <li style="color:#919191 ">&block;&nbsp;&nbsp;자주하는 질문</li>
-                    <li><a href="<%=baseurl%>/qnaboard/qList.jsp"> &block;&nbsp;&nbsp;QnA</a></li>
+                    <li><a href="qnaList.do"> &block;&nbsp;&nbsp;QnA</a></li>
                 </ul>
             </div>   <%-- 왼쪽 분류 --%>
             <div class="col-sm-9">
@@ -106,7 +106,7 @@
                                 주기적으로 아이들의 건강을 검사하고 체크하여 <br> 가족이 분양받는다 생각하며 꼼꼼히 분양을 준비해 드립니다.</p>
                         </div>     <%--분양소 시설 및 위생상태--%>
                         <div class="row more">
-                            <p>3. 궁금한 사항이 더 있을 시 <a href="<%=baseurl%>/qnaboard/qList.jsp">QnA</a>에 남겨주시기 바랍니다.</p>
+                            <p>3. 궁금한 사항이 더 있을 시 <a href="qnaList.do">QnA</a>에 남겨주시기 바랍니다.</p>
                             <button type="button" class="btn topbtn">
                                 <i class="fa fa-angle-double-up fa-2x" aria-hidden="true"><span><br>맨위로</span></i></button>
                         </div>     <%-- 더 궁금한 사항--%>
@@ -117,7 +117,7 @@
                             <img src="https://drive.google.com/uc?export=view&id=1z1Twd9pmKA_6LUMYwMdthXki4PJn9s7P">
                         </div>     <%--분양 절차--%>
                         <div class="row more">
-                            <p>3. 궁금한 사항이 더 있을 시 <a href="<%=baseurl%>/qnaboard/qList.jsp">QnA</a>에 남겨주시기 바랍니다.</p>
+                            <p>3. 궁금한 사항이 더 있을 시 <a href="qnaList.do">QnA</a>에 남겨주시기 바랍니다.</p>
                             <button type="button" class="btn topbtn">
                                 <i class="fa fa-angle-double-up fa-2x" aria-hidden="true"><span><br>맨위로</span></i></button>
                         </div>     <%-- 더 궁금한 사항--%>
@@ -130,7 +130,7 @@
 
                         </div>
                         <div class="row more">
-                            <p>3. 궁금한 사항이 더 있을 시 <a href="<%=baseurl%>/qnaboard/qList.jsp">QnA</a>에 남겨주시기 바랍니다.</p>
+                            <p>3. 궁금한 사항이 더 있을 시 <a href="qnaList.do">QnA</a>에 남겨주시기 바랍니다.</p>
                             <button type="button" class="btn topbtn">
                                 <i class="fa fa-angle-double-up fa-2x" aria-hidden="true"><span><br>맨위로</span></i></button>
                         </div>     <%-- 더 궁금한 사항--%>
@@ -139,7 +139,7 @@
                         <h3>2. 관련 FAQ를 확인해주세요.</h3>
                         <div>건강 상태</div>
                         <div class="row more">
-                            <p>3. 궁금한 사항이 더 있을 시 <a href="<%=baseurl%>/qnaboard/qList.jsp">QnA</a>에 남겨주시기 바랍니다.</p>
+                            <p>3. 궁금한 사항이 더 있을 시 <a href="qnaList.do">QnA</a>에 남겨주시기 바랍니다.</p>
                             <button type="button" class="btn topbtn">
                                 <i class="fa fa-angle-double-up fa-2x" aria-hidden="true"><span><br>맨위로</span></i></button>
                         </div>     <%-- 더 궁금한 사항--%>
@@ -148,7 +148,7 @@
                         <h3>2. 관련 FAQ를 확인해주세요.</h3>
                         <div>아이들은 생후</div>
                         <div class="row more">
-                            <p>3. 궁금한 사항이 더 있을 시 <a href="<%=baseurl%>/qnaboard/qList.jsp">QnA</a>에 남겨주시기 바랍니다.</p>
+                            <p>3. 궁금한 사항이 더 있을 시 <a href="qnaList.do">QnA</a>에 남겨주시기 바랍니다.</p>
                             <button type="button" class="btn topbtn">
                                 <i class="fa fa-angle-double-up fa-2x" aria-hidden="true"><span><br>맨위로</span></i></button>
                         </div>     <%-- 더 궁금한 사항--%>
@@ -165,6 +165,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/ttproMVC/js/button.js"></script>
 
 <script>
     var con1 = document.getElementById("answer1");
@@ -271,21 +272,6 @@
         });
     });
 </script>   <%-- 맨위로 버튼 --%>
-
-<script>
-    // 상단 로그인 버튼
-    $(function () {
-        $('#mloginbtn').on('click', function (e) {
-            location.href = '/ttpro/login/login.jsp';
-        });
-    });
-    // 회원가입 버튼
-    $(function () {
-        $('#joinbtn').on('click', function (e) {
-            location.href = '/ttpro/signup/signagree.jsp';
-        });
-    });
-</script>   <%-- 로그인 / 회원가입 버튼 --%>
 
 </body>
 </html> 

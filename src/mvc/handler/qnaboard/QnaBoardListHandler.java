@@ -1,9 +1,9 @@
 package mvc.handler.qnaboard;
 
 
-import dao.FreeBoardDAO;
+import dao.QnaBoardDAO;
 import mvc.handler.MVCHandler;
-import vo.FreeBoard;
+import vo.QnaBoard;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +18,7 @@ public class QnaBoardListHandler implements MVCHandler {
         // 인코딩 처리
         request.setCharacterEncoding("utf-8");
 
-        String viewPage = "1|/ttproMVC/freeboard/freeList.jsp";
+        String viewPage = "1|/ttproMVC/qnaboard/qnaList.jsp";
 
         String searchText = request.getParameter("searchText");
 
@@ -29,19 +29,23 @@ public class QnaBoardListHandler implements MVCHandler {
 
         // 페이징 부분
 
-        FreeBoardDAO freedao = new FreeBoardDAO();
+        QnaBoardDAO qnadao = new QnaBoardDAO();
 
-        int boardCount = freedao.countBoard();
+        int boardCount = qnadao.countBoard();
 
-        int perPage = 10;
+        int cPage = 1;
+        int perPage = 15;
+        int pageBlock = 10;
         int totalPage = boardCount / perPage;
+
+        if (request.getParameter("cpage") != null){
+            cPage = Integer.parseInt(request.getParameter("cpage"));
+        }
 
         if(boardCount % perPage > 0) ++totalPage;
 
-        int cPage = Integer.parseInt(request.getParameter("cpage"));
-
-        int startPage = ((cPage - 1)/10) * 10 + 1;
-        int endPage = startPage + 10 - 1;
+        int startPage = ((cPage - 1)/pageBlock) * pageBlock + 1;
+        int endPage = startPage + pageBlock - 1;
 
         if(cPage > totalPage){
             viewPage = "1|/ttproMvc/error.jsp";
@@ -53,9 +57,9 @@ public class QnaBoardListHandler implements MVCHandler {
         // 글번호 계산
         int boardNumber = boardCount - ((cPage-1) * perPage);
 
-        ArrayList<FreeBoard> freeLists = freedao.viewList(searchText, startnum, endnum);
+        ArrayList<QnaBoard> qnaLists = qnadao.qnalist(searchText, startnum, endnum);
 
-        request.setAttribute("freeLists", freeLists);
+        request.setAttribute("qnaLists", qnaLists);
 
         request.setAttribute("totalPage", totalPage);
         request.setAttribute("startPage", startPage);

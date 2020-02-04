@@ -1,5 +1,4 @@
 <%@ page import="java.util.ArrayList" %>
-
 <%@ page import="vo.CatBoard" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
@@ -105,6 +104,13 @@
             location.href = 'catList.do';
         });
     });
+
+    var uid = <%=uid%>;
+
+    if (uid === "" || uid == null) {
+        alert('로그인 후 사용해주세요!');
+        location.href='login.do';
+    }
 </script>
 </body>
 </html>

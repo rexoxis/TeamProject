@@ -196,7 +196,6 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="../js/loginfrm.js"></script>
 <script src="/ttproMVC/js/button.js"></script>
 
 <script>
@@ -215,9 +214,9 @@
     });
 
     // 미로그인시 접근제한
-    var uid = "<%=uid%>";
+    var uid = <%=uid%>;
 
-    if (uid === "" || uid == null) {
+    if (uid == "" || uid == null) {
         alert('로그인 후 사용해주세요!');
         location.href='login.do';
     }

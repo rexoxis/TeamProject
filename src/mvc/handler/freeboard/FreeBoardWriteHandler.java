@@ -11,7 +11,7 @@ public class FreeBoardWriteHandler implements MVCHandler{
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String viewPage = "1|/ttproMVC/freeboard/freeWrite.do";
+        String viewPage = "1|/ttproMVC/freeboard/freeWrite.jsp";
 
         return viewPage;
     }

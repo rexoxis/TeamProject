@@ -7,6 +7,7 @@
 
     ArrayList<FreeBoard> freeLists = (ArrayList)request.getAttribute("freeLists");
 
+    int boardNumber = (int)request.getAttribute("boardNumber");
     int totalPage = (int)request.getAttribute("totalPage");
     int startPage = (int)request.getAttribute("startPage");
     int endPage = (int)request.getAttribute("endPage");
@@ -123,7 +124,7 @@
                     </tr>
                     <% for (FreeBoard freeBoard : freeLists) {%>
                     <tr>
-                        <td><a><%=freeBoard.getBdno()%>
+                        <td><a><%=boardNumber--%>
                         </a></td>
                         <td><a href="freeView.do?bdno=<%=freeBoard.getBdno()%>"><%=freeBoard.getTitle()%>
                         </a></td>
@@ -148,7 +149,7 @@
                     <ul class="pagination justify-content-center">
                         <% if(cPage > 10) { %>
                         <li class="page-item">
-                            <a class="page-link" href="freeList.jsp?cpage=<%=(startPage-10)%>" aria-label="Previous">
+                            <a class="page-link" href="freeList.do?cpage=<%=(startPage-10)%>" aria-label="Previous">
                                 <span aria-hidden="true">&laquo;</span>
                                 <span class="sr-only">Previous</span>
                             </a>
@@ -160,13 +161,13 @@
                             if(cPage == i) { %>
                         <li class="page-item"><a class="page-link" style="color: red"><%=i%></a></li>
                         <% } else { %>
-                        <li class="page-item"><a class="page-link" href="freeList.jsp?cpage=<%=i%>"><%=i%></a></li>
+                        <li class="page-item"><a class="page-link" href="freeList.do?cpage=<%=i%>"><%=i%></a></li>
                         <% } %>
                         <% } %>
 
                         <% if(endPage <= totalPage) { %>
                         <li class="page-item">
-                            <a class="page-link" href="freeList.jsp?cpage=<%=(endPage+1)%>" aria-label="Next">
+                            <a class="page-link" href="freeList.do?cpage=<%=(endPage+1)%>" aria-label="Next">
                                 <span aria-hidden="true">&raquo;</span>
                                 <span class="sr-only">Next</span>
                             </a>
@@ -189,7 +190,8 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-<script src="../../js/loginfrm.js"></script>
+<script src="ttproMVC/js/loginfrm.js"></script>
+<script src="/ttproMVC/js/button.js"></script>
 
 
 <script>

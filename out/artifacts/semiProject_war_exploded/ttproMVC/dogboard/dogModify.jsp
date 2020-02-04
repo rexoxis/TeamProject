@@ -103,6 +103,12 @@
             location.href = 'dogList.do';
         });
     });
+    var uid = <%=uid%>;
+
+    if (uid === "" || uid == null) {
+        alert('로그인 후 사용해주세요!');
+        location.href='login.do';
+    }
 </script>
 </body>
 </html>
