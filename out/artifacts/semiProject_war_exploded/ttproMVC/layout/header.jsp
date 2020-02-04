@@ -97,11 +97,11 @@
                             <li><a class="nav-link" href="reviewList.do">분양후기</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="<%=baseurl%>/freeboard/fList.jsp?cpage=1" id="list">게시판</a>
+                    <li class="nav-item"><a class="nav-link" href="freeList.do?" id="list">게시판</a>
                         <ul>
-                            <li><a class="nav-link" href="<%=baseurl%>/freeboard/fList.jsp?cpage=1">자유게시판</a></li>
-                            <li><a class="nav-link" href="<%=baseurl%>/qnaboard/QnA.jsp?cpage=1">자주하는질문</a></li>
-                            <li><a class="nav-link" href="<%=baseurl%>/qnaboard/qList.jsp?cpage=1">QnA</a></li>
+                            <li><a class="nav-link" href="freeList.do">자유게시판</a></li>
+                            <li><a class="nav-link" href="QnA.do">자주하는질문</a></li>
+                            <li><a class="nav-link" href="qnaList.do">QnA</a></li>
                         </ul>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="<%=baseurl%>/product/store.jsp" id="product">상품</a>

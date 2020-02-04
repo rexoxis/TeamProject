@@ -1,6 +1,6 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean id="qnaf" class="dao.QnaBoardFactory" />
+<jsp:useBean id="qnaf" class="dao.QnaBoardDAO" />
 <jsp:useBean id="qb" class="vo.QnaBoard"/>
 
 <%

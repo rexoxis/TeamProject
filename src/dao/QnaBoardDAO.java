@@ -1,7 +1,7 @@
 package dao;
 
 import service.OracleUtil;
-import vo.QavComments;
+import vo.QnaComments;
 import vo.QnaBoard;
 
 import java.sql.Connection;
@@ -9,7 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-public class QnaBoardFactory {
+public class QnaBoardDAO {
     private Connection conn = null;
     private PreparedStatement pstmt = null;
     private ResultSet rs = null;
@@ -229,7 +229,7 @@ public class QnaBoardFactory {
     }
 
     // 댓글쓰기
-    public void commentsWrite(QavComments qc, int qavbdno) {
+    public void commentsWrite(QnaComments qc, int qavbdno) {
         String commentsSQL = "INSERT INTO qav_comments (comt_bdno, qav_bdno, comt_userid, comt_contents) VALUES (comments_seq.nextval, ?, ?, ?)";
 
         try {
@@ -249,10 +249,10 @@ public class QnaBoardFactory {
     }
 
     // 게시판 댓글 보기
-    public ArrayList<QavComments> commentView(int qavbdno) {
+    public ArrayList<QnaComments> commentView(int qavbdno) {
         String commtViewSQL = "SELECT comt_bdno, comt_userid, comt_contents, comt_likes, comt_regdate from qav_comments WHERE qav_bdno = ? ORDER BY comt_regdate";
 
-        ArrayList<QavComments> qclists = null;
+        ArrayList<QnaComments> qclists = null;
 
         try {
             conn = oracle.getConn();
@@ -263,7 +263,7 @@ public class QnaBoardFactory {
             qclists = new ArrayList<>();
 
             while (rs.next()) {
-                QavComments qc = new QavComments();
+                QnaComments qc = new QnaComments();
 
                 qc.setComt_bdno(rs.getInt(1));
                 qc.setComt_userid(rs.getString(2));

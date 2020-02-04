@@ -1,41 +1,38 @@
-package mvc.handler.dogboard;
+package mvc.handler.freeboard;
 
-import dao.DogBoardFactory;
+import dao.FreeBoardDAO;
 import mvc.handler.MVCHandler;
-import service.FileUpDownUtil;
+import vo.FreeBoard;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Map;
 
-public class ProcDogBoardModifyHandler implements MVCHandler{
+public class ProcFreeBoardModifyHandler implements MVCHandler{
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String viewPage = "1|/ttproMVC/error.jsp";
 
-        PrintWriter out = response.getWriter();
-
-        DogBoardFactory dogdao = new DogBoardFactory();
-
-        String realpath = request.getServletContext().getRealPath("ttproMVC/fileupload");
-        Map<String, String> frmdata = FileUpDownUtil.procUpload(request, realpath);
-
         int bdno = Integer.parseInt(request.getParameter("bdno"));
 
-        System.out.println("procModify bdno : " + bdno);
         int check = 0;
 
-        check = dogdao.modifyView(frmdata, bdno);
+
+        FreeBoardDAO freedao = new FreeBoardDAO();
+
+        FreeBoard freeBoard = new FreeBoard();
+
+        freeBoard.setBdno(bdno);
+        freeBoard.setTitle(request.getParameter("title"));
+        freeBoard.setContents(request.getParameter("contents"));
+
+        check = freedao.modifyBoard(freeBoard);
 
         if (check >= 1) {
-            viewPage = "2|dogView.do?bdno="+bdno;
-        } else {
-            out.print("<script>history.go(-1);</script>");
+            viewPage = "2|freeView.do?bdno="+bdno;
         }
 
         return viewPage;

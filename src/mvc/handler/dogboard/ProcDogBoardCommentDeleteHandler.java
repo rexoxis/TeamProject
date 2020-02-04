@@ -1,6 +1,6 @@
 package mvc.handler.dogboard;
 
-import dao.DogBoardFactory;
+import dao.DogBoardDAO;
 import mvc.handler.MVCHandler;
 
 import javax.servlet.ServletException;
@@ -18,7 +18,7 @@ public class ProcDogBoardCommentDeleteHandler implements MVCHandler{
         int bdno = Integer.parseInt(request.getParameter("bdno"));
         int Comment_bdno = Integer.parseInt(request.getParameter("Comment_bdno"));
 
-        DogBoardFactory dogdao = new DogBoardFactory();
+        DogBoardDAO dogdao = new DogBoardDAO();
 
         check = dogdao.deleteComment(Comment_bdno);
 

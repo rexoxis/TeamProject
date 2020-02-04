@@ -1,6 +1,6 @@
 package mvc.handler.reviewboard;
 
-import dao.ReviewBoardFactory;
+import dao.ReviewBoardDAO;
 import mvc.handler.MVCHandler;
 import service.FileUpDownUtil;
 
@@ -21,7 +21,7 @@ public class ProcReviewBoardWriteHandler implements MVCHandler{
 
         int check = 0;
 
-        ReviewBoardFactory reviewdao = new ReviewBoardFactory();
+        ReviewBoardDAO reviewdao = new ReviewBoardDAO();
 
         // 파일 업로드 절대경로
         String realpath = request.getServletContext().getRealPath("ttproMVC/fileupload");

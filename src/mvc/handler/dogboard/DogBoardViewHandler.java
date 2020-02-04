@@ -1,7 +1,7 @@
 package mvc.handler.dogboard;
 
 
-import dao.DogBoardFactory;
+import dao.DogBoardDAO;
 import mvc.handler.MVCHandler;
 import vo.DogBoard;
 import vo.DogComments;
@@ -25,7 +25,7 @@ public class DogBoardViewHandler implements MVCHandler {
 
         String viewPage = "1|/ttproMVC/dogboard/dogView.jsp";
 
-        DogBoardFactory dogdao = new DogBoardFactory();
+        DogBoardDAO dogdao = new DogBoardDAO();
 
         int bdno = 0;
 

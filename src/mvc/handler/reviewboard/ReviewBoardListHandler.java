@@ -1,7 +1,7 @@
 package mvc.handler.reviewboard;
 
 
-import dao.ReviewBoardFactory;
+import dao.ReviewBoardDAO;
 import mvc.handler.MVCHandler;
 import vo.ReviewBoard;
 
@@ -33,7 +33,7 @@ public class ReviewBoardListHandler implements MVCHandler {
 
         searchList.put(colname, findtext);
 
-        ReviewBoardFactory reviewdao = new ReviewBoardFactory();
+        ReviewBoardDAO reviewdao = new ReviewBoardDAO();
 
         // 페이징 부분
 

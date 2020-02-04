@@ -1,41 +1,16 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="vo.semilist1" %>
+<%@ page import="vo.FreeBoard" %>
 <%@ page import="java.util.ArrayList" %>
-
-<jsp:useBean id="bd" class="dao.bdDAO" scope="session"/>
-<jsp:useBean id="fbd" class="vo.semilist1"/>
 
 <%
     request.setCharacterEncoding("utf-8");
 
-    String searchText = request.getParameter("searchText");
+    ArrayList<FreeBoard> freeLists = (ArrayList)request.getAttribute("freeLists");
 
-    if (searchText == null || searchText.equals("")) {
-        searchText = "baselist";
-    }
-
-    // 페이징 부분
-
-    int bdcnt = bd.countBoard();
-
-    int perPage = 10;
-    int totalPage = bdcnt / perPage;
-
-    if(bdcnt % perPage > 0) ++totalPage;
-
-    int cPage = Integer.parseInt(request.getParameter("cpage"));
-
-    int startPage = ((cPage - 1)/10) * 10 + 1;
-    int endPage = startPage + 10 - 1;
-
-    if(cPage > totalPage){
-        response.sendRedirect("listerror.jsp");
-    }
-
-    int startnum = ((cPage-1) * perPage) + 1;
-    int endnum = startnum + perPage - 1;
-
-    ArrayList<semilist1> lists = bd.viewList(searchText, startnum, endnum);
+    int totalPage = (int)request.getAttribute("totalPage");
+    int startPage = (int)request.getAttribute("startPage");
+    int endPage = (int)request.getAttribute("endPage");
+    int cPage = (int)request.getAttribute("cPage");
 
 %>
 
@@ -105,13 +80,13 @@
                 <ul>
                     <%--해당 카테고리 a태그는 지워고 색깔 바꿔주세요--%>
                     <li style="color:#919191"> &block;&nbsp;&nbsp;자유게시판</li>
-                    <li><a href="<%=baseurl%>/qnaboard/QnA.jsp">&block;&nbsp;&nbsp;자주하는 질문</a></li>
-                    <li><a href="<%=baseurl%>/qnaboard/qList.jsp?cpage=1"> &block;&nbsp;&nbsp;QnA</a></li>
+                    <li><a href="QnA.do">&block;&nbsp;&nbsp;자주하는 질문</a></li>
+                    <li><a href="qnaList.do"> &block;&nbsp;&nbsp;QnA</a></li>
                 </ul>
             </div>
             <!--게시판 목록-->
             <div class="col-sm-9">
-                <form action="fList.jsp?cpage=1" method="post">
+                <form action="freeList.do" method="post">
                     <div class="row">
                         <span style="margin-left: 2%; font-weight: bold; color: #2c2cbd">&block;&nbsp;&nbsp;자유롭게 이야기해보세요!</span>
                         <!-- 검색 창 -->
@@ -146,19 +121,19 @@
                         <th>10</th>
                         <th>128</th>
                     </tr>
-                    <% for (semilist1 a : lists) {%>
+                    <% for (FreeBoard freeBoard : freeLists) {%>
                     <tr>
-                        <td><a><%=a.getBdno()%>
+                        <td><a><%=freeBoard.getBdno()%>
                         </a></td>
-                        <td><a href="fView.jsp?bdno=<%=a.getBdno()%>"><%=a.getTitle()%>
+                        <td><a href="freeView.do?bdno=<%=freeBoard.getBdno()%>"><%=freeBoard.getTitle()%>
                         </a></td>
-                        <td><a><%=a.getUserid()%>
+                        <td><a><%=freeBoard.getUserid()%>
                         </a></td>
-                        <td><a><%=a.getRegdate().substring(0, 10)%>
+                        <td><a><%=freeBoard.getRegdate().substring(0, 10)%>
                         </a></td>
-                        <td><a><%=a.getThumbs()%>
+                        <td><a><%=freeBoard.getThumbs()%>
                         </a></td>
-                        <td><a><%=a.getViews()%>
+                        <td><a><%=freeBoard.getViews()%>
                         </a></td>
                     </tr>
                     <% } %>
@@ -173,7 +148,7 @@
                     <ul class="pagination justify-content-center">
                         <% if(cPage > 10) { %>
                         <li class="page-item">
-                            <a class="page-link" href="fList.jsp?cpage=<%=(startPage-10)%>" aria-label="Previous">
+                            <a class="page-link" href="freeList.jsp?cpage=<%=(startPage-10)%>" aria-label="Previous">
                                 <span aria-hidden="true">&laquo;</span>
                                 <span class="sr-only">Previous</span>
                             </a>
@@ -185,13 +160,13 @@
                             if(cPage == i) { %>
                         <li class="page-item"><a class="page-link" style="color: red"><%=i%></a></li>
                         <% } else { %>
-                        <li class="page-item"><a class="page-link" href="fList.jsp?cpage=<%=i%>"><%=i%></a></li>
+                        <li class="page-item"><a class="page-link" href="freeList.jsp?cpage=<%=i%>"><%=i%></a></li>
                         <% } %>
                         <% } %>
 
                         <% if(endPage <= totalPage) { %>
                         <li class="page-item">
-                            <a class="page-link" href="fList.jsp?cpage=<%=(endPage+1)%>" aria-label="Next">
+                            <a class="page-link" href="freeList.jsp?cpage=<%=(endPage+1)%>" aria-label="Next">
                                 <span aria-hidden="true">&raquo;</span>
                                 <span class="sr-only">Next</span>
                             </a>
@@ -219,23 +194,10 @@
 
 <script>
 
-    // 상단 로그인 버튼
-    $(function () {
-        $('#mloginbtn').on('click', function (e) {
-            location.href = '/ttpro/login/login.jsp';
-        });
-    });
-    // 회원가입 버튼
-    $(function () {
-        $('#joinbtn').on('click', function (e) {
-            location.href = '/ttpro/signup/signagree.jsp';
-        });
-    });
-
     // 새글쓰기
     $(function () {
         $('#newbtn').on('click', function (e) {
-            location.href = 'fWrite.jsp';
+            location.href = 'freeWrite.do';
         });
     });
 
@@ -263,12 +225,6 @@
             }
         });
 
-    });
-    // 상단 로그아웃 버튼
-    $(function () {
-        $('#logoutbtn').on('click', function (e) {
-            location.href = '/ttpro/login/logout.jsp';
-        });
     });
 
 </script>

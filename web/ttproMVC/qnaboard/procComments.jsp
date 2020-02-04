@@ -3,8 +3,8 @@
 
 <% request.setCharacterEncoding("utf-8"); %>
 
-<jsp:useBean id="qnaf" class="dao.QnaBoardFactory" scope="session"/>
-<jsp:useBean id="qb" class="vo.QavComments"/>
+<jsp:useBean id="qnaf" class="dao.QnaBoardDAO" scope="session"/>
+<jsp:useBean id="qb" class="vo.QnaComments"/>
 <jsp:setProperty name="qb" property="*" />
 
 <%

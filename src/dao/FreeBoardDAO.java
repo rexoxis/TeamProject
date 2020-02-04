@@ -1,25 +1,25 @@
 package dao;
 
 import service.OracleUtil;
-import vo.semilist1;
-import vo.FrvComments;
+import vo.FreeBoard;
+import vo.FreeComments;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-public class bdDAO {
+public class FreeBoardDAO {
     private Connection conn = null;
     private PreparedStatement pstmt = null;
     private ResultSet rs = null;
 
 
-    private ArrayList<semilist1> lists = null;
+    private ArrayList<FreeBoard> lists = null;
 
     OracleUtil oracle = new OracleUtil();
 
-    public ArrayList<semilist1> viewcontents(int bdno) {
+    public ArrayList<FreeBoard> viewcontents(int bdno) {
         String viewSQL = "select bdno,title,userid,contents,views,thumbs,regdate from semilist1 where bdno = ?";
 
         try {
@@ -33,7 +33,7 @@ public class bdDAO {
 
             while (rs.next()) {
 
-                semilist1 bd = new semilist1();
+                FreeBoard bd = new FreeBoard();
 
                 bd.setBdno(rs.getInt(1));
                 bd.setTitle(rs.getString(2));
@@ -81,7 +81,7 @@ public class bdDAO {
     }
 
     // 게시판 조회하기 위한 메소드
-    public ArrayList<semilist1> viewList(String searchText, int startnum, int endnum) {
+    public ArrayList<FreeBoard> viewList(String searchText, int startnum, int endnum) {
         String listSQL = "";
         if (searchText.equals("baselist")){
             listSQL = " select * from (select bd.bdno, bd.title, bd.userid, bd.views, bd.regdate, bd.thumbs, rownum as rnum from " +
@@ -113,7 +113,7 @@ public class bdDAO {
 
             while (rs.next()) {
 
-                semilist1 bd = new semilist1();
+                FreeBoard bd = new FreeBoard();
 
                 bd.setBdno(rs.getInt(1));
                 bd.setTitle(rs.getString(2));
@@ -134,8 +134,10 @@ public class bdDAO {
         return lists;
     }
 
-    public void writeboard(semilist1 vo, String selectbd) {
+    public int writeboard(FreeBoard vo, String selectbd) {
         String writeSQL = "";
+        int check = 0;
+
         if (selectbd.equals("free")) {
             writeSQL = "insert into semilist1 (bdno,userid,title,contents) values (squ.nextval,?,?,?)";
         } else if (selectbd.equals("qna")) {
@@ -145,32 +147,40 @@ public class bdDAO {
         try {
             conn = oracle.getConn();
             pstmt = conn.prepareStatement(writeSQL);
+
             pstmt.setString(1, vo.getUserid());
             pstmt.setString(2, vo.getTitle());
             pstmt.setString(3, vo.getContents());
-            pstmt.executeUpdate();
+
+            check = pstmt.executeUpdate();
 
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             oracle.closeConn(rs, pstmt, conn);
         }
+        return check;
     }
 
-    public void modifyBoard(semilist1 vo) {
+    public int modifyBoard(FreeBoard vo) {
         String modifySQL = "update semilist1 set title=?, contents=? where bdno=?";
+        int check = 0;
+
         try {
             conn = oracle.getConn();
             pstmt = conn.prepareStatement(modifySQL);
             pstmt.setString(1, vo.getTitle());
             pstmt.setString(2, vo.getContents());
             pstmt.setInt(3, vo.getBdno());
-            pstmt.executeUpdate();
+
+            check = pstmt.executeUpdate();
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             oracle.closeConn(pstmt, conn);
         }
+        return check;
     }
 
     public int deletelist(int bdno) {
@@ -190,7 +200,7 @@ public class bdDAO {
         return isok;
     }
 
-    public void ReadCnt(int bdno) {
+    public void viewUP(int bdno) {
         String readcntSQL = "update semilist1 set views = views+1 where bdno=?";
 
         try {
@@ -225,8 +235,9 @@ public class bdDAO {
         return like;
     }
 
-    public void commentsWrite(FrvComments rc, int frvbdno) {
+    public int commentsWrite(FreeComments rc, int frvbdno) {
         String commentsSQL = "INSERT INTO frv_comments (comt_bdno, frv_bdno, comt_userid, comt_contents) VALUES (fcomments_seq.nextval, ?, ?, ?)";
+        int check = 0;
 
         try {
             conn = oracle.getConn();
@@ -234,7 +245,8 @@ public class bdDAO {
             pstmt.setInt(1, frvbdno);
             pstmt.setString(2, rc.getComt_userid());
             pstmt.setString(3, rc.getComt_contents());
-            pstmt.executeUpdate();
+
+            check = pstmt.executeUpdate();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -242,12 +254,13 @@ public class bdDAO {
         } finally {
             oracle.closeConn(pstmt, conn);
         }
+        return check;
     }
 
-    public ArrayList<FrvComments> commentView(int frvbdno) {
+    public ArrayList<FreeComments> commentView(int frvbdno) {
         String commtViewSQL = "SELECT comt_bdno, comt_userid, comt_contents, comt_likes, comt_regdate from frv_comments WHERE frv_bdno = ? ORDER BY comt_regdate";
 
-        ArrayList<FrvComments> fclists = null;
+        ArrayList<FreeComments> fclists = null;
 
         try {
             conn = oracle.getConn();
@@ -258,7 +271,7 @@ public class bdDAO {
             fclists = new ArrayList<>();
 
             while (rs.next()) {
-                FrvComments fc = new FrvComments();
+                FreeComments fc = new FreeComments();
 
 //                PropertySetter.setProperties(rs,rc,false,false);
                 fc.setComt_bdno(rs.getInt(1));

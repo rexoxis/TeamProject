@@ -1,34 +1,15 @@
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="vo.semilist1" %>
-<%@ page import="vo.FrvComments" %>
+<%@ page import="vo.FreeBoard" %>
+<%@ page import="vo.FreeComments" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean id="bd" class="dao.bdDAO" scope="session"/>
+
 <%
-    // 로그인한 사용자의 아이디 가져옴
-    String uid = (String)session.getAttribute("userid");
+    request.setCharacterEncoding("utf-8");
 
-    if(uid==null|| uid.equals("")) {
-        out.println("<script>alert('로그인 후 이용해주세요^^'); location.href='/ttpro/login/login.jsp';</script>");
-    }
+    ArrayList<FreeBoard> freeLists = (ArrayList)session.getAttribute("freeLists");
 
+    ArrayList<FreeBoard> freeCommentLists = (ArrayList)request.getAttribute("freeCommentLists");
 
-    // 처음 view.jsp로 이동했을때 bdno를 셋팅하는 방식
-    int bdno = 0;
-
-    if (request.getParameter("bdno") != null) {
-        bdno = Integer.parseInt(request.getParameter("bdno"));
-    }
-
-    ArrayList<semilist1> lists = bd.viewcontents(bdno);
-
-    session.setAttribute("lists", lists);
-    // 조회수 증가 메소드 호출
-    bd.ReadCnt(bdno);
-
-    System.out.println("게시글번호 : " + bdno);
-
-    // 댓글 읽어오는 메소드 호출
-    ArrayList<FrvComments> fclists = bd.commentView(bdno);
 %>
 <html>
 <head>
@@ -78,11 +59,11 @@
                 <i class="fa fa-question-circle"> 자유게시판</i>
             </div>
             <div class="col-5">
-                <button type="button" class="btn btn-success" onclick="location.href='fWrite.jsp'"
+                <button type="button" class="btn btn-success" onclick="location.href='freeWrite.do'"
                         style="margin:45px 10px 15px 45%; ">
                     <i class="fa fa-plus-circle"> 새글쓰기</i>
                 </button>
-                <button type="button" class="btn btn-warning" onclick="location.href='fList.jsp'"
+                <button type="button" class="btn btn-warning" onclick="location.href='freeList.do'"
                         style="margin:45px 0 15px 0; color: white">
                     <i class="fa fa-list" aria-hidden="true"> 목록으로</i>
                 </button>
@@ -95,14 +76,14 @@
                 <ul>
                     <%--해당 카테고리 a태그는 지워고 색깔 바꿔주세요--%>
                     <li style="color:#919191"> &block;&nbsp;&nbsp;자유게시판</li>
-                    <li><a href="<%=baseurl%>/qnaboard/QnA.jsp">&block;&nbsp;&nbsp;자주하는 질문</a></li>
-                    <li><a href="<%=baseurl%>/qnaboard/qList.jsp">&block;&nbsp;&nbsp;QnA</a></li>
+                    <li><a href="QnA.do">&block;&nbsp;&nbsp;자주하는 질문</a></li>
+                    <li><a href="qnaList.do">&block;&nbsp;&nbsp;QnA</a></li>
                 </ul>
             </div>
             <%-- 왼쪽 카테고리부분 --%>
 
             <div class="col-sm-9" style="height: auto; border: 0.3mm solid #cfcfcf; border-radius: 10px; padding: 20px">
-                <% for (semilist1 a : lists) { %>
+                <% for (FreeBoard a : freeLists) { %>
                 <div class="row">
                     <div class="col-sm-12">
                         <h1 id="title" style="text-align: center"><%=a.getTitle()%>
@@ -114,7 +95,7 @@
                         <div id="name" style="text-align: right; margin: 20px 20px 20px 0; color: #404040">
                             <%=a.getUserid()%> &#124;
                             <button type="button" class="btn btn-outline-danger"
-                                    onclick="location.href='fThumbs.jsp?bdno=<%=a.getBdno()%>'">
+                                    onclick="location.href='freeThumbsUP.do?bdno=<%=a.getBdno()%>'">
                                 <i class="fa fa-thumbs-o-up" aria-hidden="true"></i></button>
                         </div>
                     </div>
@@ -132,7 +113,7 @@
         <div class="col-sm-3"></div>
         <div class="col-sm-9" style="margin: 20px 0 30px 0">
             <%--uid부분은 로그인한 사용자의 아이디를 표시할 부분--%>
-            <form action="procComments.jsp?bdno=<%=a.getBdno()%>" method="post">
+            <form action="procfreeComment.do?bdno=<%=a.getBdno()%>" method="post">
                 <div class="row" style="margin: 20px 0 30px 0">
                     <div style="margin-left: 15px">
                         <i class="fa fa-user-circle-o" aria-hidden="true"></i>
@@ -147,7 +128,7 @@
                 <%-- 댓글 입력창 --%>
             </form>
             <%-- 입력한 댓글이 있으면 댓글을 불러옴--%>
-            <% for (FrvComments qc : fclists) { %>
+            <% for (FreeComments qc : freeCommentLists) { %>
             <% if (qc.getComt_contents() != null || !(qc.getComt_contents().equals(""))) {%>
             <div class="row">
                 <div class="col-sm-2">
@@ -157,11 +138,11 @@
                 </div>
                 <%-- 아이콘 뒤에 로그인된 아이디가 들어갔으면 좋겠어요 --%>
                 <div class="col-sm-7">
-                    <div id="coment"><%=qc.getComt_contents()%></div>
-                    <div id="coment" style="font-size: 10pt"><%=qc.getComt_regdate()%></div>
+                    <div id="coment1"><%=qc.getComt_contents()%></div>
+                    <div id="coment2" style="font-size: 10pt"><%=qc.getComt_regdate()%></div>
                     <%-- 대댓글은 시간상 언급하는 식으로 들어가는게 나을꺼 같아요 --%>
                 </div>
-                <a href="fcmDelete.jsp?comt_bdno=<%=qc.getComt_bdno()%>&bdno=<%=a.getBdno()%>"
+                <a href="procfreeCommentDelete.do?comt_bdno=<%=qc.getComt_bdno()%>&bdno=<%=a.getBdno()%>"
                    class="btn btn-outline-danger" style="height: 35px; margin-left: 65px;">
                     <i class="fa fa-trash-o" aria-hidden="true"></i></a>
             </div>
@@ -173,13 +154,13 @@
 
     <div class="row" style="margin: 0 0 0 53%">
         <div>
-            <button type="button" class="btn btn-info" onclick="location.href='fModify.jsp'"><i class="fa fa-pencil"
-                                                                                                aria-hidden="true"></i>
+            <button type="button" class="btn btn-info" onclick="location.href='freeModify.do'"><i class="fa fa-pencil"
+                                                                                                   aria-hidden="true"></i>
                 수정하기
             </button>
         </div>&nbsp;
         <div class="text-right">
-            <a href="fDelete.jsp?bdno=<%=a.getBdno()%>" class="btn btn-danger"><i class="fa fa-trash-o"
+            <a href="procfreeDelete.do?bdno=<%=a.getBdno()%>" class="btn btn-danger"><i class="fa fa-trash-o"
                                                                                   aria-hidden="true"></i> 삭제하기</a>
         </div>
     </div>
@@ -198,32 +179,15 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+<script src="/ttproMVC/js/button.js"></script>
 
 
 <script>
 
-    // 상단 로그인 버튼
-    $(function () {
-        $('#mloginbtn').on('click', function (e) {
-            location.href = '/ttpro/login/login.jsp';
-        });
-    });
-    // 회원가입 버튼
-    $(function () {
-        $('#joinbtn').on('click', function (e) {
-            location.href = '/ttpro/signup/signagree.jsp';
-        });
-    });
-
     // 새글쓰기
     $(function () {
         $('#newbtn').on('click', function (e) {
-            location.href = 'fWrite.jsp';
-        });
-    });    // 상단 로그아웃 버튼
-    $(function () {
-        $('#logoutbtn').on('click', function (e) {
-            location.href = '/ttpro/login/logout.jsp';
+            location.href = 'freeWrite.do';
         });
     });
 </script>

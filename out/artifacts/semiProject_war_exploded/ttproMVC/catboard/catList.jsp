@@ -217,6 +217,7 @@
         $('#newbtn').on('click', function (e) {
             location.href = 'catWrite.do';
         });
+    });
 
 </script>
 

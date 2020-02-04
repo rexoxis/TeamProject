@@ -1,7 +1,7 @@
 package mvc.handler.reviewboard;
 
 
-import dao.ReviewBoardFactory;
+import dao.ReviewBoardDAO;
 import mvc.handler.MVCHandler;
 import vo.ReviewBoard;
 import vo.ReviewComments;
@@ -25,7 +25,7 @@ public class ReviewBoardViewHandler implements MVCHandler {
 
         String viewPage = "1|/ttproMVC/reviewboard/reviewView.jsp";
 
-        ReviewBoardFactory reviewdao = new ReviewBoardFactory();
+        ReviewBoardDAO reviewdao = new ReviewBoardDAO();
 
         int bdno = 0;
 

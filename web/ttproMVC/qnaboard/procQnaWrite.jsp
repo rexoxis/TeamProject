@@ -2,7 +2,7 @@
 
 <% request.setCharacterEncoding("utf-8"); %>
 
-<jsp:useBean id="qnaf" class="dao.QnaBoardFactory" scope="session"/>
+<jsp:useBean id="qnaf" class="dao.QnaBoardDAO" scope="session"/>
 
 <%--단지 가져오는 부분 --%>
 <jsp:useBean id="qb" class="vo.QnaBoard"/>

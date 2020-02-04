@@ -1,17 +1,13 @@
 package mvc.handler.catboard;
 
 
-import dao.CatBoardFactory;
+import dao.CatBoardDAO;
 import mvc.handler.MVCHandler;
 import vo.CatBoard;
 
 import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,7 +33,7 @@ public class CatBoardListHandler implements MVCHandler {
 
         searchList.put(colname, findtext);
 
-        CatBoardFactory catdao = new CatBoardFactory();
+        CatBoardDAO catdao = new CatBoardDAO();
 
         // 페이징 부분
 

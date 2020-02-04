@@ -1,6 +1,6 @@
 package mvc.handler.reviewboard;
 
-import dao.ReviewBoardFactory;
+import dao.ReviewBoardDAO;
 import mvc.handler.MVCHandler;
 
 import javax.servlet.ServletException;
@@ -18,7 +18,7 @@ public class ProcReviewBoardCommentDeleteHandler implements MVCHandler{
         int bdno = Integer.parseInt(request.getParameter("bdno"));
         int Comment_bdno = Integer.parseInt(request.getParameter("Comment_bdno"));
 
-        ReviewBoardFactory reviewdao = new ReviewBoardFactory();
+        ReviewBoardDAO reviewdao = new ReviewBoardDAO();
 
         check = reviewdao.commentDelete(Comment_bdno);
 

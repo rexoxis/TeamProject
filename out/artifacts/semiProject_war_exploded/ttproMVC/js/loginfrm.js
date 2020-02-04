@@ -1,7 +1,5 @@
 var loginbtn = document.getElementById("loginbtn");
-var logoutbtn = document.getElementById("logoutbtn");
 loginbtn.addEventListener("click", loginfrm);
-logoutbtn.addEventListener("click", gologout);
 
 // alert창 띄우는 함수
 // function loginfrm_() {
@@ -35,8 +33,3 @@ function loginfrm(){
         frm.submit();
     }
 }
-
-function gologout(){
-    location.href = 'logout.do';
-}
-

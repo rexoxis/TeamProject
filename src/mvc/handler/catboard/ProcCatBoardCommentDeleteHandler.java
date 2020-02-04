@@ -1,8 +1,7 @@
 package mvc.handler.catboard;
 
-import dao.CatBoardFactory;
+import dao.CatBoardDAO;
 import mvc.handler.MVCHandler;
-import vo.CatComments;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +18,7 @@ public class ProcCatBoardCommentDeleteHandler implements MVCHandler{
         int bdno = Integer.parseInt(request.getParameter("bdno"));
         int Comment_bdno = Integer.parseInt(request.getParameter("comment_bdno"));
 
-        CatBoardFactory catdao = new CatBoardFactory();
+        CatBoardDAO catdao = new CatBoardDAO();
 
         check = catdao.deleteComment(Comment_bdno);
 

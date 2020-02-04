@@ -1,9 +1,10 @@
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="vo.semilist1" %>
+<%@ page import="vo.FreeBoard" %>
+<%@ page import="vo.FreeComments" %>
 <%@ page contentType="text/html; charset=utf-8" %>
-<jsp:useBean id="bd" class="dao.bdDAO"/>
+
 <%
-    ArrayList<semilist1> lists = (ArrayList) session.getAttribute("lists");
+    ArrayList<FreeBoard> freeLists = (ArrayList)session.getAttribute("freeLists");
 %>
 <html>
 <head>
@@ -32,26 +33,26 @@
 
 
         <div class="row" style="margin: 10px 30px 20px 30px">
-            <% for (semilist1 a : lists) { %>
-            <form class="card card-body bg-light" method="post" action="procfModify.jsp?bdno=<%=a.getBdno()%>">
+            <% for (FreeBoard freeBoard : freeLists) { %>
+            <form class="card card-body bg-light" method="post" action="procfreeModify.do?bdno=<%=freeBoard.getBdno()%>">
 
                 <div class="form-group row">
                     <label class="col-sm-2 control-label">이름</label>
                     <div class="col-sm-3">
-                        <div name="name"><%=a.getUserid()%>
+                        <div name="name"><%=freeBoard.getUserid()%>
                         </div>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 control-label">제목</label>
                     <div class="col-sm-5">
-                        <textarea name="title" class="form-control col-sm-5"><%=a.getTitle()%></textarea>
+                        <textarea name="title" class="form-control col-sm-5"><%=freeBoard.getTitle()%></textarea>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 control-label">내용</label>
                     <div class="col-sm-8" style="word-break: break-all;">
-                        <textarea name="contents" class="form-control col-sm-5"><%=a.getContents()%></textarea>
+                        <textarea name="contents" class="form-control col-sm-5"><%=freeBoard.getContents()%></textarea>
                     </div>
                 </div>
 
@@ -59,11 +60,8 @@
                     <div class="col-sm-offset-2 col-sm-10 ">
                         <div class="col-12 text-center"
                              style="border-top: 1px solid #000000; margin-top: 35px;padding-top: 25px">
-                            <button type="button" id="thumbs" class="btn btn-danger"
-                                    onclick="location.href='fDelete.jsp?bdno=<%=a.getBdno()%>'">삭제
-                            </button>
-                            <button type="submit" class="btn btn-warning" onclick="location.href='fModify.jsp'">수정완료
-                            </button>
+                            <button type="submit" class="btn btn-warning">수정완료</button>
+                            <button type="button" id="cancelbtn" class="btn btn-danger">취소하기</button>
                         </div>
                     </div>
                 </div>
@@ -84,25 +82,22 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+<script src="/ttproMVC/js/button.js"></script>
+
 <script>
-    // 상단 로그인 버튼
+    // 작성취소 버튼
     $(function () {
-        $('#mloginbtn').on('click', function (e) {
-            location.href = '/ttpro/login/login.jsp';
+        $('#cancelbtn').on('click', function (e) {
+            history.back();
         });
     });
-    // 회원가입 버튼
+    // 목록 버튼
     $(function () {
-        $('#joinbtn').on('click', function (e) {
-            location.href = '/ttpro/signup/signagree.jsp';
+        $('#listbtn').on('click', function (e) {
+            location.href = 'freeList.do';
         });
     });
-    // 상단 로그아웃 버튼
-    $(function () {
-        $('#logoutbtn').on('click', function (e) {
-            location.href = '/ttpro/login/logout.jsp';
-        });
-    });
+
 </script>
 </body>
 </html>

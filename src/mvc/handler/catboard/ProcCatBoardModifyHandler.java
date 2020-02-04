@@ -1,6 +1,6 @@
 package mvc.handler.catboard;
 
-import dao.CatBoardFactory;
+import dao.CatBoardDAO;
 import mvc.handler.MVCHandler;
 import service.FileUpDownUtil;
 
@@ -18,24 +18,19 @@ public class ProcCatBoardModifyHandler implements MVCHandler{
 
         String viewPage = "1|/ttproMVC/error.jsp";
 
-        PrintWriter out = response.getWriter();
-
-        CatBoardFactory catdoa = new CatBoardFactory();
+        CatBoardDAO catdoa = new CatBoardDAO();
 
         String realpath = request.getServletContext().getRealPath("ttproMVC/fileupload");
         Map<String, String> frmdata = FileUpDownUtil.procUpload(request, realpath);
 
         int bdno = Integer.parseInt(request.getParameter("bdno"));
 
-        System.out.println("procModify bdno : " + bdno);
         int check = 0;
 
         check = catdoa.modifyView(frmdata, bdno);
 
         if (check >= 1) {
             viewPage = "2|catView.do?bdno="+bdno;
-        } else {
-            out.print("<script>history.go(-1);</script>");
         }
 
         return viewPage;

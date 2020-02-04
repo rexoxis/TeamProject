@@ -1,15 +1,12 @@
 package mvc.handler.catboard;
 
-import dao.CatBoardFactory;
+import dao.CatBoardDAO;
 import mvc.handler.MVCHandler;
-import service.FileUpDownUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Map;
 
 public class ProcCatBoardDeleteHandler implements MVCHandler{
 
@@ -19,7 +16,7 @@ public class ProcCatBoardDeleteHandler implements MVCHandler{
 
         int check = 0;
 
-        CatBoardFactory catdao = new CatBoardFactory();
+        CatBoardDAO catdao = new CatBoardDAO();
 
         int bdno = Integer.parseInt(request.getParameter("bdno"));
 

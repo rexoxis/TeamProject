@@ -3,7 +3,7 @@ package vo;
 /**
  * Created by TJ on 2020-01-15.
  */
-public class FrvComments {
+public class FreeComments {
     int comt_bdno;
     int frv_bdno;
     String comt_userid;

@@ -1,12 +1,4 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="java.util.Date" %>
-
-
-<%
-    request.setCharacterEncoding("utf-8");
-    String uid = String.valueOf(session.getAttribute("userid"));
-
-%>
 
 <!DOCTYPE html>
 <html>
@@ -44,7 +36,7 @@
         </div> <!--버튼-->
 
         <div class="row" style="margin: 10px 30px 20px 30px">
-            <form method="post" action="procfWrite.jsp" name="writefrm" class="card card-body bg-light">
+            <form method="post" action="procfreeWrite.do" name="writefrm" class="card card-body bg-light">
                 <div class="form-group row">
                     <label class="col-form-label col-2 text-right" for="selectbd">게시판선택</label>
                     <select id="selectbd" name="selectbd">
@@ -89,42 +81,31 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-<script src="../js/writefrmcheck.js"></script>
+<script src="/ttproMVC/js/writefrmcheck.js"></script>
+<script src="/ttproMVC/js/button.js"></script>
 
 <script>
-
-    // 상단 로그인 버튼
-    $(function () {
-        $('#mloginbtn').on('click', function (e) {
-            location.href = '/ttpro/login/login.jsp';
-        });
-    });
-    // 회원가입 버튼
-    $(function () {
-        $('#joinbtn').on('click', function (e) {
-            location.href = '/ttpro/signup/signagree.jsp';
-        });
-    });
-
     // 작성취소 버튼
     $(function () {
         $('#cancelbtn').on('click', function (e) {
-            location.href = 'qList.jsp';
+            location.href = 'freeList.do';
         });
     });
 
+    // 목록 버튼
     $(function () {
         $('#listbtn').on('click', function (e) {
-            location.href = 'qList.jsp?cpage=1';
-        });
-    });
-    // 상단 로그아웃 버튼
-    $(function () {
-        $('#logoutbtn').on('click', function (e) {
-            location.href = '/ttpro/login/logout.jsp';
+            location.href = 'freeList.do';
         });
     });
 
+    // 미로그인시 접근제한
+    var uid = "<%=uid%>";
+
+    if (uid === "" || uid == null) {
+        alert('로그인 후 사용해주세요!');
+        location.href='login.do';
+    }
 </script>
 </body>
 </html>

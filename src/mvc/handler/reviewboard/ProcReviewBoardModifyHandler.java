@@ -1,6 +1,6 @@
 package mvc.handler.reviewboard;
 
-import dao.ReviewBoardFactory;
+import dao.ReviewBoardDAO;
 import mvc.handler.MVCHandler;
 import service.FileUpDownUtil;
 
@@ -20,7 +20,7 @@ public class ProcReviewBoardModifyHandler implements MVCHandler{
 
         PrintWriter out = response.getWriter();
 
-        ReviewBoardFactory reviewdao = new ReviewBoardFactory();
+        ReviewBoardDAO reviewdao = new ReviewBoardDAO();
 
         String realpath = request.getServletContext().getRealPath("ttproMVC/fileupload");
         Map<String, String> frmdata = FileUpDownUtil.procUpload(request, realpath);

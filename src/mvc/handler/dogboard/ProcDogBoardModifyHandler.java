@@ -1,6 +1,6 @@
 package mvc.handler.dogboard;
 
-import dao.DogBoardFactory;
+import dao.DogBoardDAO;
 import mvc.handler.MVCHandler;
 import service.FileUpDownUtil;
 
@@ -20,7 +20,7 @@ public class ProcDogBoardModifyHandler implements MVCHandler{
 
         PrintWriter out = response.getWriter();
 
-        DogBoardFactory dogdao = new DogBoardFactory();
+        DogBoardDAO dogdao = new DogBoardDAO();
 
         String realpath = request.getServletContext().getRealPath("ttproMVC/fileupload");
         Map<String, String> frmdata = FileUpDownUtil.procUpload(request, realpath);

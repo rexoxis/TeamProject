@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ReviewBoardFactory {
+public class ReviewBoardDAO {
 
     private Connection conn;
     private PreparedStatement pstmt;

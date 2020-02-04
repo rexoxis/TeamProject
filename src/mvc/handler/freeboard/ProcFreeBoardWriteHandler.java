@@ -1,41 +1,36 @@
-package mvc.handler.dogboard;
+package mvc.handler.freeboard;
 
-import dao.DogBoardFactory;
+import dao.FreeBoardDAO;
 import mvc.handler.MVCHandler;
-import service.FileUpDownUtil;
+import vo.FreeBoard;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Map;
 
-public class ProcDogBoardWriteHandler implements MVCHandler{
+public class ProcFreeBoardWriteHandler implements MVCHandler{
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String viewPage = "1|/ttproMVC/dogboard/dogWrite.jsp";
-
-        PrintWriter out = response.getWriter();
+        String viewPage = "1|/ttproMVC/freeboard/freeWrite.jsp";
 
         int check = 0;
 
-        DogBoardFactory dogdao = new DogBoardFactory();
+        FreeBoardDAO freedao = new FreeBoardDAO();
 
-        // 파일 업로드 절대경로
-        String realpath = request.getServletContext().getRealPath("ttproMVC/fileupload");
-//        System.out.println(realpath);
+        FreeBoard freeBoard = new FreeBoard();
 
-        Map<String, String> frmdata = FileUpDownUtil.procUpload(request, realpath);
+        freeBoard.setUserid(request.getParameter("userid"));
+        freeBoard.setTitle(request.getParameter("title"));
+        freeBoard.setContents(request.getParameter("contents"));
 
-        String selectbd = frmdata.get("selectbd");
+        String selectbd = request.getParameter("selectbd");
 
-        check = dogdao.dogWrite(frmdata, selectbd);
+        check = freedao.writeboard(freeBoard, selectbd);
 
         if (check >= 1) {
-            viewPage = "2|dogList.do";
-//            out.println("<script> alert('게시글이 등록되었습니다.'); </script>");
+            viewPage = "2|freeList.do";
         } else {
             System.out.println("글쓰기 실패");
         }

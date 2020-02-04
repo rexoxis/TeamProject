@@ -1,6 +1,6 @@
-package mvc.handler.dogboard;
+package mvc.handler.freeboard;
 
-import dao.DogBoardFactory;
+import dao.FreeBoardDAO;
 import mvc.handler.MVCHandler;
 
 import javax.servlet.ServletException;
@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class ProcDogBoardDeleteHandler implements MVCHandler{
+public class ProcFreeBoardDeleteHandler implements MVCHandler{
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -16,14 +16,14 @@ public class ProcDogBoardDeleteHandler implements MVCHandler{
 
         int check = 0;
 
-        DogBoardFactory dogdao = new DogBoardFactory();
+        FreeBoardDAO freedao = new FreeBoardDAO();
 
         int bdno = Integer.parseInt(request.getParameter("bdno"));
 
-        check = dogdao.deleteDogList(bdno);
+        check = freedao.deletelist(bdno);
 
         if (check >= 1) {
-            viewPage = "2|dogList.do";
+            viewPage = "2|freeList.do";
         }
 
         return viewPage;

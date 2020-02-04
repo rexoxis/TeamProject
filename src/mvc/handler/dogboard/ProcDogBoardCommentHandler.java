@@ -1,6 +1,6 @@
 package mvc.handler.dogboard;
 
-import dao.DogBoardFactory;
+import dao.DogBoardDAO;
 import mvc.handler.MVCHandler;
 import vo.DogComments;
 
@@ -22,7 +22,7 @@ public class ProcDogBoardCommentHandler implements MVCHandler{
         // 현재 글의 게시판 번호
         int dogBoard_bdno = Integer.parseInt(request.getParameter("bdno"));
 
-        DogBoardFactory dogdao = new DogBoardFactory();
+        DogBoardDAO dogdao = new DogBoardDAO();
 
         DogComments dogComments = new DogComments();
         // 파라미터로 넘어온 댓글 작성자, 내용 vo클래ㅅ에 저장

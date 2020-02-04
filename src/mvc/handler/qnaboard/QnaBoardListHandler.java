@@ -1,10 +1,8 @@
-package mvc.handler.freeboard;
+package mvc.handler.qnaboard;
 
 
-import dao.DogBoardDAO;
 import dao.FreeBoardDAO;
 import mvc.handler.MVCHandler;
-import vo.DogBoard;
 import vo.FreeBoard;
 
 import javax.servlet.ServletException;
@@ -12,9 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
-public class FreeBoardListHandler implements MVCHandler {
+public class QnaBoardListHandler implements MVCHandler {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

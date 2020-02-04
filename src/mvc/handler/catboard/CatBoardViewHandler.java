@@ -1,7 +1,7 @@
 package mvc.handler.catboard;
 
 
-import dao.CatBoardFactory;
+import dao.CatBoardDAO;
 import mvc.handler.MVCHandler;
 import vo.CatBoard;
 import vo.CatComments;
@@ -25,7 +25,7 @@ public class CatBoardViewHandler implements MVCHandler {
 
         String viewPage = "1|/ttproMVC/catboard/catView.jsp";
 
-        CatBoardFactory catdao = new CatBoardFactory();
+        CatBoardDAO catdao = new CatBoardDAO();
 
         int bdno = 0;
 

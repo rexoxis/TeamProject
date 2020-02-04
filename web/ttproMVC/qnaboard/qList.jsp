@@ -3,7 +3,7 @@
 <%@ page import="java.util.ArrayList" %>
 
 
-<jsp:useBean id="qnaf" class="dao.QnaBoardFactory" scope="session"/>
+<jsp:useBean id="qnaf" class="dao.QnaBoardDAO" scope="session"/>
 <jsp:useBean id="qb" class="vo.QnaBoard"/>
 
 <%

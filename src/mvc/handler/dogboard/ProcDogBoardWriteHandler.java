@@ -1,6 +1,6 @@
 package mvc.handler.dogboard;
 
-import dao.DogBoardFactory;
+import dao.DogBoardDAO;
 import mvc.handler.MVCHandler;
 import service.FileUpDownUtil;
 
@@ -21,7 +21,7 @@ public class ProcDogBoardWriteHandler implements MVCHandler{
 
         int check = 0;
 
-        DogBoardFactory dogdao = new DogBoardFactory();
+        DogBoardDAO dogdao = new DogBoardDAO();
 
         // 파일 업로드 절대경로
         String realpath = request.getServletContext().getRealPath("ttproMVC/fileupload");

@@ -1,7 +1,7 @@
 package mvc.handler.dogboard;
 
 
-import dao.DogBoardFactory;
+import dao.DogBoardDAO;
 import mvc.handler.MVCHandler;
 import vo.DogBoard;
 
@@ -33,7 +33,7 @@ public class DogBoardListHandler implements MVCHandler {
 
         searchList.put(colname, findtext);
 
-        DogBoardFactory dogdao = new DogBoardFactory();
+        DogBoardDAO dogdao = new DogBoardDAO();
 
         // 페이징 부분
 

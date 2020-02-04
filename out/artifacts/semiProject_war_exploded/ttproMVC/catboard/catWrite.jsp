@@ -100,12 +100,21 @@
             location.href = 'catList.do';
         });
     });
+
     // 목록 버튼
     $(function () {
         $('#listbtn').on('click', function (e) {
             location.href = 'catList.do';
         });
     });
+
+    // 미로그인시 접근제한
+    var uid = "<%=uid%>";
+
+    if (uid === "" || uid == null) {
+        alert('로그인 후 사용해주세요!');
+        location.href='login.do';
+    }
 </script>
 
 </body>

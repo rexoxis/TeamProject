@@ -1,6 +1,6 @@
 package vo;
 
-public class semilist1 {
+public class FreeBoard {
     private int bdno;
     private String userid;
     private String title;

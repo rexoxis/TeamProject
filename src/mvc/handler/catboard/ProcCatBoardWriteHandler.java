@@ -1,6 +1,6 @@
 package mvc.handler.catboard;
 
-import dao.CatBoardFactory;
+import dao.CatBoardDAO;
 import mvc.handler.MVCHandler;
 import service.FileUpDownUtil;
 
@@ -21,7 +21,7 @@ public class ProcCatBoardWriteHandler implements MVCHandler{
 
         int check = 0;
 
-        CatBoardFactory catdao = new CatBoardFactory();
+        CatBoardDAO catdao = new CatBoardDAO();
 
         // 파일 업로드 절대경로
         String realpath = request.getServletContext().getRealPath("ttproMVC/fileupload");

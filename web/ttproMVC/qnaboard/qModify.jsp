@@ -1,7 +1,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="vo.QnaBoard" %>
 <%@ page contentType="text/html; charset=utf-8"%>
-<jsp:useBean id="qb" class="dao.QnaBoardFactory"  scope="session"/>
+<jsp:useBean id="qb" class="dao.QnaBoardDAO" scope="session"/>
 
 <%
     ArrayList<QnaBoard> qnalists = (ArrayList)session.getAttribute("q");

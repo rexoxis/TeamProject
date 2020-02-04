@@ -1,6 +1,6 @@
 package mvc.handler.reviewboard;
 
-import dao.ReviewBoardFactory;
+import dao.ReviewBoardDAO;
 import mvc.handler.MVCHandler;
 import vo.ReviewComments;
 
@@ -22,7 +22,7 @@ public class ProcReviewBoardCommentHandler implements MVCHandler{
         // 현재 글의 게시판 번호
         int reviewBoard_bdno = Integer.parseInt(request.getParameter("bdno"));
 
-        ReviewBoardFactory reviewdao = new ReviewBoardFactory();
+        ReviewBoardDAO reviewdao = new ReviewBoardDAO();
 
         ReviewComments reviewComments = new ReviewComments();
         // 파라미터로 넘어온 댓글 작성자, 내용 vo클래ㅅ에 저장

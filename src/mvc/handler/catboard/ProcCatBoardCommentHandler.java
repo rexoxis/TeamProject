@@ -1,16 +1,13 @@
 package mvc.handler.catboard;
 
-import dao.CatBoardFactory;
+import dao.CatBoardDAO;
 import mvc.handler.MVCHandler;
-import service.FileUpDownUtil;
 import vo.CatComments;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Map;
 
 public class ProcCatBoardCommentHandler implements MVCHandler{
 
@@ -25,7 +22,7 @@ public class ProcCatBoardCommentHandler implements MVCHandler{
         // 현재 글의 게시판 번호
         int catBoard_bdno = Integer.parseInt(request.getParameter("bdno"));
 
-        CatBoardFactory catdao = new CatBoardFactory();
+        CatBoardDAO catdao = new CatBoardDAO();
 
         CatComments catComments = new CatComments();
         // 파라미터로 넘어온 댓글 작성자, 내용 vo클래ㅅ에 저장

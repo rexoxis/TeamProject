@@ -1,9 +1,9 @@
 <%@ page import="vo.QnaBoard" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="vo.QavComments" %>
+<%@ page import="vo.QnaComments" %>
 <%@ page contentType="text/html; charset=UTF-8"%>
 
-<jsp:useBean id="qnaf" class="dao.QnaBoardFactory" scope="session"/>
+<jsp:useBean id="qnaf" class="dao.QnaBoardDAO" scope="session"/>
 <%
     // 로그인한 사용자의 아이디 가져옴
     String uid = (String)session.getAttribute("userid");
@@ -28,7 +28,7 @@
     session.setAttribute("q",q);
 
     //댓글 읽어오는 메소드 호출
-    ArrayList<QavComments> qclists = qnaf.commentView(bdno);
+    ArrayList<QnaComments> qclists = qnaf.commentView(bdno);
 %>
 
 
@@ -132,7 +132,7 @@
                     </div>    <%-- 댓글 입력창 --%>
                 </form>
                 <%-- 입력한 댓글이 있으면 댓글을 불러옴--%>
-                <% for(QavComments qc : qclists) { %>
+                <% for(QnaComments qc : qclists) { %>
                 <% if (qc.getComt_contents() != null || !(qc.getComt_contents().equals(""))) {%>
                 <div class="row">
                     <div class="col-sm-2">

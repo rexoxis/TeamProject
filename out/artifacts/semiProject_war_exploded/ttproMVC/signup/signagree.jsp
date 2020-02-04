@@ -756,8 +756,8 @@
             alert('개인정보 수집 및 이용에 동의해 주세요.');    // 얼럿창을 띄움
             return false;
         }
-//        if (chk1 && chk2) {                                 // 모두 체크했을시
-//            location.href = "joinMember.do";                 // joinMember.jsp 로 이동
-//        }
+        if (chk1 && chk2) {                                 // 모두 체크했을시
+            location.href = "joinMember.do";                 // joinMember.jsp 로 이동
+        }
     }
 </script>

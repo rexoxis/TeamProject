@@ -7,11 +7,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class FreeBoardModifyHandler implements MVCHandler{
+public class FreeBoardWriteHandler implements MVCHandler{
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String viewPage = "1|/ttproMVC/freeboard/freeModify.jsp";
+        String viewPage = "1|/ttproMVC/freeboard/freeWrite.do";
 
         return viewPage;
     }

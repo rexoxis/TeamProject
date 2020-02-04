@@ -3,7 +3,7 @@ package vo;
 /**
  * Created by 아라 on 2020-01-15.
  */
-public class QavComments {
+public class QnaComments {
     int comt_bdno;
     int qav_bdno;
     String comt_userid;

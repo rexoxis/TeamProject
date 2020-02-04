@@ -205,11 +205,7 @@
 
     function frmcheckid() {
         var inputID = frm.userid.value;
-<<<<<<< HEAD:out/artifacts/semiProject_war_exploded/ttproMVC/signup/joinMember.jsp
         var url = "/ttproMVC/signup/checkId.jsp?inputID=" + inputID;
-=======
-        var url = "/ttpro/signup/checkId.jsp?inputID=" + inputID;
->>>>>>> origin/master:web/ttproMVC/signup/joinMember.jsp
 
         if (inputID == "") {
             alert('아이디를 먼저 입력해주세요.');
