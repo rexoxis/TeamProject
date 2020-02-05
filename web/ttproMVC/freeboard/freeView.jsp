@@ -56,15 +56,13 @@
     <div class="main">
         <div class="row">
             <div class="col-6" style="font-size: 45px; margin: 0 20px 0 60px ; padding:30px 0 20px 0;">
-                <i class="fa fa-question-circle"> 자유게시판</i>
+                <i class="fa fa-comments fa"> 자유게시판</i>
             </div>
             <div class="col-5">
-                <button type="button" class="btn btn-success" onclick="location.href='freeWrite.do'"
-                        style="margin:45px 10px 15px 45%; ">
+                <button type="button" class="btn btn-success" id="newbtn" style="margin:45px 10px 15px 45%; ">
                     <i class="fa fa-plus-circle"> 새글쓰기</i>
                 </button>
-                <button type="button" class="btn btn-warning" onclick="location.href='freeList.do'"
-                        style="margin:45px 0 15px 0; color: white">
+                <button type="button" class="btn btn-warning" onclick="location.href='qnaList.do'" style="margin:45px 0 15px 0; color: white">
                     <i class="fa fa-list" aria-hidden="true"> 목록으로</i>
                 </button>
             </div>
@@ -190,6 +188,7 @@
             location.href = 'freeWrite.do';
         });
     });
+
     // 미로그인시 접근제한
     var uid = <%=uid%>;
 

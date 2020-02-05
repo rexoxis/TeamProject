@@ -109,12 +109,20 @@
         });
     });
 
-    var uid = <%=uid%>;
+    // 수정 권한 제한
+    var uid = "";
 
-    if (uid === "" || uid == null) {
-        alert('로그인 후 사용해주세요!');
-        location.href='login.do';
+    if ("<%=uid%>" != null) {
+        uid = "<%=uid%>";
     }
+
+    var writer = document.catModifyfrm.userid.value;
+
+    if (uid != writer) {
+        alert('수정 권한이 없습니다.');
+        history.back();
+    }
+
 </script>
 </body>
 </html>

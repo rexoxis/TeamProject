@@ -98,6 +98,7 @@
                     </div>
                 </div>
                 <hr color="#cfcfcf">
+
                 <div class="col-sm-12" style="margin-left: 15%">
                     <div class="row">
                         <% if (reviewBoard.getFile1() != null) { %>
@@ -120,6 +121,16 @@
                     </div>
                     <div class="row">
                         <div id="contents" style="margin-top: 5px"><%=reviewBoard.getContents().replace("\r\n", "<br>")%></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div style="text-align: right; margin: 20px 20px 20px 0; color: #404040">
+                            <button type="button" class="btn btn-outline-danger"
+                                    onclick="location.href='freeThumbsUP.do?bdno=<%=reviewBoard.getBdno()%>'">
+                                <i class="fa fa-thumbs-o-up" aria-hidden="true"></i></button> &#124;
+                            <%=reviewBoard.getLikes()%>
+                        </div>
                     </div>
                 </div>
             </div>

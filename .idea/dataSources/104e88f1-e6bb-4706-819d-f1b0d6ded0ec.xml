@@ -4,9 +4,9 @@
     <root id="1"/>
     <schema id="2" parent="1" name="HR">
       <ObjectId>43</ObjectId>
-      <IntrospectionTimestamp>2020-02-04.14:08:41</IntrospectionTimestamp>
+      <IntrospectionTimestamp>2020-02-05.19:32:36</IntrospectionTimestamp>
       <CreatedTimestamp>2011-08-28.22:21:55</CreatedTimestamp>
-      <ModifiedTimestamp>2020-02-04.14:08:40</ModifiedTimestamp>
+      <ModifiedTimestamp>2020-02-05.19:32:35</ModifiedTimestamp>
       <CommentsHash>212605363307689</CommentsHash>
       <Current>1</Current>
       <Visible>1</Visible>
@@ -146,7 +146,7 @@
     <table id="32" parent="2" name="CATBOARD">
       <ObjectId>28799</ObjectId>
       <CreatedTimestamp>2020-01-16.12:35:36</CreatedTimestamp>
-      <ModifiedTimestamp>2020-01-16.12:35:36</ModifiedTimestamp>
+      <ModifiedTimestamp>2020-02-05.19:26:50</ModifiedTimestamp>
     </table>
     <table id="33" parent="2" name="CAT_COMMENTS">
       <ObjectId>30036</ObjectId>
@@ -169,7 +169,7 @@ work. Contains 27 rows; references with locations, employees, and job_history ta
     <table id="36" parent="2" name="DOGBOARD">
       <ObjectId>28517</ObjectId>
       <CreatedTimestamp>2020-01-14.22:07:31</CreatedTimestamp>
-      <ModifiedTimestamp>2020-01-14.22:07:31</ModifiedTimestamp>
+      <ModifiedTimestamp>2020-02-05.19:31:25</ModifiedTimestamp>
     </table>
     <table id="37" parent="2" name="DOG_COMMENTS">
       <ObjectId>30046</ObjectId>
@@ -225,7 +225,7 @@ Contains 25 rows. References with jobs, employees, and departments tables.</Comm
       <Comment>Locations table that contains specific address of a specific office,
 warehouse, and/or production site of a company. Does not store addresses /
 locations of customers. Contains 23 rows; references with the
-departments and countries tables. </Comment>
+departments and countries tables.</Comment>
       <CreatedTimestamp>2011-08-28.22:21:55</CreatedTimestamp>
       <ModifiedTimestamp>2011-08-28.22:21:57</ModifiedTimestamp>
     </table>
@@ -272,7 +272,7 @@ departments and countries tables. </Comment>
     <table id="54" parent="2" name="SEMILIST1">
       <ObjectId>28659</ObjectId>
       <CreatedTimestamp>2020-01-15.20:20:52</CreatedTimestamp>
-      <ModifiedTimestamp>2020-01-15.20:20:52</ModifiedTimestamp>
+      <ModifiedTimestamp>2020-02-05.19:32:35</ModifiedTimestamp>
     </table>
     <table id="55" parent="2" name="SUNGJUK">
       <ObjectId>21297</ObjectId>
@@ -377,10 +377,12 @@ departments and countries tables. </Comment>
     <column id="73" parent="32" name="VIEWS">
       <Position>5</Position>
       <DataType>NUMBER(*)|0</DataType>
+      <DefaultExpression>0</DefaultExpression>
     </column>
     <column id="74" parent="32" name="LIKES">
       <Position>6</Position>
       <DataType>NUMBER(*)|0</DataType>
+      <DefaultExpression>0</DefaultExpression>
     </column>
     <column id="75" parent="32" name="REGDATE">
       <Position>7</Position>
@@ -537,7 +539,7 @@ departments and countries tables. </Comment>
       <Position>2</Position>
       <Comment>A not null column that shows name of a department. Administration,
 Marketing, Purchasing, Human Resources, Shipping, IT, Executive, Public
-Relations, Sales, Finance, and Accounting. </Comment>
+Relations, Sales, Finance, and Accounting.</Comment>
       <DataType>VARCHAR2(30)|0</DataType>
       <NotNull>1</NotNull>
     </column>
@@ -615,10 +617,12 @@ Relations, Sales, Finance, and Accounting. </Comment>
     <column id="114" parent="36" name="VIEWS">
       <Position>5</Position>
       <DataType>NUMBER(*)|0</DataType>
+      <DefaultExpression>0</DefaultExpression>
     </column>
     <column id="115" parent="36" name="LIKES">
       <Position>6</Position>
       <DataType>NUMBER(*)|0</DataType>
+      <DefaultExpression>0</DefaultExpression>
     </column>
     <column id="116" parent="36" name="REGDATE">
       <Position>7</Position>
@@ -1299,13 +1303,13 @@ Contains building number and street name</Comment>
     <column id="232" parent="45" name="POSTAL_CODE">
       <Position>3</Position>
       <Comment>Postal code of the location of an office, warehouse, or production site
-of a company. </Comment>
+of a company.</Comment>
       <DataType>VARCHAR2(12)|0</DataType>
     </column>
     <column id="233" parent="45" name="CITY">
       <Position>4</Position>
       <Comment>A not null column that shows city where an office, warehouse, or
-production site of a company is located. </Comment>
+production site of a company is located.</Comment>
       <DataType>VARCHAR2(30)|0</DataType>
       <NotNull>1</NotNull>
     </column>
@@ -1764,6 +1768,7 @@ located. Foreign key to country_id column of the countries table.</Comment>
     <column id="311" parent="54" name="VIEWS">
       <Position>5</Position>
       <DataType>NUMBER(*)|0</DataType>
+      <DefaultExpression>0</DefaultExpression>
     </column>
     <column id="312" parent="54" name="THUMBS">
       <Position>6</Position>

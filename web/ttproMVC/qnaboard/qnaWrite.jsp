@@ -39,15 +39,16 @@
         <div class="row" style="margin: 10px 30px 20px 30px">
             <form method="post" action="procQnaWrite.do" name="writefrm" class="card card-body bg-light">
                 <div class="form-group row">
+                    <label class="col-form-label col-2 text-right" for="wtitle">작성자</label>
+                    <input type="text" id="userid" name="userid" class="form-control col-1" value="<%=uid%>" readonly>
+                </div>
+                <div class="form-group row">
                     <label class="col-form-label col-2 text-right" for="selectbd">게시판선택</label>
                     <select id="selectbd" name="selectbd">
                         <option value="qna" selected>선택하세요</option>
                         <option value="qna">QaA 게시판</option>
                         <option value="free">자유 게시판</option>
                     </select>
-                </div>
-                <div class="form-group row">
-                    <input type="hidden" id="userid" name="userid" class="form-control col-9" value="<%=uid%>">
                 </div>
                 <div class="form-group row">
                     <label class="col-form-label col-2 text-right" for="wtitle">제목</label>

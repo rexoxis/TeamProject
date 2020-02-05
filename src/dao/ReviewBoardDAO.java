@@ -267,6 +267,28 @@ public class ReviewBoardDAO {
         }
     }
 
+    // 추천수 증가
+    public int likesUp(int bdno) {
+        String likesUpSQL = "UPDATE reviewboard SET likes = likes+1 WHERE bdno = ?";
+
+        int check = 0;
+
+        try {
+            conn = oracle.getConn();
+            pstmt = conn.prepareStatement(likesUpSQL);
+            pstmt.setInt(1, bdno);
+
+            check = pstmt.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("likesUp 메소드 확인");
+        } finally {
+            oracle.closeConn(pstmt, conn);
+        }
+        return check;
+    }
+
     // 댓글 쓰기
     public int commentsWrite(ReviewComments reviewComment, int revbdno){
         String commentsSQL = "INSERT INTO rev_comments (comt_bdno, rev_bdno, comt_userid, comt_contents) VALUES (comments_seq.nextval, ?, ?, ?)";

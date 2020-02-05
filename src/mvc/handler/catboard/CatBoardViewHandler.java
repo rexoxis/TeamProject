@@ -33,7 +33,7 @@ public class CatBoardViewHandler implements MVCHandler {
             bdno = Integer.parseInt(request.getParameter("bdno"));
         }
 
-        System.out.println("catView bdno : " + bdno);
+//        System.out.println("catView bdno : " + bdno);
 
         // 조회수 증가 메소드 호출
         catdao.viewsUp(bdno);

@@ -36,7 +36,8 @@
 
         <div class="row" style="margin: 10px 30px 20px 30px">
             <% for (QnaBoard qna : qnaLists) { %>
-            <form method="post" action="procqnaModify.do?bdno=<%=qna.getBdno()%>" name="bdfrm" class="card card-body bg-light">
+            <form method="post" action="procqnaModify.do?bdno=<%=qna.getBdno()%>" name="qnaModifyfrm" class="card card-body bg-light">
+                <input type="hidden" id="userid" name="userid" class="form-control col-9" value="<%=qna.getUserid()%>">
                 <div class="form-group row">
                     <label class="col-sm-2 control-label" >이름</label>
                     <div class="col-sm-3">
@@ -91,12 +92,18 @@
         });
     });
 
-    // 미로그인시 접근제한
-    var uid = <%=uid%>;
+    // 수정 권한 제한
+    var uid = "";
 
-    if (uid === "" || uid == null) {
-        alert('로그인 후 사용해주세요!');
-        location.href='login.do';
+    if ("<%=uid%>" != null) {
+        uid = "<%=uid%>";
+    }
+
+    var writer = document.qnaModifyfrm.userid.value;
+
+    if (uid != writer) {
+        alert('수정 권한이 없습니다.');
+        history.back();
     }
 
 </script>

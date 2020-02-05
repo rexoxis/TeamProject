@@ -17,7 +17,8 @@
     <%@ include file="../layout/header.jsp" %>
     <div class="main">
         <div class="col-8" style="font-size: 45px; margin: 0 20px 0 40px ; padding:30px 0 20px 0;">
-            <i class="fa fa-question-circle"> Free Board</i></div>
+            <i class="fa fa-comments fa"> 자유게시판</i>
+        </div>
         <div class="row" style="margin: 10px 30px 20px 30px">
             <div class="col-6">
                 <h4><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 수정하기</h4>
@@ -33,38 +34,31 @@
 
         <div class="row" style="margin: 10px 30px 20px 30px">
             <% for (FreeBoard freeBoard : freeLists) { %>
-            <form class="card card-body bg-light" method="post" action="procfreeModify.do?bdno=<%=freeBoard.getBdno()%>">
-
+            <form class="card card-body bg-light" name="freeModifyfrm" method="post" action="procfreeModify.do?bdno=<%=freeBoard.getBdno()%>">
                 <div class="form-group row">
-                    <label class="col-sm-2 control-label">이름</label>
+                    <input type="hidden" id="userid" name="userid" class="form-control col-9" value="<%=freeBoard.getUserid()%>">
+                    <label class="col-sm-2 control-label text-right">이름</label>
                     <div class="col-sm-3">
-                        <div name="name"><%=freeBoard.getUserid()%>
-                        </div>
+                        <div name="name"><%=freeBoard.getUserid()%></div>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-sm-2 control-label">제목</label>
-                    <div class="col-sm-5">
-                        <textarea name="title" class="form-control col-sm-5"><%=freeBoard.getTitle()%></textarea>
-                    </div>
+                    <label class="col-form-label col-2 text-right" for="title">제목</label>
+                    <input type="text" id="title" name="title" class="form-control col-9" value="<%=freeBoard.getTitle()%>">
                 </div>
                 <div class="form-group row">
-                    <label class="col-sm-2 control-label">내용</label>
-                    <div class="col-sm-8" style="word-break: break-all;">
-                        <textarea name="contents" class="form-control col-sm-5"><%=freeBoard.getContents()%></textarea>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <div class="col-sm-offset-2 col-sm-10 ">
-                        <div class="col-12 text-center"
-                             style="border-top: 1px solid #000000; margin-top: 35px;padding-top: 25px">
-                            <button type="submit" class="btn btn-warning">수정완료</button>
-                            <button type="button" id="cancelbtn" class="btn btn-danger">취소하기</button>
-                        </div>
-                    </div>
+                    <label class="col-form-label col-2 text-right" for="contents">본문내용</label>
+                    <textarea rows="20" type="text" id="contents" name="contents"
+                              class="form-control col-9"><%=freeBoard.getContents()%></textarea>
                 </div>
                 <% } %>
+                <div class="form-group row">
+                    <div class="col-12 text-center"
+                         style="border-top: 1px solid #000000; padding-top: 20px; ">
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-check"> 입력완료</i></button>
+                        <button type="button" class="btn btn-danger" id="cancelbtn"><i class="fa fa-times" onclick="history.go(-1);"> 취소하기</i></button>
+                    </div>
+                </div>
             </form>
         </div>
     </div>
@@ -97,13 +91,20 @@
         });
     });
 
-    // 미로그인시 접근제한
-    var uid = <%=uid%>;
+    // 수정 권한 제한
+    var uid = "";
 
-    if (uid === "" || uid == null) {
-        alert('로그인 후 사용해주세요!');
-        location.href='login.do';
+    if ("<%=uid%>" != null) {
+        uid = "<%=uid%>";
     }
+
+    var writer = document.freeModifyfrm.userid.value;
+
+    if (uid != writer) {
+        alert('수정 권한이 없습니다.');
+        history.back();
+    }
+
 </script>
 </body>
 </html>

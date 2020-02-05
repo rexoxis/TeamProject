@@ -210,7 +210,7 @@
     // 미로그인시 접근제한
     var uid = <%=uid%>;
 
-    if (uid === "" || uid == null) {
+    if (uid == null) {
         alert('로그인 후 사용해주세요!');
         location.href='login.do';
     }

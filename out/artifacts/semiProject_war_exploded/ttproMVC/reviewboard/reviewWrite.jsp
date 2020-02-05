@@ -32,7 +32,8 @@
         <div class="row" style="margin: 10px 30px 20px 50px">
             <form class="card card-body bg-light" name="writefrm" action="procReviewWrite.do" method="post" enctype="multipart/form-data">
                 <div class="form-group row">
-                    <input type="hidden" id="userid" name="userid" class="form-control col-9" value="<%=uid%>">
+                    <label class="col-form-label col-2 text-right" for="wtitle">작성자</label>
+                    <input type="text" id="userid" name="userid" class="form-control col-1" value="<%=uid%>" readonly>
                 </div>
                 <div class="form-group row">
                     <label class="col-form-label col-2 text-right" for="selectbd">게시판선택</label>

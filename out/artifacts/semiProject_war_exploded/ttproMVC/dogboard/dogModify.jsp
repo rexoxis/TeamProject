@@ -27,7 +27,8 @@
     <div class="main">
         <div class="row">
             <div class="col-8 text-left" style="font-size: 25px; margin: 0 45px 0 50px ; padding:30px 0 20px 0;">
-                <i class="fa fa-comments fa-2x"> Dog</i></div>
+                <i class="fa fa-comments fa-2x"> Dog</i>
+            </div>
             <div class="col-3">
                 <button type="button" class="btn btn-success" id="listbtn" style="margin:40px 0 15px 110px; ">
                     <i class="fa fa-plus-circle"> 목록으로</i>
@@ -37,9 +38,13 @@
 
         <div class="row" style="margin: 10px 30px 20px 50px">
             <%for(DogBoard dogBoard : dogLists) {%>
-            <form class="card card-body bg-light" name="rbfrm" action="procDogModify.do?bdno=<%=dogBoard.getBdno()%>" method="post" enctype="multipart/form-data">
+            <form class="card card-body bg-light" name="dogModifyfrm" action="procDogModify.do?bdno=<%=dogBoard.getBdno()%>" method="post" enctype="multipart/form-data">
                 <div class="form-group row">
                     <input type="hidden" id="userid" name="userid" class="form-control col-9" value="<%=dogBoard.getUserid()%>">
+                    <label class="col-sm-2 control-label text-right" >이름</label>
+                    <div class="col-sm-3">
+                        <div name="name"><%=dogBoard.getUserid()%></div>
+                    </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-form-label col-2 text-right" for="title">제목</label>
@@ -73,10 +78,8 @@
             </form>
         </div>
     </div>
-
-
-</div>
 <%@include file="../layout/footer.jsp" %>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -103,12 +106,21 @@
             location.href = 'dogList.do';
         });
     });
-    var uid = <%=uid%>;
 
-    if (uid === "" || uid == null) {
-        alert('로그인 후 사용해주세요!');
-        location.href='login.do';
+    // 수정 권한 제한
+    var uid = "";
+
+    if ("<%=uid%>" != null) {
+        uid = "<%=uid%>";
     }
+
+    var writer = document.dogModifyfrm.userid.value;
+
+    if (uid != writer) {
+        alert('수정 권한이 없습니다.');
+        history.back();
+    }
+
 </script>
 </body>
 </html>

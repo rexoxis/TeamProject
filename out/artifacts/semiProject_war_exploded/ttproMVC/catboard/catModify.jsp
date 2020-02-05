@@ -40,6 +40,10 @@
             <form class="card card-body bg-light" name="catModifyfrm" action="procCatModify.do?bdno=<%=catBoard.getBdno()%>" method="post" enctype="multipart/form-data">
                 <div class="form-group row">
                     <input type="hidden" id="userid" name="userid" class="form-control col-9" value="<%=catBoard.getUserid()%>">
+                    <label class="col-sm-2 control-label text-right" >이름</label>
+                    <div class="col-sm-3">
+                        <div name="name"><%=catBoard.getUserid()%></div>
+                    </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-form-label col-2 text-right" for="title">제목</label>
@@ -105,12 +109,20 @@
         });
     });
 
-    var uid = <%=uid%>;
+    // 수정 권한 제한
+    var uid = "";
 
-    if (uid === "" || uid == null) {
-        alert('로그인 후 사용해주세요!');
-        location.href='login.do';
+    if ("<%=uid%>" != null) {
+        uid = "<%=uid%>";
     }
+
+    var writer = document.catModifyfrm.userid.value;
+
+    if (uid != writer) {
+        alert('수정 권한이 없습니다.');
+        history.back();
+    }
+
 </script>
 </body>
 </html>

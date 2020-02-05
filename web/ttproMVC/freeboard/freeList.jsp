@@ -67,7 +67,8 @@
     <div class="main">  <!--https://glyphicons.com/-->
         <div class="row">
             <div class="col-8" style="font-size: 25px; margin: 0 45px 0 50px ; padding:30px 0 20px 0;">
-                <i class="fa fa-comments fa-2x"> 자유게시판</i></div>
+                <i class="fa fa-comments fa-2x"> 자유게시판</i>
+            </div>
             <div class="col-3">
                 <button type="button" class="btn btn-success" id="newbtn" style="margin:40px 0 15px 110px; ">
                     <i class="fa fa-plus-circle"> 새글쓰기</i>
@@ -190,7 +191,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-<script src="ttproMVC/js/loginfrm.js"></script>
 <script src="/ttproMVC/js/button.js"></script>
 
 
