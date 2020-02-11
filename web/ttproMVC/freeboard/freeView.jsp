@@ -62,7 +62,7 @@
                 <button type="button" class="btn btn-success" id="newbtn" style="margin:45px 10px 15px 45%; ">
                     <i class="fa fa-plus-circle"> 새글쓰기</i>
                 </button>
-                <button type="button" class="btn btn-warning" onclick="location.href='qnaList.do'" style="margin:45px 0 15px 0; color: white">
+                <button type="button" class="btn btn-warning" onclick="location.href='freeList.do'" style="margin:45px 0 15px 0; color: white">
                     <i class="fa fa-list" aria-hidden="true"> 목록으로</i>
                 </button>
             </div>
@@ -80,7 +80,7 @@
             </div>
             <%-- 왼쪽 카테고리부분 --%>
 
-            <div class="col-sm-9" style="height: auto; border: 0.3mm solid #cfcfcf; border-radius: 10px; padding: 20px">
+            <div class="col-sm-9" style="height: 680px; border: 0.3mm solid #cfcfcf; border-radius: 10px; padding: 20px">
                 <% for (FreeBoard freeBoard : freeLists) { %>
                 <div class="row">
                     <div class="col-sm-12">

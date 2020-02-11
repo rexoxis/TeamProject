@@ -13,6 +13,7 @@ public class ProcFreeBoardWriteHandler implements MVCHandler{
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("utf-8");
         String viewPage = "1|/ttproMVC/freeboard/freeWrite.jsp";
 
         int check = 0;

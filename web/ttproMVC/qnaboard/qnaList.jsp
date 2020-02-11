@@ -1,12 +1,14 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="vo.QnaBoard" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="vo.AnwserBoard" %>
 
 
 <%
     request.setCharacterEncoding("utf-8");
 
     ArrayList<QnaBoard> qnaLists = (ArrayList)request.getAttribute("qnaLists");
+    ArrayList<AnwserBoard> anwserLists = (ArrayList)request.getAttribute("anwserLists");
 
     int boardNumber = (int)request.getAttribute("boardNumber");
     int totalPage = (int)request.getAttribute("totalPage");
@@ -141,6 +143,26 @@
                         <td><%=qnaBoard.getThumb()%>
                         </td>
                         <td><%=qnaBoard.getViews()%>
+                        </td>
+                    </tr>
+                    <% } %>
+
+                    <% for (AnwserBoard anwserBoard0 : anwserLists) {%>
+                    <tr>
+                        <%--<td><%=cnt</td> <!--실제 번호가 아니고 가 번호 등록 -->--%>
+                        <!--프라이머리키로 설정되어 있는 부분을 매개변수로 넘겨주어야함 -->
+
+                        <td><%=boardNumber--%>
+                        </td>
+                        <td><a href="anwserView.do?bdno=<%=anwserBoard0.getAnwser_bdno()%>">&nbsp;Re: <%=anwserBoard0.getAnwser_title()%>
+                        </a></td>
+                        <td><%=anwserBoard0.getAnwser_userid()%>
+                        </td>
+                        <td><%=anwserBoard0.getAnwser_regdate().substring(0, 10)%>
+                        </td>
+                        <td><%=anwserBoard0.getAnwser_views()%>
+                        </td>
+                        <td><%=anwserBoard0.getAnwser_views()%>
                         </td>
                     </tr>
                     <% } %>

@@ -1,8 +1,10 @@
 package mvc.handler.qnaboard;
 
 
+import dao.AnwserBoardDAO;
 import dao.QnaBoardDAO;
 import mvc.handler.MVCHandler;
+import vo.AnwserBoard;
 import vo.QnaBoard;
 
 import javax.servlet.ServletException;
@@ -29,7 +31,10 @@ public class QnaBoardListHandler implements MVCHandler {
 
         // 페이징 부분
 
+        // qna
         QnaBoardDAO qnadao = new QnaBoardDAO();
+        // anwser 게시판을 불러오기 위함
+        AnwserBoardDAO anwserdao = new AnwserBoardDAO();
 
         int boardCount = qnadao.countBoard();
 
@@ -58,8 +63,12 @@ public class QnaBoardListHandler implements MVCHandler {
         int boardNumber = boardCount - ((cPage-1) * perPage);
 
         ArrayList<QnaBoard> qnaLists = qnadao.qnalist(searchText, startnum, endnum);
+        ArrayList<AnwserBoard> anwserLists = anwserdao.anwserListview(searchText, startnum, endnum);
 
+        // qna 게시판 조회 결과 저장
         request.setAttribute("qnaLists", qnaLists);
+        // anwser 게시판 조회 결과 저장
+        request.setAttribute("anwserLists", anwserLists);
 
         request.setAttribute("totalPage", totalPage);
         request.setAttribute("startPage", startPage);

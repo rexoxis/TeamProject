@@ -1,16 +1,12 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
 
+<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="x-ua-compatible" content="ie-edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <link rel="stylesheet" href="../css/bootstrap-4.3.1-dist/css/bootstrap.css">
-    <title>Free New</title>
+    <title>QnA New</title>
 </head>
 <style>
     body {
@@ -25,8 +21,8 @@
 
     <div class="main">  <!--https://glyphicons.com/-->
         <div class="col-8" style="font-size: 45px; margin: 0 20px 0 40px ; padding:30px 0 20px 0;">
-            <i class="fa fa-comments fa-2x"> 자유게시판</i>
-        </div>
+            <i class="fa fa-question-circle"> QnA</i></div>
+
 
         <div class="row" style="margin: 10px 30px 20px 30px">
             <div class="col-6">
@@ -41,7 +37,7 @@
         </div> <!--버튼-->
 
         <div class="row" style="margin: 10px 30px 20px 30px">
-            <form method="post" action="procfreeWrite.do" name="writefrm" class="card card-body bg-light">
+            <form method="post" action="procQnaWrite.do" name="writefrm" class="card card-body bg-light">
                 <div class="form-group row">
                     <label class="col-form-label col-2 text-right" for="wtitle">작성자</label>
                     <input type="text" id="userid" name="userid" class="form-control col-1" value="<%=uid%>" readonly>
@@ -49,7 +45,7 @@
                 <div class="form-group row">
                     <label class="col-form-label col-2 text-right" for="selectbd">게시판선택</label>
                     <select id="selectbd" name="selectbd">
-                        <option value="free" selected>선택하세요</option>
+                        <option value="qna" selected>선택하세요</option>
                         <option value="qna">QaA 게시판</option>
                         <option value="free">자유 게시판</option>
                     </select>
@@ -63,6 +59,15 @@
                     <label class="col-form-label col-2 text-right">본문내용</label>
                     <textarea rows="20" name="contents" id="wcontents" class="form-control col-9"></textarea>
                 </div>
+
+                <%--<div class="form-group row">--%>
+                <%--<label class="col-form-label col-2"for="captcha">자동입력방지</label>--%>
+                <%--<img src="../../../../../web1911/img/capcha.png" width="50%" style="margin-bottom: 10px">--%>
+                <%--<input type="text" id="captcha" class="form-control col-3" style="margin-left: 170px">&nbsp;--%>
+                <%--<button type="button" class="btb btn-dark">--%>
+                <%--<i class="fa fa-refresh"></i>다른 captcha 보기--%>
+                <%--</button>--%>
+                <%--</div>--%>
                 <div class="form-group row">
                     <div class="col-12 text-center"
                          style="border-top: 1px solid #000000; margin-top: 35px;padding-top: 25px">
@@ -71,10 +76,13 @@
                         <button type="button" class="btn btn-danger" id="cancelbtn"><i class="fa fa-times"> 취소하기</i>
                         </button>
                     </div>
+
                 </div>
             </form>
         </div>
     </div>
+
+
     <%@ include file="../layout/footer.jsp" %>
 </div>
 
@@ -94,24 +102,28 @@
     // 작성취소 버튼
     $(function () {
         $('#cancelbtn').on('click', function (e) {
-            location.href = 'freeList.do';
+            location.href = 'qnaList.do';
         });
     });
 
     // 목록 버튼
     $(function () {
         $('#listbtn').on('click', function (e) {
-location.href = 'freeList.do';
-});
-});
+            location.href = 'qnaList.do';
+        });
+    });
 
-// 미로그인시 접근제한
-var uid = <%=uid%>;
+    // 미로그인시 접근제한
+    var uid = <%=uid%>;
 
-if (uid === "" || uid == null) {
-alert('로그인 후 사용해주세요!');
-location.href='login.do';
-}
+    if (uid === "" || uid == null) {
+        alert('로그인 후 사용해주세요!');
+        location.href='login.do';
+    }
+
 </script>
+
+
+</div>
 </body>
 </html>

@@ -73,7 +73,6 @@ public class FreeBoardDAO {
 
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("countBoard 메소드 확인");
         } finally {
             oracle.closeConn(pstmt,conn);
         }

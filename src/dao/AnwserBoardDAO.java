@@ -16,6 +16,66 @@ public class AnwserBoardDAO {
 
     OracleUtil oracle = new OracleUtil();
 
+    // 답변 게시판 조회하기 위한 메소드
+    public ArrayList<AnwserBoard> anwserListview(String searchText, int startnum, int endnum) {
+
+        String listSQL = "";
+
+        ArrayList<AnwserBoard> anwserLists = null;
+
+        if (searchText.equals("baselist")) {
+            listSQL = " select * from (select bd.anwser_bdno, bd.anwser_title, bd.anwser_userid, bd.anwser_views, bd.anwser_regdate, rownum as rnum from " +
+                    " (select anwser_bdno, anwser_title, anwser_userid, anwser_views, anwser_regdate from qna_anwser order by regdate desc) bd " +
+                    " where rownum <= ?) bd2 " +
+                    " where bd2.rnum >= ?";
+        } else {
+            listSQL = " select * from (select bd.anwser_bdno, bd.anwser_title, bd.anwser_userid, bd.anwser_views, bd.anwser_regdate, rownum as rnum from " +
+                    " (select anwser_bdno, anwser_title, anwser_userid, anwser_views, anwser_regdate from qna_anwser WHERE title like '%'|| ? ||'%' order by regdate desc) bd " +
+                    " where rownum <= ?) bd2 " +
+                    " where bd2.rnum >= ?";
+        }
+
+        try {
+            conn = oracle.getConn();
+            pstmt = conn.prepareStatement(listSQL);
+
+            if(searchText.equals("baselist")){
+                pstmt.setInt(1, endnum);
+                pstmt.setInt(2, startnum);
+            } else {
+                pstmt.setString(1, searchText);
+                pstmt.setInt(2, endnum);
+                pstmt.setInt(3, startnum);
+            }
+
+            rs = pstmt.executeQuery();
+
+            anwserLists = new ArrayList<>();
+
+            while (rs.next()) {
+
+                AnwserBoard bd = new AnwserBoard();
+
+                bd.setAnwser_bdno(rs.getInt(1));
+                bd.setAnwser_title(rs.getString(2));
+                bd.setAnwser_userid(rs.getString(3));
+                bd.setAnwser_views(rs.getInt(4));
+                bd.setAnwser_regdate(rs.getString(5));
+
+                anwserLists.add(bd);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("anwserListview 확인바람");
+        } finally {
+            oracle.closeConn(rs, pstmt, conn);
+        }
+
+        return anwserLists;
+    }
+
+
     // 답변글 보여주기
     public ArrayList<AnwserBoard> AnwserView(int qnaBoard_bdno) {
         String viewsSQL = "SELECT * FROM qna_anwser WHERE qnaboard_bdno = ?";
@@ -113,6 +173,31 @@ public class AnwserBoardDAO {
         } catch (Exception ex) {
             ex.printStackTrace();
             System.out.println("anwserDelete 메소드 확인");
+        } finally {
+            oracle.closeConn(pstmt, conn);
+        }
+        return check;
+    }
+
+    // 답변글 수정
+    public int anwserModify(AnwserBoard anwserBoard) {
+        String modifySQL = "update qna_anwser set anwser_title = ?, anwser_contents = ? where anwser_bdno=?";
+
+        int check = 0;
+
+        try {
+            conn = oracle.getConn();
+            pstmt = conn.prepareStatement(modifySQL);
+
+            pstmt.setString(1, anwserBoard.getAnwser_title());
+            pstmt.setString(2, anwserBoard.getAnwser_contents());
+            pstmt.setInt(3, anwserBoard.getAnwser_bdno());
+
+            check = pstmt.executeUpdate();
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            System.out.println("anwserModify 확인바람");
         } finally {
             oracle.closeConn(pstmt, conn);
         }

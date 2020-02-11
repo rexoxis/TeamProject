@@ -48,6 +48,7 @@ public class QnaBoardDAO {
                 pstmt.setInt(2, endnum);
                 pstmt.setInt(3, startnum);
             }
+
             rs = pstmt.executeQuery();
 
             while (rs.next()) {

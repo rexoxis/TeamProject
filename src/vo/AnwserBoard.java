@@ -7,7 +7,16 @@ public class AnwserBoard {
     private String anwser_userid;
     private String anwser_title;
     private String anwser_contents;
+    private int anwser_views;
     private String anwser_regdate;
+
+    public int getAnwser_views() {
+        return anwser_views;
+    }
+
+    public void setAnwser_views(int anwser_views) {
+        this.anwser_views = anwser_views;
+    }
 
     public int getAnwser_bdno() {
         return anwser_bdno;
