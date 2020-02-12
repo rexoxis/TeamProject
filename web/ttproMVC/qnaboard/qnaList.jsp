@@ -149,11 +149,7 @@
 
                     <% for (AnwserBoard anwserBoard0 : anwserLists) {%>
                     <tr>
-                        <%--<td><%=cnt</td> <!--실제 번호가 아니고 가 번호 등록 -->--%>
-                        <!--프라이머리키로 설정되어 있는 부분을 매개변수로 넘겨주어야함 -->
 
-                        <td><%=boardNumber--%>
-                        </td>
                         <td><a href="anwserView.do?bdno=<%=anwserBoard0.getAnwser_bdno()%>">&nbsp;Re: <%=anwserBoard0.getAnwser_title()%>
                         </a></td>
                         <td><%=anwserBoard0.getAnwser_userid()%>

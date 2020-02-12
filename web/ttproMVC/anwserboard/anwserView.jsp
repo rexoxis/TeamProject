@@ -1,14 +1,12 @@
-<%@ page import="vo.QnaBoard" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="vo.QnaComments" %>
+<%@ page import="vo.AnwserBoard" %>
 <%@ page contentType="text/html; charset=UTF-8"%>
 
 <%
     request.setCharacterEncoding("utf-8");
 
-    ArrayList<QnaBoard> qnaLists = (ArrayList)session.getAttribute("qnaLists");
+    ArrayList<AnwserBoard> anwserLists = (ArrayList)session.getAttribute("anwserLists");
 
-    ArrayList<QnaComments> qnaCommentLists = (ArrayList)request.getAttribute("qnaCommentLists");
 %>
 
 <!DOCTYPE html>
@@ -18,7 +16,7 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <title>QnA 본문보기</title>
+    <title>Anwser 본문보기</title>
     <style>
         body {width: 100%; margin: 0 auto;}
 
@@ -62,17 +60,17 @@
             </div>   <%-- 왼쪽 카테고리부분 --%>
 
             <div class="col-sm-9" style="height: auto; border: 0.3mm solid #cfcfcf; border-radius: 10px; padding: 20px">
-                <% for(QnaBoard qnaBoard : qnaLists) { %>
+                <% for(AnwserBoard anwserBoard : anwserLists) { %>
                 <div class="row">
                     <div class="col-sm-12">
-                        <h1 id="title" style="text-align: center"><%=qnaBoard.getTitle()%></h1>
+                        <h1 id="title" style="text-align: center"><%=anwserBoard.getAnwser_title()%></h1>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
                         <div id="name" style="text-align: right; margin: 20px 20px 20px 0; color: #404040">
-                            <%=qnaBoard.getUserid()%> &#124;
-                            <button type="button" class="btn btn-outline-danger" onclick="location.href='qThumbs.jsp?bdno=<%=qnaBoard.getBdno()%>'">
+                            <%=anwserBoard.getAnwser_userid()%> &#124;
+                            <button type="button" class="btn btn-outline-danger" onclick="location.href='qThumbs.jsp?bdno=<%=anwserBoard.getAnwser_bdno()%>'">
                                 <i class="fa fa-thumbs-o-up" aria-hidden="true"></i></button>
                         </div>
                     </div>
@@ -80,53 +78,53 @@
                 <hr color="#cfcfcf">
                 <div class="col-sm-12" style="margin-left: 15%">
                     <div class="row">
-                        <div id="contents" style="margin-top: 5px"><%=qnaBoard.getContents()%></div>
+                        <div id="contents" style="margin-top: 5px"><%=anwserBoard.getAnwser_contents()%></div>
                     </div>
                 </div>
             </div>   <%-- 메인내용 부분 --%>
 
         </div>
-        <div class="row">
-            <div class="col-sm-3"></div>
-            <div class="col-sm-9" style="margin: 20px 0 30px 0">
-                <%--uid부분은 로그인한 사용자의 아이디를 표시할 부분--%>
-                <form action="procQnaComment.do?bdno=<%=qnaBoard.getBdno()%>" method="post">
-                    <div class="row" style="margin: 20px 0 30px 0">
-                        <div style="margin-left: 15px" >
-                            <i class="fa fa-user-circle-o" aria-hidden="true"></i>
-                            <%=uid%> <div class="user"></div>
-                        </div> <%-- 아이콘 뒤에 로그인된 아이디가 들어갔으면 좋겠어요 --%>
-                        <input type="hidden" name="qnaCommnet_userid" value="<%=uid%>">
-                        <input type="text" id="comentWr" name="qnaComment_contents" style="width: 70%; margin: 0 15px 0 35px ">
-                        <button type="submit" class="btn btn-outline-success" id="comentOk"> 등록</button>
-                    </div>    <%-- 댓글 입력창 --%>
-                </form>
+        <%--<div class="row">--%>
+            <%--<div class="col-sm-3"></div>--%>
+            <%--<div class="col-sm-9" style="margin: 20px 0 30px 0">--%>
+                <%--&lt;%&ndash;uid부분은 로그인한 사용자의 아이디를 표시할 부분&ndash;%&gt;--%>
+                <%--<form action="procQnaComment.do?bdno=<%=anwserBoard.getBdno()%>" method="post">--%>
+                    <%--<div class="row" style="margin: 20px 0 30px 0">--%>
+                        <%--<div style="margin-left: 15px" >--%>
+                            <%--<i class="fa fa-user-circle-o" aria-hidden="true"></i>--%>
+                            <%--<%=uid%> <div class="user"></div>--%>
+                        <%--</div> &lt;%&ndash; 아이콘 뒤에 로그인된 아이디가 들어갔으면 좋겠어요 &ndash;%&gt;--%>
+                        <%--<input type="hidden" name="qnaCommnet_userid" value="<%=uid%>">--%>
+                        <%--<input type="text" id="comentWr" name="qnaComment_contents" style="width: 70%; margin: 0 15px 0 35px ">--%>
+                        <%--<button type="submit" class="btn btn-outline-success" id="comentOk"> 등록</button>--%>
+                    <%--</div>    &lt;%&ndash; 댓글 입력창 &ndash;%&gt;--%>
+                <%--</form>--%>
                 <%-- 입력한 댓글이 있으면 댓글을 불러옴--%>
-                <% for(QnaComments qnaComments : qnaCommentLists) { %>
-                <div class="row">
-                    <div class="col-sm-2">
-                        <i class="fa fa-user-circle-o" aria-hidden="true"></i>
-                        <%=qnaComments.getComt_userid()%> <div class="user"></div>
-                    </div> <%-- 아이콘 뒤에 로그인된 아이디가 들어갔으면 좋겠어요 --%>
-                    <div class="col-sm-7">
-                        <div id="coment1"><%=qnaComments.getComt_contents()%></div>
-                        <div id="coment2"><%=qnaComments.getComt_regdate()%></div>
-                        <%-- 대댓글은 시간상 언급하는 식으로 들어가는게 나을꺼 같아요 --%>
-                    </div>
-                    <a href="procQnaCommentDelete.do?Comment_bdno=<%=qnaComments.getComt_bdno()%>&bdno=<%=qnaBoard.getBdno()%>"
-                       class="btn btn-outline-danger" style="height: 35px; margin-left: 65px;">
-                        <i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                </div>
-                <%}%>
-            </div>
-        </div>   <%-- 댓글부분 --%>
+                <%--<% for(QnaComments qnaComments : qnaCommentLists) { %>--%>
+                <%--<div class="row">--%>
+                    <%--<div class="col-sm-2">--%>
+                        <%--<i class="fa fa-user-circle-o" aria-hidden="true"></i>--%>
+                        <%--<%=qnaComments.getComt_userid()%> <div class="user"></div>--%>
+                    <%--</div> &lt;%&ndash; 아이콘 뒤에 로그인된 아이디가 들어갔으면 좋겠어요 &ndash;%&gt;--%>
+                    <%--<div class="col-sm-7">--%>
+                        <%--<div id="coment1"><%=qnaComments.getComt_contents()%></div>--%>
+                        <%--<div id="coment2"><%=qnaComments.getComt_regdate()%></div>--%>
+                        <%--&lt;%&ndash; 대댓글은 시간상 언급하는 식으로 들어가는게 나을꺼 같아요 &ndash;%&gt;--%>
+                    <%--</div>--%>
+                    <%--<a href="procQnaCommentDelete.do?Comment_bdno=<%=qnaComments.getComt_bdno()%>&bdno=<%=qnaBoard.getBdno()%>"--%>
+                       <%--class="btn btn-outline-danger" style="height: 35px; margin-left: 65px;">--%>
+                        <%--<i class="fa fa-trash-o" aria-hidden="true"></i></a>--%>
+                <%--</div>--%>
+                <%--<%}%>--%>
+            <%--</div>--%>
+        <%--</div>   &lt;%&ndash; 댓글부분 &ndash;%&gt;--%>
 
         <div class="row" style="margin: 0 0 0 53%">
             <div>
-                <button type="button" class="btn btn-info" onclick="location.href='qnaModify.do'"><i class="fa fa-pencil" aria-hidden="true"></i> 수정하기</button>
+                <button type="button" class="btn btn-info" onclick="location.href='anwserModify.do'"><i class="fa fa-pencil" aria-hidden="true"></i> 수정하기</button>
             </div>&nbsp;
             <div class="text-right">
-                <a href="procQnaDelete.do?bdno=<%=qnaBoard.getBdno()%>" class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i> 삭제하기</a>
+                <a href="procAnwserDelete.do?bdno=<%=anwserBoard.getAnwser_bdno()%>" class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i> 삭제하기</a>
             </div>
         </div>  <%-- 수정/삭제 버튼 --%>
 
@@ -146,7 +144,7 @@
     // 새글쓰기
     $(function () {
         $('#newbtn').on('click', function (e) {
-            location.href = 'freeWrite.do';
+            location.href = 'qnaWrite.do';
         });
     });
     // 미로그인시 접근제한

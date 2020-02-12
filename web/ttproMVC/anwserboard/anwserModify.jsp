@@ -1,16 +1,16 @@
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="vo.QnaBoard" %>
+<%@ page import="vo.AnwserBoard" %>
 <%@ page contentType="text/html; charset=utf-8"%>
 
 <%
-    ArrayList<QnaBoard> qnaLists = (ArrayList)session.getAttribute("qnaLists");
+    ArrayList<AnwserBoard> anwserLists = (ArrayList)session.getAttribute("anwserLists");
 %>
 <html>
 <head>
     <link rel ="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>QnA 수정하기</title>
+    <title>Anwser 수정하기</title>
 </head>
 <body>
 <div class="container">
@@ -35,22 +35,22 @@
         </div> <!--버튼-->
 
         <div class="row" style="margin: 10px 30px 20px 30px">
-            <% for (QnaBoard qna : qnaLists) { %>
-            <form method="post" action="procqnaModify.do?bdno=<%=qna.getBdno()%>" name="qnaModifyfrm" class="card card-body bg-light">
-                <input type="hidden" id="userid" name="userid" class="form-control col-9" value="<%=qna.getUserid()%>">
+            <% for (AnwserBoard anwserBoard : anwserLists) { %>
+            <form method="post" action="procAnwserModify.do?bdno=<%=anwserBoard.getAnwser_bdno()%>" name="qnaModifyfrm" class="card card-body bg-light">
+                <input type="hidden" id="userid" name="userid" class="form-control col-9" value="<%=anwserBoard.getAnwser_userid()%>">
                 <div class="form-group row">
                     <label class="col-sm-2 control-label" >이름</label>
                     <div class="col-sm-3">
-                        <div name="name"><%=qna.getUserid()%></div>
+                        <div name="name"><%=anwserBoard.getAnwser_userid()%></div>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 control-label" >제목</label>
-                    <input name="title" class="form-control col-sm-9"><%=qna.getTitle()%>
+                    <input name="title" class="form-control col-sm-9"><%=anwserBoard.getAnwser_title()%>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 control-label" >내용</label>
-                        <textarea cols="30" rows="15" name="contents" class="form-control col-sm-9"><%=qna.getContents()%></textarea>
+                        <textarea cols="30" rows="15" name="contents" class="form-control col-sm-9"><%=anwserBoard.getAnwser_contents()%></textarea>
                 </div>
 
                 <div class="form-group row">

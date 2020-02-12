@@ -83,10 +83,8 @@
                         <div id="contents" style="margin-top: 5px"><%=qnaBoard.getContents()%></div>
                     </div>
                 </div>
-                <div class="row">
-                    <div>
-                        <button type="button" class="btn btn-primary">답변달기</button>
-                    </div>
+                <div class="text-right">
+                        <button type="button" class="btn btn-primary" onclick="location.href='anwserWrite.do'">답변달기</button>
                 </div>
             </div>   <%-- 메인내용 부분 --%>
 
@@ -151,7 +149,7 @@
     // 새글쓰기
     $(function () {
         $('#newbtn').on('click', function (e) {
-            location.href = 'freeWrite.do';
+            location.href = 'qnaWrite.do';
         });
     });
     // 미로그인시 접근제한

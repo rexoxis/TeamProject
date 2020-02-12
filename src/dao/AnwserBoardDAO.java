@@ -25,12 +25,12 @@ public class AnwserBoardDAO {
 
         if (searchText.equals("baselist")) {
             listSQL = " select * from (select bd.anwser_bdno, bd.anwser_title, bd.anwser_userid, bd.anwser_views, bd.anwser_regdate, rownum as rnum from " +
-                    " (select anwser_bdno, anwser_title, anwser_userid, anwser_views, anwser_regdate from qna_anwser order by regdate desc) bd " +
+                    " (select anwser_bdno, anwser_title, anwser_userid, anwser_views, anwser_regdate from qna_anwser order by anwser_regdate desc) bd " +
                     " where rownum <= ?) bd2 " +
                     " where bd2.rnum >= ?";
         } else {
             listSQL = " select * from (select bd.anwser_bdno, bd.anwser_title, bd.anwser_userid, bd.anwser_views, bd.anwser_regdate, rownum as rnum from " +
-                    " (select anwser_bdno, anwser_title, anwser_userid, anwser_views, anwser_regdate from qna_anwser WHERE title like '%'|| ? ||'%' order by regdate desc) bd " +
+                    " (select anwser_bdno, anwser_title, anwser_userid, anwser_views, anwser_regdate from qna_anwser WHERE title like '%'|| ? ||'%' order by anwser_regdate desc) bd " +
                     " where rownum <= ?) bd2 " +
                     " where bd2.rnum >= ?";
         }
