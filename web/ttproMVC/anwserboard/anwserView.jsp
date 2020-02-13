@@ -84,22 +84,22 @@
             </div>   <%-- 메인내용 부분 --%>
 
         </div>
-        <%--<div class="row">--%>
-            <%--<div class="col-sm-3"></div>--%>
-            <%--<div class="col-sm-9" style="margin: 20px 0 30px 0">--%>
-                <%--&lt;%&ndash;uid부분은 로그인한 사용자의 아이디를 표시할 부분&ndash;%&gt;--%>
-                <%--<form action="procQnaComment.do?bdno=<%=anwserBoard.getBdno()%>" method="post">--%>
-                    <%--<div class="row" style="margin: 20px 0 30px 0">--%>
-                        <%--<div style="margin-left: 15px" >--%>
-                            <%--<i class="fa fa-user-circle-o" aria-hidden="true"></i>--%>
-                            <%--<%=uid%> <div class="user"></div>--%>
-                        <%--</div> &lt;%&ndash; 아이콘 뒤에 로그인된 아이디가 들어갔으면 좋겠어요 &ndash;%&gt;--%>
-                        <%--<input type="hidden" name="qnaCommnet_userid" value="<%=uid%>">--%>
-                        <%--<input type="text" id="comentWr" name="qnaComment_contents" style="width: 70%; margin: 0 15px 0 35px ">--%>
-                        <%--<button type="submit" class="btn btn-outline-success" id="comentOk"> 등록</button>--%>
-                    <%--</div>    &lt;%&ndash; 댓글 입력창 &ndash;%&gt;--%>
-                <%--</form>--%>
-                <%-- 입력한 댓글이 있으면 댓글을 불러옴--%>
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-9" style="margin: 20px 0 30px 0">
+                <%--uid부분은 로그인한 사용자의 아이디를 표시할 부분--%>
+                <form action="procQnaComment.do?bdno=<%=anwserBoard.getAnwser_bdno()%>" method="post">
+                    <div class="row" style="margin: 20px 0 30px 0">
+                        <div style="margin-left: 15px" >
+                            <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                            <%=uid%> <div class="user"></div>
+                        </div> <%-- 아이콘 뒤에 로그인된 아이디가 들어갔으면 좋겠어요 --%>
+                        <input type="hidden" name="qnaCommnet_userid" value="<%=uid%>">
+                        <input type="text" id="comentWr" name="qnaComment_contents" style="width: 70%; margin: 0 15px 0 35px ">
+                        <button type="submit" class="btn btn-outline-success" id="comentOk"> 등록</button>
+                    </div>    <%-- 댓글 입력창 --%>
+                </form>
+                 입력한 댓글이 있으면 댓글을 불러옴
                 <%--<% for(QnaComments qnaComments : qnaCommentLists) { %>--%>
                 <%--<div class="row">--%>
                     <%--<div class="col-sm-2">--%>
@@ -116,8 +116,8 @@
                         <%--<i class="fa fa-trash-o" aria-hidden="true"></i></a>--%>
                 <%--</div>--%>
                 <%--<%}%>--%>
-            <%--</div>--%>
-        <%--</div>   &lt;%&ndash; 댓글부분 &ndash;%&gt;--%>
+            </div>
+        </div>   <%-- 댓글부분 --%>
 
         <div class="row" style="margin: 0 0 0 53%">
             <div>
@@ -148,7 +148,7 @@
         });
     });
     // 미로그인시 접근제한
-    var uid = <%=uid%>;
+    var uid = "<%=uid%>";
 
     if (uid === "" || uid == null) {
         alert('로그인 후 사용해주세요!');

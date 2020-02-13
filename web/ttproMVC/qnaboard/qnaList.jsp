@@ -17,8 +17,6 @@
     int cPage = (int)request.getAttribute("cPage");
 %>
 
-
-<!DOCTYPE html>
 <html>
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -132,18 +130,12 @@
                         <%--<td><%=cnt</td> <!--실제 번호가 아니고 가 번호 등록 -->--%>
                         <!--프라이머리키로 설정되어 있는 부분을 매개변수로 넘겨주어야함 -->
 
-                        <td><%=boardNumber--%>
-                        </td>
-                        <td><a href="qnaView.do?bdno=<%=qnaBoard.getBdno()%>"><%=qnaBoard.getTitle()%>
-                        </a></td>
-                        <td><%=qnaBoard.getUserid()%>
-                        </td>
-                        <td><%=qnaBoard.getRegdate().substring(0, 10)%>
-                        </td>
-                        <td><%=qnaBoard.getThumb()%>
-                        </td>
-                        <td><%=qnaBoard.getViews()%>
-                        </td>
+                        <td><%=boardNumber--%></td>
+                        <td><a href="qnaView.do?bdno=<%=qnaBoard.getBdno()%>"><%=qnaBoard.getTitle()%></a></td>
+                        <td><%=qnaBoard.getUserid()%></td>
+                        <td><%=qnaBoard.getRegdate().substring(0, 10)%></td>
+                        <td><%=qnaBoard.getThumb()%></td>
+                        <td><%=qnaBoard.getViews()%></td>
                     </tr>
                     <% } %>
 

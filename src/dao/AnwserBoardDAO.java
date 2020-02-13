@@ -117,8 +117,8 @@ public class AnwserBoardDAO {
 
             pstmt.setInt(1, qnaBoard_bdno);
             pstmt.setString(2, anwserBoard.getAnwser_userid());
-            pstmt.setString(2, anwserBoard.getAnwser_title());
-            pstmt.setString(3, anwserBoard.getAnwser_contents());
+            pstmt.setString(3, anwserBoard.getAnwser_title());
+            pstmt.setString(4, anwserBoard.getAnwser_contents());
 
             check = pstmt.executeUpdate();
 

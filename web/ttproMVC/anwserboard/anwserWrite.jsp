@@ -1,6 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%
+    int qnaBoard_bdno = Integer.parseInt(request.getParameter("qnaBoard_bdno"));
+%>
 
-<!DOCTYPE html>
 <html>
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -37,7 +39,7 @@
         </div> <!--버튼-->
 
         <div class="row" style="margin: 10px 30px 20px 30px">
-            <form method="post" action="procAnwserWrite.do" name="writefrm" class="card card-body bg-light">
+            <form method="post" action="procAnwserWrite.do?qnaBoard_bdno=<%=qnaBoard_bdno%>" name="writefrm" class="card card-body bg-light">
                 <div class="form-group row">
                     <label class="col-form-label col-2 text-right" for="wtitle">작성자</label>
                     <input type="text" id="userid" name="userid" class="form-control col-1" value="<%=uid%>" readonly>

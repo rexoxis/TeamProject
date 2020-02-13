@@ -13,7 +13,9 @@ public class ProcAnwserBoardWriteHandler implements MVCHandler{
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String viewPage = "1|/ttproMVC/anwserboard/anwserWrite.jsp";
+        request.setCharacterEncoding("utf-8");
+
+        String viewPage = "1|/ttproMVC/anwserboard/anwserWrite.do";
 
         int check = 0;
 

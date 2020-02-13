@@ -84,7 +84,7 @@
                     </div>
                 </div>
                 <div class="text-right">
-                        <button type="button" class="btn btn-primary" onclick="location.href='anwserWrite.do'">답변달기</button>
+                        <button type="button" class="btn btn-primary" onclick="location.href='anwserWrite.do?qnaBoard_bdno=<%=qnaBoard.getBdno()%>'">답변달기</button>
                 </div>
             </div>   <%-- 메인내용 부분 --%>
 
