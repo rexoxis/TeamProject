@@ -33,7 +33,7 @@ public class ReviewBoardViewHandler implements MVCHandler {
             bdno = Integer.parseInt(request.getParameter("bdno"));
         }
 
-        System.out.println("reviewView bdno : " + bdno);
+        // System.out.println("reviewView bdno : " + bdno);
 
         // 조회수 증가 메소드 호출
         reviewdao.viewsUp(bdno);
