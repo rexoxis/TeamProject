@@ -7,8 +7,17 @@ public class AnwserBoard {
     private String anwser_userid;
     private String anwser_title;
     private String anwser_contents;
+    private int anwser_likes;
     private int anwser_views;
     private String anwser_regdate;
+
+    public int getAnwser_likes() {
+        return anwser_likes;
+    }
+
+    public void setAnwser_likes(int anwser_likes) {
+        this.anwser_likes = anwser_likes;
+    }
 
     public int getAnwser_views() {
         return anwser_views;

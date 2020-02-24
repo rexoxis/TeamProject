@@ -42,8 +42,8 @@ public class InitController extends HttpServlet {
         while (iterator.hasNext()) {
             String command = (String)iterator.next();
             String handlerName = p.getProperty(command);
-            System.out.println("InitController command : " + command);
-            System.out.println("InitController handlerName : " + handlerName);
+//            System.out.println("InitController command : " + command);
+//            System.out.println("InitController handlerName : " + handlerName);
 
             try {
                 Class<?> handlerClassName = Class.forName(handlerName);

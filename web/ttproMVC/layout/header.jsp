@@ -86,9 +86,9 @@
         </div>
         <hr color="#000000">
         <div class="menubar">
-            <div class="row" style="margin: 0 0 30px 65px">
+            <div class="row col-sm-12" style="margin: 0 0 30px 65px">
                 <ul class="nav nav-tabs">
-                    <li class="nav-item"><a class="nav-link active" href="index.do">착한아이</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.do">착한아이</a></li>
                     <li class="nav-item"><a class="nav-link" href="info.do">소개</a></li>
                     <li class="nav-item"><a class="nav-link" href="catList.do" id="parcel">분양</a>
                         <ul>

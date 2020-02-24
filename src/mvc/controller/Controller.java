@@ -24,8 +24,8 @@ public class Controller extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String uri = request.getRequestURI();
         String command = uri.substring(uri.lastIndexOf("/")+1);
-        System.out.println("Controller uri : " + uri);
-        System.out.println("Controller command : " + command);
+//        System.out.println("Controller uri : " + uri);
+//        System.out.println("Controller command : " + command);
 
         MVCHandler handler = (MVCHandler)InitController.getCommandMap().get(command);
 

@@ -57,10 +57,10 @@
 
     <div class="main">
         <div class="row">
-            <div class="col-8" style="font-size: 25px; margin: 0 0 0 60px ; padding:30px 0 20px 0;">
+            <div class="col-sm-8" style="font-size: 25px; margin: 0 0 0 60px ; padding:30px 0 20px 0;">
                 <i class="fa fa-comments fa-2x"> 분양후기</i>
             </div>
-            <div class="col-3">
+            <div class="col-sm-3">
                 <button type="button" class="btn btn-success" id="newbtn" style="margin:45px 0 15px 31px; ">
                     <i class="fa fa-plus-circle"> 새글쓰기</i>
                 </button>

@@ -23,7 +23,7 @@ public class ProcAnwserBoardDeleteHandler implements MVCHandler{
         check = anwserdao.anwserDelete(bdno);
 
         if (check >= 1) {
-            viewPage = "2|anwserList.do";
+            viewPage = "2|qnaList.do";
         }
 
         return viewPage;

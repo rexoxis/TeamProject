@@ -31,6 +31,8 @@ public class AnwserBoardViewHandler implements MVCHandler {
             bdno = Integer.parseInt(request.getParameter("bdno"));
         }
 
+        System.out.println("AnwserBoardViewHandler bdno : " + bdno);
+
         // 조회수 증가 메소드 호출
         anwserdao.anwserViewUp(bdno);
 
@@ -42,11 +44,6 @@ public class AnwserBoardViewHandler implements MVCHandler {
         } else {
             session.setAttribute("anwserLists", anwserLists);
         }
-
-//        // 댓글 읽어오는 메소드 호출
-//        ArrayList<AnwserComments> anwserCommentLists = anwserdao.commentView(bdno);
-//
-//        request.setAttribute("anwserCommentLists", anwserCommentLists);
 
         return viewPage;
     }

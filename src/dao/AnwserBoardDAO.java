@@ -24,13 +24,13 @@ public class AnwserBoardDAO {
         ArrayList<AnwserBoard> anwserLists = null;
 
         if (searchText.equals("baselist")) {
-            listSQL = " select * from (select bd.anwser_bdno, bd.anwser_title, bd.anwser_userid, bd.anwser_views, bd.anwser_regdate, rownum as rnum from " +
-                    " (select anwser_bdno, anwser_title, anwser_userid, anwser_views, anwser_regdate from qna_anwser order by anwser_regdate desc) bd " +
+            listSQL = " select * from (select bd.anwser_bdno, bd.qnaboard_bdno, bd.anwser_title, bd.anwser_userid, bd.anwser_likes, bd.anwser_views, bd.anwser_regdate, rownum as rnum from " +
+                    " (select anwser_bdno, qnaboard_bdno, anwser_title, anwser_userid, anwser_likes, anwser_views, anwser_regdate from qna_anwser order by anwser_regdate desc) bd " +
                     " where rownum <= ?) bd2 " +
                     " where bd2.rnum >= ?";
         } else {
-            listSQL = " select * from (select bd.anwser_bdno, bd.anwser_title, bd.anwser_userid, bd.anwser_views, bd.anwser_regdate, rownum as rnum from " +
-                    " (select anwser_bdno, anwser_title, anwser_userid, anwser_views, anwser_regdate from qna_anwser WHERE title like '%'|| ? ||'%' order by anwser_regdate desc) bd " +
+            listSQL = " select * from (select bd.anwser_bdno, bd.qnaboard_bdno, bd.anwser_title, bd.anwser_userid, bd.anwser_likes, bd.anwser_views, bd.anwser_regdate, rownum as rnum from " +
+                    " (select anwser_bdno, qnaboard_bdno, anwser_title, anwser_userid, anwser_likes, anwser_views, anwser_regdate from qna_anwser WHERE title like '%'|| ? ||'%' order by anwser_regdate desc) bd " +
                     " where rownum <= ?) bd2 " +
                     " where bd2.rnum >= ?";
         }
@@ -57,10 +57,12 @@ public class AnwserBoardDAO {
                 AnwserBoard bd = new AnwserBoard();
 
                 bd.setAnwser_bdno(rs.getInt(1));
-                bd.setAnwser_title(rs.getString(2));
-                bd.setAnwser_userid(rs.getString(3));
-                bd.setAnwser_views(rs.getInt(4));
-                bd.setAnwser_regdate(rs.getString(5));
+                bd.setQnaboard_bdno(rs.getInt(2));
+                bd.setAnwser_title(rs.getString(3));
+                bd.setAnwser_userid(rs.getString(4));
+                bd.setAnwser_likes(rs.getInt(5));
+                bd.setAnwser_views(rs.getInt(6));
+                bd.setAnwser_regdate(rs.getString(7));
 
                 anwserLists.add(bd);
             }
@@ -78,7 +80,7 @@ public class AnwserBoardDAO {
 
     // 답변글 보여주기
     public ArrayList<AnwserBoard> AnwserView(int qnaBoard_bdno) {
-        String viewsSQL = "SELECT * FROM qna_anwser WHERE qnaboard_bdno = ?";
+        String viewsSQL = "SELECT anwser_bdno, qnaboard_bdno, anwser_userid, anwser_title, anwser_contents, anwser_views, anwser_regdate FROM qna_anwser WHERE qnaboard_bdno = ?";
 
         ArrayList<AnwserBoard> viewList = new ArrayList<>();
 
@@ -157,8 +159,8 @@ public class AnwserBoardDAO {
 
 
     // 답변글 삭제
-    public int anwserDelete(int qnaBoard_bdno) {
-        String deleteSQL = "DELETE FROM qna_anwser WHERE qnaboard_bdno = ?";
+    public int anwserDelete(int anwser_bdno) {
+        String deleteSQL = "DELETE FROM qna_anwser WHERE anwser_bdno = ?";
 
         int check = 0;
 
@@ -166,7 +168,7 @@ public class AnwserBoardDAO {
             conn = oracle.getConn();
             pstmt = conn.prepareStatement(deleteSQL);
 
-            pstmt.setInt(1, qnaBoard_bdno);
+            pstmt.setInt(1, anwser_bdno);
 
             check = pstmt.executeUpdate();
 

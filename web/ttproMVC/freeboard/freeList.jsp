@@ -66,10 +66,10 @@
 
     <div class="main">  <!--https://glyphicons.com/-->
         <div class="row">
-            <div class="col-8" style="font-size: 25px; margin: 0 45px 0 50px ; padding:30px 0 20px 0;">
+            <div class="col-sm-8" style="font-size: 25px; margin: 0 45px 0 50px ; padding:30px 0 20px 0;">
                 <i class="fa fa-comments fa-2x"> 자유게시판</i>
             </div>
-            <div class="col-3">
+            <div class="col-sm-3">
                 <button type="button" class="btn btn-success" id="newbtn" style="margin:40px 0 15px 110px; ">
                     <i class="fa fa-plus-circle"> 새글쓰기</i>
                 </button>
@@ -145,7 +145,7 @@
         </div>
         <div class="row" style="margin: 10px 30px 20px 30px">
             <!--페이지네이션-->
-            <div class="col-12">
+            <div class="col-sm-12">
                 <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-center">
                         <% if(cPage > 10) { %>

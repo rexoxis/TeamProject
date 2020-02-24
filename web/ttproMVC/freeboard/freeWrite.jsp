@@ -25,7 +25,7 @@
 
     <div class="main">  <!--https://glyphicons.com/-->
         <div class="col-8" style="font-size: 45px; margin: 0 20px 0 40px ; padding:30px 0 20px 0;">
-            <i class="fa fa-comments fa-2x"> 자유게시판</i>
+            <i class="fa fa-comments"> 자유게시판</i>
         </div>
 
         <div class="row" style="margin: 10px 30px 20px 30px">

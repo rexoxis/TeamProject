@@ -55,10 +55,10 @@
 
     <div class="main">
         <div class="row">
-            <div class="col-6" style="font-size: 45px; margin: 0 20px 0 60px ; padding:30px 0 20px 0;">
+            <div class="col-sm-6" style="font-size: 45px; margin: 0 20px 0 60px ; padding:30px 0 20px 0;">
                 <i class="fa fa-comments fa"> 자유게시판</i>
             </div>
-            <div class="col-5">
+            <div class="col-sm-5">
                 <button type="button" class="btn btn-success" id="newbtn" style="margin:45px 10px 15px 45%; ">
                     <i class="fa fa-plus-circle"> 새글쓰기</i>
                 </button>
@@ -80,7 +80,7 @@
             </div>
             <%-- 왼쪽 카테고리부분 --%>
 
-            <div class="col-sm-9" style="height: 680px; border: 0.3mm solid #cfcfcf; border-radius: 10px; padding: 20px">
+            <div class="col-sm-9" style="height: auto; border: 0.3mm solid #cfcfcf; border-radius: 10px; padding: 20px">
                 <% for (FreeBoard freeBoard : freeLists) { %>
                 <div class="row">
                     <div class="col-sm-12">
@@ -99,8 +99,8 @@
                     </div>
                 </div>
                 <hr color="#cfcfcf">
-                <div class="col-sm-12" style="margin-left: 15%">
-                    <div id="contents" style="margin-top: 5px"><%=freeBoard.getContents()%></div>
+                <div class="row" style="margin-left: 15%">
+                    <p id="contents" style="margin-top: 5px"><%=freeBoard.getContents()%></p>
                 </div>
             </div>
         </div>
