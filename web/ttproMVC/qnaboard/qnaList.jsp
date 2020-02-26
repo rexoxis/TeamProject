@@ -139,17 +139,18 @@
                         <td><%=qnaBoard.getThumb()%></td>
                         <td><%=qnaBoard.getViews()%></td>
                     </tr>
-
                     <% for (AnwserBoard anwserBoard0 : anwserLists) {%>
-                    <tr>
-                        <td><%=boardNumber--%></td>
-                        <td><a href="anwserView.do?bdno=<%=anwserBoard0.getQnaboard_bdno()%>"> &nbsp;Re: <%=anwserBoard0.getAnwser_title()%>
-                        </a></td>
-                        <td><%=anwserBoard0.getAnwser_userid()%></td>
-                        <td><%=anwserBoard0.getAnwser_regdate().substring(0, 10)%></td>
-                        <td><%=anwserBoard0.getAnwser_likes()%></td>
-                        <td><%=anwserBoard0.getAnwser_views()%></td>
-                    </tr>
+                        <% if (qnaBoard.getBdno() == anwserBoard0.getQnaboard_bdno()) { %>
+                        <tr>
+                            <td><%=boardNumber--%></td>
+                            <td><a href="anwserView.do?bdno=<%=anwserBoard0.getQnaboard_bdno()%>"> &nbsp;&nbsp;Re: <%=qnaBoard.getTitle()%>
+                            </a></td>
+                            <td><%=anwserBoard0.getAnwser_userid()%></td>
+                            <td><%=anwserBoard0.getAnwser_regdate().substring(0, 10)%></td>
+                            <td><%=anwserBoard0.getAnwser_likes()%></td>
+                            <td><%=anwserBoard0.getAnwser_views()%></td>
+                        </tr>
+                        <% } %>
                     <% } %>
 
                     <% } %>
